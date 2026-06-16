@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Programming Project Playbook"
+  short_description: "Guide AI-assisted projects from idea to secure delivery"
+  default_prompt: "Use $ai-programming-project-playbook to plan and execute an AI-assisted software project from idea to delivery."
