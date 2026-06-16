@@ -24,7 +24,7 @@ It turns "just ask the agent to build it" into a staged workflow: clarify the pr
 Clone this repository, then install the runtime skill files into your Codex skills directory:
 
 ```bash
-git clone https://github.com/YOUR_NAME/agent-project-kit.git
+git clone https://github.com/junjiang858/agent-project-kit.git
 cd agent-project-kit
 ./scripts/install.sh
 ```

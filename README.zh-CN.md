@@ -24,7 +24,7 @@ Agent Project Kit 是一个面向 Codex 的 skill，用来把 AI 编程项目从
 克隆仓库后，把运行时 skill 文件安装到 Codex skills 目录：
 
 ```bash
-git clone https://github.com/YOUR_NAME/agent-project-kit.git
+git clone https://github.com/junjiang858/agent-project-kit.git
 cd agent-project-kit
 ./scripts/install.sh
 ```
