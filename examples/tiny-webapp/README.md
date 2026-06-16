@@ -18,5 +18,5 @@ Build a tiny web app where a user can save short reading notes and mark them as 
 ## Example Prompt
 
 ```text
-Use $agent-project-kit for this idea: I want a tiny app for saving reading notes and marking them reviewed. Do not write code yet. Start with the project charter and ask only the questions needed to define the MVP.
+Use $agent-project-kit for this idea: I want a tiny app for saving reading notes and marking them reviewed. Do not write code yet. Guide me step by step and ask only one question at a time until PROJECT_CHARTER.md is ready to draft.
 ```

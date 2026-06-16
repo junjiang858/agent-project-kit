@@ -49,6 +49,8 @@ Invoke the skill explicitly:
 Use $agent-project-kit to turn my app idea into a project charter and implementation workflow.
 ```
 
+By default, the skill guides project startup step by step. It should ask one question at a time, not dump a long intake questionnaire.
+
 Typical requests:
 
 ```text

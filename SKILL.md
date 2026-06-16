@@ -13,6 +13,20 @@ Guide an AI-assisted software project through staged clarification, documented d
 
 Do not jump from a vague idea to implementation. First identify the current project stage, load only the relevant reference, produce or update the stage artifact, then ask for approval before irreversible or high-risk work.
 
+## Guided Interaction
+
+Ask one question at a time when gathering missing project context. Do not present a full intake questionnaire unless the user explicitly asks for one.
+
+For vague project starts, use this loop:
+
+1. State the current stage in one short sentence.
+2. Ask the single most important next question.
+3. Wait for the answer.
+4. Reflect the answer into the current artifact.
+5. Continue only to the next necessary question or draft.
+
+If two details are inseparable, ask at most two short questions. Prefer multiple-choice options when they reduce effort.
+
 ## Stage Router
 
 | User situation | Load | Primary output |
@@ -31,10 +45,11 @@ Do not jump from a vague idea to implementation. First identify the current proj
 
 1. Classify the request into one stage from the router.
 2. Read the matching reference file before giving instructions or editing project files.
-3. Check whether required upstream artifacts exist. If they are missing, create or request them before continuing.
-4. Produce the smallest useful stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
-5. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
-6. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+3. Check whether required upstream artifacts exist. If they are missing, create or request only the next missing artifact, not the entire chain.
+4. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
+5. Produce the smallest useful stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
+6. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
+7. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
 
 ## Required Artifacts
 

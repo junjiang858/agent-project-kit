@@ -19,6 +19,29 @@ Use this reference for cognition calibration, project charter work, technology s
 5. Choose exactly one main technical route and write `TECH_STACK.md`.
 6. Initialize Git, create the first checkpoint, and define commit rules.
 
+## Guided Intake
+
+Ask one question at a time. Do not present a full intake questionnaire at project start.
+
+Start with the smallest question that unlocks the next artifact:
+
+1. What are you trying to build?
+2. Who is it for?
+3. What pain or workflow should the first version solve?
+4. What would make the first version useful enough?
+
+Do not ask all four at once. Ask the next question only after the previous answer is reflected back briefly.
+
+Move in this order:
+
+1. Gather enough context for `PROJECT_CHARTER.md`.
+2. Draft `PROJECT_CHARTER.md` and ask for confirmation.
+3. After confirmation, move to `TECH_STACK.md`.
+4. After stack confirmation, move to `AGENTS.md` and `TOOL_POLICY.md`.
+5. Only then discuss first implementation planning.
+
+If the user says "not sure", offer 2-3 concrete options and ask them to choose one.
+
 ## Project Charter Checklist
 
 - Target users and their concrete scenario.
@@ -50,7 +73,7 @@ Use this reference for cognition calibration, project charter work, technology s
 ## Prompt: Vague Idea to Charter
 
 ```text
-I want to build a small project with AI, but the idea is still vague. Do not write code yet. Act as a product partner and technical advisor. Ask about target users, core problem, MVP boundary, technical risks, data objects, business flow, and acceptance criteria until the project is clear enough to turn into PROJECT_CHARTER.md.
+I want to build a small project with AI, but the idea is still vague. Do not write code yet. Act as a product partner and technical advisor. Guide me step by step. Ask only one question at a time, reflect my answer briefly, and continue until there is enough context to draft PROJECT_CHARTER.md.
 ```
 
 ## Prompt: Unique Tech Stack

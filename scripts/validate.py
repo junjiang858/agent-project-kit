@@ -93,12 +93,26 @@ def check_reference_links() -> None:
             fail(f"SKILL.md does not route to {path}")
 
 
+def check_guided_interaction() -> None:
+    skill = read("SKILL.md")
+    initiation = read("references/project-initiation.md")
+    required_phrases = [
+        "Guided Interaction",
+        "Ask one question at a time",
+        "Do not present a full intake questionnaire",
+    ]
+    for phrase in required_phrases:
+        if phrase not in skill and phrase not in initiation:
+            fail(f"missing guided interaction rule: {phrase}")
+
+
 def main() -> None:
     require_files()
     check_skill_frontmatter()
     check_readme_language_switch()
     check_markdown_fences()
     check_reference_links()
+    check_guided_interaction()
     print("Repository validation passed.")
 
 

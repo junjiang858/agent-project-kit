@@ -49,6 +49,8 @@ ${CODEX_HOME:-$HOME/.codex}/skills/agent-project-kit
 Use $agent-project-kit to turn my app idea into a project charter and implementation workflow.
 ```
 
+默认情况下，这个 skill 会分步引导项目启动。它应该一次只问一个问题，而不是一次性丢出很长的问卷。
+
 常见请求：
 
 ```text
