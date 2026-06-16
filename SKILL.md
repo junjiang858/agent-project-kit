@@ -38,6 +38,8 @@ Do not jump from a vague idea to implementation. First identify the current proj
 
 ## Required Artifacts
 
+When a `templates/` directory is available, copy and adapt its matching template instead of drafting the artifact from scratch.
+
 - `PROJECT_CHARTER.md`: target user, problem, MVP scope, non-goals, risks, acceptance criteria.
 - `TECH_STACK.md`: chosen stack, rejected alternatives, re-evaluation rules, forbidden drift.
 - `AGENTS.md` or equivalent Agent constitution: project rules, completion definition, tests, Git discipline, conflict handling.

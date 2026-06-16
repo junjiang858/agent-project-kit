@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+REQUIRED_FILES = [
+    "SKILL.md",
+    "agents/openai.yaml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "scripts/install.sh",
+    "examples/tiny-webapp/README.md",
+    "templates/PROJECT_CHARTER.md",
+    "templates/TECH_STACK.md",
+    "templates/AGENTS.md",
+    "templates/TOOL_POLICY.md",
+    "templates/DATABASE_DESIGN.md",
+    "templates/BACKEND_SPEC.md",
+    "templates/AI_WORKFLOW.md",
+    "templates/DEPLOYMENT.md",
+]
+
+REQUIRED_RUNTIME_REFERENCES = [
+    "references/project-initiation.md",
+    "references/engineering-rules.md",
+    "references/frontend.md",
+    "references/database.md",
+    "references/backend.md",
+    "references/security.md",
+    "references/tool-policy.md",
+    "references/workflow-checklists.md",
+]
+
+
+def fail(message: str) -> None:
+    print(f"FAIL: {message}")
+    sys.exit(1)
+
+
+def read(path: str) -> str:
+    return (ROOT / path).read_text(encoding="utf-8")
+
+
+def require_files() -> None:
+    for path in REQUIRED_FILES + REQUIRED_RUNTIME_REFERENCES:
+        if not (ROOT / path).is_file():
+            fail(f"missing required file: {path}")
+
+
+def check_skill_frontmatter() -> None:
+    text = read("SKILL.md")
+    match = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+    if not match:
+        fail("SKILL.md must start with YAML frontmatter")
+    frontmatter = match.group(1)
+    if "name: agent-project-kit" not in frontmatter:
+        fail("SKILL.md frontmatter must use name: agent-project-kit")
+    if not re.search(r"^description: Use when ", frontmatter, re.M):
+        fail('SKILL.md description must start with "Use when"')
+
+
+def check_readme_language_switch() -> None:
+    readme_en = read("README.md")
+    readme_zh = read("README.zh-CN.md")
+    if "README.zh-CN.md" not in readme_en:
+        fail("README.md must link to README.zh-CN.md")
+    if "README.md" not in readme_zh:
+        fail("README.zh-CN.md must link to README.md")
+    if "$agent-project-kit" not in readme_en or "$agent-project-kit" not in readme_zh:
+        fail("both README files must show the skill invocation name")
+
+
+def check_markdown_fences() -> None:
+    for path in sorted(ROOT.rglob("*.md")):
+        if ".git" in path.parts:
+            continue
+        count = path.read_text(encoding="utf-8").count("```")
+        if count % 2:
+            fail(f"unbalanced fenced code block in {path.relative_to(ROOT)}")
+
+
+def check_reference_links() -> None:
+    skill = read("SKILL.md")
+    for path in REQUIRED_RUNTIME_REFERENCES:
+        if path not in skill:
+            fail(f"SKILL.md does not route to {path}")
+
+
+def main() -> None:
+    require_files()
+    check_skill_frontmatter()
+    check_readme_language_switch()
+    check_markdown_fences()
+    check_reference_links()
+    print("Repository validation passed.")
+
+
+if __name__ == "__main__":
+    main()
