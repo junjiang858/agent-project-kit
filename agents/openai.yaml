@@ -1,4 +1,4 @@
 interface:
-  display_name: "AI Programming Project Playbook"
+  display_name: "Agent Project Kit"
   short_description: "Guide AI-assisted projects from idea to secure delivery"
-  default_prompt: "Use $ai-programming-project-playbook to plan and execute an AI-assisted software project from idea to delivery."
+  default_prompt: "Use $agent-project-kit to plan and execute an AI-assisted software project from idea to delivery."

@@ -1,9 +1,9 @@
 ---
-name: ai-programming-project-playbook
+name: agent-project-kit
 description: Use when planning, building, or reviewing AI-assisted software projects from vague idea to delivery, especially for Vibe Coding, project charters, tech stack decisions, Agent constitution, skill workflows, frontend/backend/database skeletons, security acceptance, tool permissions, or AI-friendly engineering rules.
 ---
 
-# AI Programming Project Playbook
+# Agent Project Kit
 
 ## Overview
 
