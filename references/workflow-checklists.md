@@ -21,38 +21,42 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 
 ## Deliverable Checklist
 
-- [ ] `PROJECT_CHARTER.md`
-- [ ] `TECH_STACK.md`
+- [ ] `AGENTS.md`
+- [ ] `docs/project/PROJECT_CHARTER.md`
+- [ ] `docs/architecture/TECH_STACK.md`
+- [ ] `docs/architecture/ENGINEERING_BASELINE.md`
 - [ ] Git commit and remote backup rules
-- [ ] `AGENTS.md` or Agent constitution
 - [ ] Common skills or workflow templates
-- [ ] Frontend page and component inventory
-- [ ] `DATABASE_DESIGN.md`
-- [ ] `BACKEND_SPEC.md`
+- [ ] `docs/architecture/FRONTEND_PLAN.md`
+- [ ] `docs/architecture/DATABASE_DESIGN.md`
+- [ ] `docs/architecture/BACKEND_SPEC.md`
 - [ ] Minimal backend skeleton run evidence
 - [ ] Backend architecture acceptance report
 - [ ] Backend security boundary table
 - [ ] Bottom-layer security checklist
-- [ ] `TOOL_POLICY.md`
-- [ ] `AI_WORKFLOW.md`
-- [ ] `DEPLOYMENT.md`
+- [ ] `docs/ops/TOOL_POLICY.md`
+- [ ] `docs/workflow/AI_WORKFLOW.md`
+- [ ] `docs/ops/DEPLOYMENT.md`
 - [ ] Testing and quality check scripts
 
-## Default AI-Friendly Stack
+## Default Product MVP Stack
 
-Use as a default for ordinary individual or small-team web projects unless project constraints justify another route.
+Use as a default for ordinary individual or small-team web products unless project constraints justify another route. Product MVP means narrow feature scope, not a disposable foundation.
 
 | Layer | Default | Role |
 | --- | --- | --- |
+| Repository | pnpm workspace with `apps/*`, `packages/*`, `docs/*` | mature monorepo shape without forcing heavy tooling |
 | Frontend | Next.js + TypeScript | pages, routing, SSR/full-stack entry |
 | Styling | Tailwind CSS | consistent styling constraints |
 | UI | shadcn/ui | readable, editable, AI-friendly component source |
 | Icons | lucide-react | consistent icon language |
 | Charts | Recharts or Apache ECharts | business charts and advanced visualization |
-| Backend | NestJS | modules, APIs, services, permission and validation boundaries |
-| Database | PostgreSQL or Supabase | relational data, auth/storage acceleration when needed |
+| Backend | NestJS for independent APIs; Next.js route handlers/server actions for same-app light backend | modules, APIs, services, permission and validation boundaries |
+| Database | PostgreSQL or Supabase/Postgres | relational data, auth/storage acceleration when needed |
+| Migrations | Prisma or Drizzle migrations | schema evolution, rollback planning, team visibility |
 | Frontend deploy | Vercel | Next.js-friendly deployment |
 | Backend deploy | Railway, Render, Fly.io, or Docker | Node service hosting and operations control |
+| Quality | ESLint, Prettier, EditorConfig, TypeScript, CI | repeatable code quality |
 | Checks | pnpm check, pnpm test, pnpm build, Vitest, React Testing Library, Playwright | quality gate, unit, component, and browser evidence |
 | AI discipline | Superpowers | clarify, plan, implement, verify |
 | Spec management | OpenSpec or GitHub Spec Kit | durable requirements, design, tasks, acceptance |
@@ -60,32 +64,34 @@ Use as a default for ordinary individual or small-team web projects unless proje
 
 Rule: mature technology reduces AI error rate; workflow discipline constrains execution; tests, browser checks, API checks, builds, and deploy logs form the evidence chain.
 
+SQLite, local JSON files, ad hoc SQL files, and no-migration setups are allowed only for explicit local-first or throwaway prototypes.
+
 ## TECH_STACK.md Prompt
 
 ```text
-Based on the project charter, target users, scope, budget, launch time, and team capability, recommend exactly one AI-friendly tech stack. Cover frontend framework, UI library, icon library, chart library, backend framework, database, deployment platform, AI SDK, and AI workflow discipline. Explain choices, rejected alternatives, risks, and which project documents must record these decisions.
+Based on the project charter, target users, scope, budget, launch time, and team capability, recommend exactly one Product MVP tech stack for docs/architecture/TECH_STACK.md. Cover architecture track, repository shape, frontend framework, UI library, icon library, chart library, backend framework, database, migrations, deployment platform, AI SDK, and AI workflow discipline. Explain production compatibility, migration cost, choices, rejected alternatives, risks, and re-evaluation triggers.
 ```
 
 ## AI_WORKFLOW.md Prompt
 
 ```text
-Generate AI_WORKFLOW.md for this project. Combine Superpowers-style discipline with spec-first work. Define how AI should clarify requirements, write specs, design, split tasks, implement, test, accept, and archive. Mark which steps require human confirmation and which situations forbid direct coding.
+Generate docs/workflow/AI_WORKFLOW.md for this project. Combine Superpowers-style discipline with spec-first work. Define how AI should clarify requirements, write specs, design, split tasks, implement, test, accept, and archive. Mark which steps require human confirmation and which situations forbid direct coding.
 ```
 
 ## DEPLOYMENT.md Prompt
 
 ```text
-Based on the current stack, generate DEPLOYMENT.md. Cover local run, test environment, production environment, frontend deployment, backend deployment, database, environment variables, logs, rollback, health checks, and pre-launch acceptance checklist.
+Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, test environment, production environment, frontend deployment, backend deployment, database, environment variables, logs, rollback, health checks, and pre-launch acceptance checklist.
 ```
 
 ## Testing Scripts Prompt
 
 ```text
-Based on the current stack, generate a testing and quality-check plan. Output package.json scripts for typecheck, lint, test, test:watch, e2e, build, check, check:unit, check:full, and check:e2e when applicable. Define whether pnpm check is the minimal entry or full quality gate, and explain which test layer Vitest, React Testing Library, Playwright, or Jest covers. Finish with rules that can be written into TESTING.md and AGENTS.md.
+Based on the current stack, generate a testing and quality-check plan for docs/architecture/ENGINEERING_BASELINE.md. Output package.json scripts for typecheck, lint, format:check, test, test:watch, e2e, build, check, check:unit, check:full, and check:e2e when applicable. Define whether pnpm check is the minimal entry or full quality gate, and explain which test layer Vitest, React Testing Library, Playwright, or Jest covers. Finish with rules that can be referenced from AGENTS.md.
 ```
 
 ## Anti-Drift Prompt
 
 ```text
-Before implementing, read TECH_STACK.md, AI_WORKFLOW.md, TOOL_POLICY.md, and AGENTS.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. After finishing, provide test, build, browser, API, or deployment evidence.
+Before implementing, read AGENTS.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/workflow/AI_WORKFLOW.md, and docs/ops/TOOL_POLICY.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. After finishing, provide test, build, browser, API, or deployment evidence.
 ```

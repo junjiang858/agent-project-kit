@@ -15,9 +15,10 @@ Use this reference for cognition calibration, project charter work, technology s
 1. Calibrate the project idea.
 2. Create an isolated project folder with a clear English name.
 3. Discuss requirements without writing code.
-4. Produce `PROJECT_CHARTER.md`.
-5. Choose exactly one main technical route and write `TECH_STACK.md`.
-6. Initialize Git, create the first checkpoint, and define commit rules.
+4. Produce `docs/project/PROJECT_CHARTER.md`.
+5. Choose exactly one main technical route and write `docs/architecture/TECH_STACK.md`.
+6. Define `docs/architecture/ENGINEERING_BASELINE.md` before implementation.
+7. Initialize Git, create the first checkpoint, and define commit rules.
 
 ## Guided Intake
 
@@ -34,10 +35,10 @@ Do not ask all four at once. Ask the next question only after the previous answe
 
 Move in this order:
 
-1. Gather enough context for `PROJECT_CHARTER.md`.
-2. Draft `PROJECT_CHARTER.md` and ask for confirmation.
-3. After confirmation, move to `TECH_STACK.md`.
-4. After stack confirmation, move to `AGENTS.md` and `TOOL_POLICY.md`.
+1. Gather enough context for `docs/project/PROJECT_CHARTER.md`.
+2. Draft `docs/project/PROJECT_CHARTER.md` and ask for confirmation.
+3. After confirmation, move to `docs/architecture/TECH_STACK.md`.
+4. After stack confirmation, move to root `AGENTS.md`, `docs/architecture/ENGINEERING_BASELINE.md`, and `docs/ops/TOOL_POLICY.md`.
 5. Only then discuss first implementation planning.
 
 If the user says "not sure", offer 2-3 concrete options and ask them to choose one.
@@ -56,7 +57,11 @@ If the user says "not sure", offer 2-3 concrete options and ask them to choose o
 ## Technology Decision Checklist
 
 - Product shape: web, mini program, app, backend service, automation, hybrid.
+- Product lifecycle: Product MVP, throwaway prototype, internal tool, or platform.
+- Architecture track: Single Web App, Web + API, or Multi-App Platform.
 - Frontend framework, backend framework, database, deployment target, UI library, SDKs.
+- Production compatibility: which choices can remain after launch.
+- Migration cost: which choices would be expensive to replace later.
 - Reasons for the chosen route.
 - Rejected alternatives and why they are not the default route.
 - Risk notes: maintenance, security, license, ecosystem, hosting, migration cost.
@@ -73,13 +78,13 @@ If the user says "not sure", offer 2-3 concrete options and ask them to choose o
 ## Prompt: Vague Idea to Charter
 
 ```text
-I want to build a small project with AI, but the idea is still vague. Do not write code yet. Act as a product partner and technical advisor. Guide me step by step. Ask only one question at a time, reflect my answer briefly, and continue until there is enough context to draft PROJECT_CHARTER.md.
+I want to build a small project with AI, but the idea is still vague. Do not write code yet. Act as a product partner and technical advisor. Guide me step by step. Ask only one question at a time, reflect my answer briefly, and continue until there is enough context to draft docs/project/PROJECT_CHARTER.md.
 ```
 
 ## Prompt: Unique Tech Stack
 
 ```text
-Based on my project charter and product shape, recommend exactly one technical stack. Explain frontend, backend, database, deployment, UI library, key SDKs, reasons, risks, rejected alternatives, and the rules for re-evaluating the stack later. Do not start coding.
+Based on my project charter and product shape, recommend exactly one Product MVP technical stack. Explain architecture track, frontend, backend, database, deployment, UI library, key SDKs, production compatibility, migration cost, risks, rejected alternatives, and the rules for re-evaluating the stack later. Write the decision for docs/architecture/TECH_STACK.md. Do not start coding.
 ```
 
 ## Prompt: Git Checkpoint

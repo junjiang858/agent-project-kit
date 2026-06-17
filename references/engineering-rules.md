@@ -9,11 +9,11 @@ The Agent constitution governs stable project-level behavior. Keep it short, act
 Include:
 
 - Project goal and current product boundary.
-- Chosen technical route and forbidden drift.
+- Chosen technical route from `docs/architecture/TECH_STACK.md` and forbidden drift.
 - Code quality rules and completion definition.
 - Test, build, and verification requirements.
 - Git checkpoint and commit policy.
-- Tool permission principles, with details delegated to `TOOL_POLICY.md`.
+- Tool permission principles, with details delegated to `docs/ops/TOOL_POLICY.md`.
 - Forbidden actions: secrets in code, destructive commands, production mutation without confirmation, broad rewrites without approval.
 - Conflict order: user instruction, project docs, Agent constitution, skill/reference instructions, local code conventions.
 
@@ -21,7 +21,7 @@ Avoid:
 
 - Long tutorials.
 - Every possible style preference.
-- Tool permission matrices that belong in `TOOL_POLICY.md`.
+- Tool permission matrices that belong in `docs/ops/TOOL_POLICY.md`.
 - Task-specific workflows that belong in separate skills.
 
 ## Skill Workflow
@@ -51,7 +51,7 @@ A task is not complete until the agent can show evidence appropriate to the work
 ## Prompt: Agent Constitution
 
 ```text
-Based on the project charter, technical route, and collaboration rules, draft a concise Agent constitution. Include project goal, development boundaries, quality standards, testing requirements, commit policy, tool permission principles, forbidden actions, completion definition, and conflict handling. Reference TOOL_POLICY.md for detailed tool permissions instead of embedding the full matrix.
+Based on the project charter, technical route, and collaboration rules, draft a concise root AGENTS.md. Include project goal, development boundaries, quality standards, testing requirements, commit policy, tool permission principles, forbidden actions, completion definition, and conflict handling. Index docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/workflow/AI_WORKFLOW.md, and docs/ops/TOOL_POLICY.md. Reference docs/ops/TOOL_POLICY.md for detailed tool permissions instead of embedding the full matrix.
 ```
 
 ## Prompt: Skill Draft

@@ -6,6 +6,12 @@
 - Target users:
 - Core scenario:
 
+## Product Lifecycle
+
+- Lifecycle: Product MVP / throwaway prototype / internal tool / platform
+- Launch target:
+- Budget or operating constraints:
+
 ## MVP Scope
 
 ### Must Have

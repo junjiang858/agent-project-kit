@@ -28,6 +28,7 @@ Describe frontend needs with:
 
 ## Frontend Skeleton Checklist
 
+- Save the frontend plan as `docs/architecture/FRONTEND_PLAN.md`.
 - Confirm product tone, target user, and visual density.
 - Choose framework, UI component library, icon library, and chart library.
 - Define directory structure, routes, layout boundaries, and component split rules.
@@ -51,5 +52,5 @@ Based on my product flow, create a frontend page inventory. For each page, outpu
 ## Prompt: Frontend Skeleton Plan
 
 ```text
-Do not generate every page at once. Based on the project charter and tech stack, create a frontend skeleton implementation plan covering design style, component library, directory structure, routes, shared layout, design tokens, base components, and the order for the first pages.
+Do not generate every page at once. Based on docs/project/PROJECT_CHARTER.md and docs/architecture/TECH_STACK.md, create docs/architecture/FRONTEND_PLAN.md covering design style, component library, directory structure, routes, shared layout, design tokens, base components, and the order for the first pages.
 ```

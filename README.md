@@ -6,6 +6,8 @@ Agent Project Kit is a Codex skill for taking AI-assisted software projects from
 
 It turns "just ask the agent to build it" into a staged workflow: clarify the project, choose a stack, set agent rules, plan frontend/backend/database work, define tool permissions, and require evidence before calling work done.
 
+The default posture is Product MVP: small feature scope, but a production-compatible repo shape, stack decision, and engineering baseline.
+
 ## Who It Is For
 
 - Solo builders and small teams using Codex, Claude Code, Cursor, Copilot, or similar coding agents.
@@ -55,7 +57,7 @@ Typical requests:
 
 ```text
 Use $agent-project-kit to help me choose a tech stack for this product idea.
-Use $agent-project-kit to draft AGENTS.md and TOOL_POLICY.md for this repo.
+Use $agent-project-kit to draft root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo.
 Use $agent-project-kit to plan the backend skeleton and acceptance checklist.
 Use $agent-project-kit to review whether this backend is safe enough to deploy.
 ```
@@ -87,18 +89,39 @@ The skill routes work through these stages:
 └── scripts/validate.py       # Repository validation
 ```
 
+## Generated Project Layout
+
+By default, generated project documents should not be dumped into the repository root. Keep `AGENTS.md` as the root agent index and place detailed source-of-truth documents under `docs/`:
+
+```text
+.
+├── AGENTS.md
+└── docs/
+    ├── project/PROJECT_CHARTER.md
+    ├── architecture/TECH_STACK.md
+    ├── architecture/ENGINEERING_BASELINE.md
+    ├── architecture/FRONTEND_PLAN.md
+    ├── architecture/DATABASE_DESIGN.md
+    ├── architecture/BACKEND_SPEC.md
+    ├── workflow/AI_WORKFLOW.md
+    ├── ops/TOOL_POLICY.md
+    └── ops/DEPLOYMENT.md
+```
+
 ## Templates
 
 Copy templates into your project when the skill asks for stage artifacts:
 
-- `templates/PROJECT_CHARTER.md`
-- `templates/TECH_STACK.md`
 - `templates/AGENTS.md`
-- `templates/TOOL_POLICY.md`
-- `templates/DATABASE_DESIGN.md`
-- `templates/BACKEND_SPEC.md`
-- `templates/AI_WORKFLOW.md`
-- `templates/DEPLOYMENT.md`
+- `templates/docs/project/PROJECT_CHARTER.md`
+- `templates/docs/architecture/TECH_STACK.md`
+- `templates/docs/architecture/ENGINEERING_BASELINE.md`
+- `templates/docs/architecture/FRONTEND_PLAN.md`
+- `templates/docs/architecture/DATABASE_DESIGN.md`
+- `templates/docs/architecture/BACKEND_SPEC.md`
+- `templates/docs/workflow/AI_WORKFLOW.md`
+- `templates/docs/ops/TOOL_POLICY.md`
+- `templates/docs/ops/DEPLOYMENT.md`
 
 ## Validate
 
@@ -108,7 +131,7 @@ Run local validation before publishing changes:
 python3 scripts/validate.py
 ```
 
-This checks required files, README language links, markdown fences, skill frontmatter, and stage reference routing.
+This checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, and Product MVP baseline coverage.
 
 ## Why This Exists
 

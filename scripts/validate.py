@@ -17,17 +17,22 @@ REQUIRED_FILES = [
     "LICENSE",
     "scripts/install.sh",
     "examples/tiny-webapp/README.md",
-    "templates/PROJECT_CHARTER.md",
-    "templates/TECH_STACK.md",
     "templates/AGENTS.md",
-    "templates/TOOL_POLICY.md",
-    "templates/DATABASE_DESIGN.md",
-    "templates/BACKEND_SPEC.md",
-    "templates/AI_WORKFLOW.md",
-    "templates/DEPLOYMENT.md",
+    "templates/docs/project/PROJECT_CHARTER.md",
+    "templates/docs/architecture/TECH_STACK.md",
+    "templates/docs/architecture/ENGINEERING_BASELINE.md",
+    "templates/docs/architecture/FRONTEND_PLAN.md",
+    "templates/docs/architecture/DATABASE_DESIGN.md",
+    "templates/docs/architecture/BACKEND_SPEC.md",
+    "templates/docs/workflow/AI_WORKFLOW.md",
+    "templates/docs/ops/TOOL_POLICY.md",
+    "templates/docs/ops/DEPLOYMENT.md",
 ]
 
 REQUIRED_RUNTIME_REFERENCES = [
+    "references/document-layout.md",
+    "references/architecture-baseline.md",
+    "references/engineering-baseline.md",
     "references/project-initiation.md",
     "references/engineering-rules.md",
     "references/frontend.md",
@@ -106,6 +111,36 @@ def check_guided_interaction() -> None:
             fail(f"missing guided interaction rule: {phrase}")
 
 
+def check_project_document_layout() -> None:
+    for path in sorted((ROOT / "templates").glob("*.md")):
+        if path.name != "AGENTS.md":
+            fail(f"project document template must live under templates/docs/: {path.relative_to(ROOT)}")
+
+    agents = read("templates/AGENTS.md")
+    required_doc_paths = [
+        "docs/project/PROJECT_CHARTER.md",
+        "docs/architecture/TECH_STACK.md",
+        "docs/architecture/ENGINEERING_BASELINE.md",
+        "docs/workflow/AI_WORKFLOW.md",
+        "docs/ops/TOOL_POLICY.md",
+    ]
+    for path in required_doc_paths:
+        if path not in agents:
+            fail(f"templates/AGENTS.md must index {path}")
+
+
+def check_product_mvp_baseline() -> None:
+    required_pairs = [
+        ("references/architecture-baseline.md", "Product MVP"),
+        ("references/engineering-baseline.md", "Required Scripts"),
+        ("templates/docs/architecture/TECH_STACK.md", "Production Compatibility"),
+        ("templates/docs/architecture/ENGINEERING_BASELINE.md", "Required Scripts"),
+    ]
+    for path, phrase in required_pairs:
+        if phrase not in read(path):
+            fail(f"{path} must include {phrase}")
+
+
 def main() -> None:
     require_files()
     check_skill_frontmatter()
@@ -113,6 +148,8 @@ def main() -> None:
     check_markdown_fences()
     check_reference_links()
     check_guided_interaction()
+    check_project_document_layout()
+    check_product_mvp_baseline()
     print("Repository validation passed.")
 
 

@@ -17,7 +17,7 @@ Use this reference when turning business flow into tables, fields, relations, co
 4. Define tables, primary keys, foreign keys, required fields, default values, status enums, and timestamps.
 5. Add indexes for high-frequency queries, not as decoration.
 6. Add security fields and rules: password hash, role, owner/user id, soft delete, audit fields, sensitive data masking.
-7. Save the design as `DATABASE_DESIGN.md` and version it in Git before backend implementation.
+7. Save the design as `docs/architecture/DATABASE_DESIGN.md` and version it in Git before backend implementation.
 
 ## Table Checklist
 
@@ -51,5 +51,5 @@ Based on my user flow and business objects, draft the database design. Output co
 ## Prompt: Database Design Document
 
 ```text
-Based on my frontend page flow and backend business rules, generate DATABASE_DESIGN.md. Include core objects, relationships, table structures, field explanations, types, constraints, indexes, status enums, permission-related fields, security concerns, and migration suggestions.
+Based on my frontend page flow and backend business rules, generate docs/architecture/DATABASE_DESIGN.md. Include core objects, relationships, table structures, field explanations, types, constraints, indexes, status enums, permission-related fields, security concerns, and migration suggestions.
 ```

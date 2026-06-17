@@ -3,7 +3,7 @@
 ## Flow
 
 1. Clarify the request.
-2. Read project source-of-truth documents.
+2. Read `AGENTS.md` and relevant project documents under `docs/`.
 3. Produce or update a plan.
 4. Implement the smallest useful change.
 5. Run checks.

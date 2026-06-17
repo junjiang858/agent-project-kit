@@ -42,7 +42,7 @@ Require explicit approval before:
 - Publishing public repositories or packages.
 - Sending external messages from user-owned accounts.
 
-## TOOL_POLICY.md Template
+## docs/ops/TOOL_POLICY.md Template
 
 ```markdown
 # TOOL_POLICY
@@ -77,5 +77,5 @@ Require explicit approval before:
 ## Prompt: Generate Tool Policy
 
 ```text
-Based on this project's tech stack, deployment method, database, and collaboration tools, generate an AI tool permission strategy. Divide it into default open, project open, and high-risk confirmation. For each tool, explain purpose, allowed operations, forbidden operations, verification method, and scenarios requiring human confirmation. Finish with a version that can be saved as TOOL_POLICY.md.
+Based on this project's tech stack, deployment method, database, and collaboration tools, generate an AI tool permission strategy. Divide it into default open, project open, and high-risk confirmation. For each tool, explain purpose, allowed operations, forbidden operations, verification method, and scenarios requiring human confirmation. Finish with a version that can be saved as docs/ops/TOOL_POLICY.md.
 ```

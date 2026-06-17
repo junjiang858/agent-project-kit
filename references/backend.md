@@ -13,7 +13,7 @@ Before coding, distinguish:
 
 ## Backend Business Spec
 
-Produce `BACKEND_SPEC.md` before implementation. Include:
+Produce `docs/architecture/BACKEND_SPEC.md` before implementation. Include:
 
 - Business objects and actions.
 - Rules that must be enforced on the backend.
@@ -59,13 +59,13 @@ Backend "can start" is not enough. Accept it by checking:
 ## Prompt: Backend Business Boundary
 
 ```text
-Do not write code yet. Based on the project charter, frontend flow, database design, and business needs, analyze the backend plan. Output backend responsibilities, required APIs, business validation for each API, database tables each API reads/writes, login/admin requirements, parameter validation, exception handling, recommended language/framework, built-in framework capabilities, required external libraries, and decisions that must go into BACKEND_SPEC.md.
+Do not write code yet. Based on the project charter, frontend flow, database design, and business needs, analyze the backend plan. Output backend responsibilities, required APIs, business validation for each API, database tables each API reads/writes, login/admin requirements, parameter validation, exception handling, recommended language/framework, built-in framework capabilities, required external libraries, and decisions that must go into docs/architecture/BACKEND_SPEC.md.
 ```
 
 ## Prompt: Minimal Backend Skeleton
 
 ```text
-Based on BACKEND_SPEC.md and TECH_STACK.md, build a minimal runnable backend skeleton. First output the implementation plan and directory responsibilities, then implement startup line, interface line, business line, and operations line. Finish with startup command, test method, health check, and run evidence.
+Based on docs/architecture/BACKEND_SPEC.md and docs/architecture/TECH_STACK.md, build a minimal runnable backend skeleton. First output the implementation plan and directory responsibilities, then implement startup line, interface line, business line, and operations line. Finish with startup command, test method, health check, and run evidence.
 ```
 
 ## Prompt: Architecture Acceptance

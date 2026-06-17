@@ -31,38 +31,43 @@ If two details are inseparable, ask at most two short questions. Prefer multiple
 
 | User situation | Load | Primary output |
 | --- | --- | --- |
+| Creating or reorganizing project source-of-truth documents | `references/document-layout.md` | root `AGENTS.md` index plus docs under `docs/` |
 | Vague idea, unsure what AI can do, or first project | `references/project-initiation.md` | clarified problem, MVP boundary, project charter |
-| Choosing stack, repository setup, version safety | `references/project-initiation.md` | tech stack decision, Git checkpoint rule |
+| Choosing stack, repository setup, version safety | `references/project-initiation.md`, `references/architecture-baseline.md` | tech stack decision, architecture track, Git checkpoint rule |
+| Defining quality gates, scripts, CI, migrations, env, or repo hygiene | `references/engineering-baseline.md` | engineering baseline and acceptance checklist |
 | Need project-level rules, AGENTS.md, or reusable process | `references/engineering-rules.md` | Agent constitution, candidate skill workflow |
 | Planning pages, UX states, components, frontend skeleton | `references/frontend.md` | page map, component map, frontend skeleton plan |
 | Designing tables, fields, relations, migrations | `references/database.md` | database design document |
 | Defining APIs, backend business boundaries, backend skeleton, architecture acceptance | `references/backend.md` | backend business spec, minimal backend skeleton, acceptance report |
 | Checking backend safety, secrets, logs, dependencies, database risk | `references/security.md` | security boundary table, bottom-layer security evidence |
-| Deciding which tools or MCPs AI may use | `references/tool-policy.md` | `TOOL_POLICY.md` or tool permission matrix |
+| Deciding which tools or MCPs AI may use | `references/tool-policy.md` | `docs/ops/TOOL_POLICY.md` or tool permission matrix |
 | Need whole-project flow, default stack, or reusable prompt pack | `references/workflow-checklists.md` | roadmap, docs checklist, default workflow docs |
 
 ## Execution Flow
 
 1. Classify the request into one stage from the router.
 2. Read the matching reference file before giving instructions or editing project files.
-3. Check whether required upstream artifacts exist. If they are missing, create or request only the next missing artifact, not the entire chain.
-4. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
-5. Produce the smallest useful stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
-6. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
-7. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+3. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
+4. Check whether required upstream artifacts exist. If they are missing, create or request only the next missing artifact, not the entire chain.
+5. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
+6. Produce the smallest useful stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
+7. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
+8. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
 
 ## Required Artifacts
 
 When a `templates/` directory is available, copy and adapt its matching template instead of drafting the artifact from scratch.
 
-- `PROJECT_CHARTER.md`: target user, problem, MVP scope, non-goals, risks, acceptance criteria.
-- `TECH_STACK.md`: chosen stack, rejected alternatives, re-evaluation rules, forbidden drift.
-- `AGENTS.md` or equivalent Agent constitution: project rules, completion definition, tests, Git discipline, conflict handling.
-- `TOOL_POLICY.md`: default tools, project tools, high-risk confirmations.
-- `DATABASE_DESIGN.md`: objects, tables, fields, relations, indexes, security notes.
-- `BACKEND_SPEC.md`: business rules, API boundary, permissions, data flow, error handling.
-- `AI_WORKFLOW.md`: clarify, spec, plan, implement, verify, archive.
-- `DEPLOYMENT.md`: local, staging, production, environment variables, health checks, rollback.
+- `AGENTS.md`: root-level Agent constitution and index into project documents.
+- `docs/project/PROJECT_CHARTER.md`: target user, problem, MVP scope, non-goals, risks, acceptance criteria.
+- `docs/architecture/TECH_STACK.md`: chosen stack, architecture track, rejected alternatives, re-evaluation rules, forbidden drift.
+- `docs/architecture/ENGINEERING_BASELINE.md`: scripts, code quality, CI, migrations, env, testing, commit discipline.
+- `docs/architecture/FRONTEND_PLAN.md`: pages, routes, components, states, design system, frontend skeleton plan.
+- `docs/architecture/DATABASE_DESIGN.md`: objects, tables, fields, relations, indexes, security notes.
+- `docs/architecture/BACKEND_SPEC.md`: business rules, API boundary, permissions, data flow, error handling.
+- `docs/workflow/AI_WORKFLOW.md`: clarify, spec, plan, implement, verify, archive.
+- `docs/ops/TOOL_POLICY.md`: default tools, project tools, high-risk confirmations.
+- `docs/ops/DEPLOYMENT.md`: local, staging, production, environment variables, health checks, rollback.
 
 ## Common Mistakes
 
@@ -72,6 +77,8 @@ When a `templates/` directory is available, copy and adapt its matching template
 | Letting AI choose many possible stacks forever | Discuss alternatives, then commit to one documented main route. |
 | Treating Git as an afterthought | Initialize Git early and commit every stable stage. |
 | Putting every rule into the Agent constitution | Keep project rules short; move task-specific procedures into skills or references. |
+| Dumping every project document in the repository root | Keep only `AGENTS.md` as the root index; put detailed documents under `docs/`. |
+| Choosing a throwaway MVP stack for a product MVP | Keep scope small, but choose a stack and repo shape that can grow without a core rewrite. |
 | Accepting "it is secure" as proof | Require file locations, code paths, tests, and role-based evidence. |
 | Opening every tool to AI | Separate default-open tools, project-specific tools, and high-risk confirmation gates. |
 

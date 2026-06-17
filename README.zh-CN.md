@@ -6,6 +6,8 @@ Agent Project Kit 是一个面向 Codex 的 skill，用来把 AI 编程项目从
 
 它把“直接让 AI 写代码”改造成一套阶段化流程：先澄清项目、选择技术栈、建立 Agent 规则，再规划前端/后端/数据库、定义工具权限，并在完成前要求测试、构建、接口、安全等验收证据。
 
+默认姿态是 Product MVP：功能范围可以小，但仓库形态、技术栈决策和工程基线不能是后续必然推倒重来的临时方案。
+
 ## 适合谁
 
 - 正在用 Codex、Claude Code、Cursor、Copilot 等 AI 编程工具的个人开发者和小团队。
@@ -55,7 +57,7 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 
 ```text
 Use $agent-project-kit to help me choose a tech stack for this product idea.
-Use $agent-project-kit to draft AGENTS.md and TOOL_POLICY.md for this repo.
+Use $agent-project-kit to draft root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo.
 Use $agent-project-kit to plan the backend skeleton and acceptance checklist.
 Use $agent-project-kit to review whether this backend is safe enough to deploy.
 ```
@@ -87,18 +89,39 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 └── scripts/validate.py       # 仓库校验脚本
 ```
 
+## 生成项目的文档布局
+
+默认情况下，项目文档不要全部堆在仓库根目录。根目录只保留 `AGENTS.md` 作为 Agent 索引，详细的项目事实文档放到 `docs/`：
+
+```text
+.
+├── AGENTS.md
+└── docs/
+    ├── project/PROJECT_CHARTER.md
+    ├── architecture/TECH_STACK.md
+    ├── architecture/ENGINEERING_BASELINE.md
+    ├── architecture/FRONTEND_PLAN.md
+    ├── architecture/DATABASE_DESIGN.md
+    ├── architecture/BACKEND_SPEC.md
+    ├── workflow/AI_WORKFLOW.md
+    ├── ops/TOOL_POLICY.md
+    └── ops/DEPLOYMENT.md
+```
+
 ## 模板
 
 当 skill 要求阶段产物时，可以复制这些模板到你的项目里：
 
-- `templates/PROJECT_CHARTER.md`
-- `templates/TECH_STACK.md`
 - `templates/AGENTS.md`
-- `templates/TOOL_POLICY.md`
-- `templates/DATABASE_DESIGN.md`
-- `templates/BACKEND_SPEC.md`
-- `templates/AI_WORKFLOW.md`
-- `templates/DEPLOYMENT.md`
+- `templates/docs/project/PROJECT_CHARTER.md`
+- `templates/docs/architecture/TECH_STACK.md`
+- `templates/docs/architecture/ENGINEERING_BASELINE.md`
+- `templates/docs/architecture/FRONTEND_PLAN.md`
+- `templates/docs/architecture/DATABASE_DESIGN.md`
+- `templates/docs/architecture/BACKEND_SPEC.md`
+- `templates/docs/workflow/AI_WORKFLOW.md`
+- `templates/docs/ops/TOOL_POLICY.md`
+- `templates/docs/ops/DEPLOYMENT.md`
 
 ## 校验
 
@@ -108,7 +131,7 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 python3 scripts/validate.py
 ```
 
-它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter 和阶段 reference 路由。
+它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter、阶段 reference 路由、生成项目的文档布局，以及 Product MVP 基线覆盖。
 
 ## 为什么做它
 
