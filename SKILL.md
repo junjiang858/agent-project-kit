@@ -19,6 +19,18 @@ Before confirming a technology stack for a Product MVP, run the Capability Libra
 
 Never create application scaffolding, UI pages, API skeletons, database schemas, package manager files, or implementation directories until the Project Specification Readiness Gate is satisfied or the user explicitly confirms a narrow bootstrap-only exception.
 
+## Global Interaction Rules
+
+### Confirmation Prompt Rule
+
+Any task that asks for user confirmation, consent, approval, or a path choice must include a plain-text fallback in the assistant message. Do not depend on UI buttons, `request_user_input`, AskUserQuestion, or any host-specific quick action. Interactive tools may be used when available, but the visible message must still contain enough text for the user to reply directly.
+
+When options are useful, label them clearly, such as `A. Continue` and `B. Revise`, and state what each option authorizes. For one-way or high-risk confirmations, state the exact action that will happen and wait for an explicit affirmative reply before acting.
+
+### User Language Rule
+
+Always match the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user requests another language. If the conversation contains multiple languages, use the language of the user's latest instruction. Preserve the same operational meaning across languages; do not force Chinese examples on non-Chinese users or English examples on Chinese users.
+
 ## Goal Contract
 
 At the start of every project-level run, state the current goal in one sentence. The goal must include:
@@ -177,6 +189,8 @@ When multiple documents are missing for the next stage, first interpret the curr
 1. Steady path: create or update only the single most important next document, then ask for review before continuing.
 2. Accelerated path: ask the user to authorize the named missing batch for this stage, create or update only those listed documents, then run the implementation readiness audit.
 
+Render these as plain-text options even when no interactive choice tool is available. Do not depend on UI buttons, `request_user_input`, or any host-specific quick action. Label the choices clearly, such as `A. Steady path` and `B. Accelerated path`, and include the exact document paths covered by each choice.
+
 Batch consent is limited to the named document list and current stage. It is not permanent permission, does not cover future documents discovered later, and does not authorize implementation code, scaffolding, package manager files, UI pages, APIs, database schemas, migrations, or runnable behavior.
 
 The agent may discuss, summarize, or propose a short outline in chat before consent, but must not create or modify document files before consent.
@@ -216,7 +230,7 @@ For a Product MVP with web, backend, database, tool execution, deployment, or AI
 
 For high-risk projects involving uploaded executable content, tool execution, secrets, payments, production data, external writes, or privileged local access, also require explicit security acceptance content before implementation. This can live in `docs/architecture/BACKEND_SPEC.md`, `docs/ops/TOOL_POLICY.md`, or a separately approved security document if the user requests one.
 
-If any required artifact is missing, do not dump a raw checklist. State the current stage, identify only the documents that directly unblock the next stage, explain why each one matters now, and offer the steady path or accelerated path from the Document Consent Gate. Do not create code or scaffolding while the gate is incomplete.
+If any required artifact is missing, do not dump a raw checklist. State the current stage, identify only the documents that directly unblock the next stage, explain why each one matters now, and offer the steady path or accelerated path from the Document Consent Gate. Use plain-text options and do not depend on UI buttons. Do not create code or scaffolding while the gate is incomplete.
 
 Bootstrap-only exception: if the user explicitly asks to create a bare repository skeleton before the readiness set is complete, confirm that the exception is limited to empty folders, root config, Git setup, and documentation plumbing. Do not add UI/API/business logic, database schema, migrations, or runnable product behavior under this exception.
 
@@ -263,14 +277,14 @@ Use this sequence:
 2. State the Goal Contract for the current run: target outcome, completion signal, and next action.
 3. Read the matching reference file before giving instructions or editing project files.
 4. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
-5. Check whether required upstream artifacts exist. If they are missing, request only the next missing artifact or fact, not the entire chain.
+5. Check whether required upstream artifacts exist. If only one artifact or fact is missing, request only that item. If multiple readiness documents are missing, run the stage-aware readiness audit and offer both steady and accelerated paths.
 6. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
 7. For project initiation, satisfy Reference Project Scan Gate, Requirements Depth Gate, and Project Purpose Confirmation before asking to write the project charter.
 8. For every document file, satisfy Document Consent Gate before creating or updating it.
 9. Before technology stack confirmation, satisfy the Capability Library Scan Gate and get user confirmation for the combined core stack and library set.
-10. Before scaffolding or implementation, satisfy the Project Specification Readiness Gate. If documents are missing, stop implementation and continue with the next approved source-of-truth document.
+10. Before scaffolding or implementation, satisfy the Project Specification Readiness Gate. If documents are missing, stop implementation and offer the steady path and accelerated path as plain-text options.
 11. Before any implementation that changes design or contracts, satisfy the Source-of-Truth Change Gate and update the original project documents first.
-12. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
+12. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report. After creating or updating any readiness document, rerun the readiness audit summary in the final response; when multiple readiness documents remain, end with the two plain-text options rather than a single "next document" suggestion.
 13. For implementation work, preserve Git checkpoints and return evidence: updated source-of-truth documents when design changed, commands run, tests, build, browser/API checks, or security proof.
 14. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
 15. When a Goal Contract milestone is genuinely satisfied, say so explicitly. Provide the project engineering baseline congratulatory message at the baseline milestone, and provide the first MVP slice congratulatory message only after the approved slice is implemented and verified with fresh evidence.

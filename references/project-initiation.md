@@ -14,6 +14,16 @@ Use this reference for cognition calibration, project charter work, technology s
 - Git is the rollback and comparison mechanism for fast AI edits; initialize it before meaningful implementation.
 - `PROJECT_CHARTER.md`, `TECH_STACK.md`, and `ENGINEERING_BASELINE.md` alone are not enough to begin a Product MVP scaffold when the project also has frontend, backend, database, tool execution, deployment, or AI workflow concerns.
 
+## Interaction Defaults
+
+### Confirmation Prompt Rule
+
+Any confirmation, consent, approval, or path-choice prompt must include plain-text options in the assistant message. Do not depend on UI buttons, `request_user_input`, AskUserQuestion, or host-specific quick actions.
+
+### User Language Rule
+
+Use the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user asks for another language.
+
 ## Stage Flow
 
 1. Calibrate the project idea.
@@ -131,7 +141,7 @@ Move in this order:
 9. Recommend exactly one technical route plus included/deferred/rejected third-party libraries, then get user confirmation before writing `docs/architecture/TECH_STACK.md`.
 10. After stack confirmation and document-write consent, move to root `AGENTS.md`, `docs/architecture/ENGINEERING_BASELINE.md`, and `docs/ops/TOOL_POLICY.md`.
 11. Before implementation, complete the project-specific readiness set: frontend plan for UI work, database design for persisted data, backend spec for API/service/tool execution, AI workflow for agent process, deployment plan for local or hosted runtime, and explicit security acceptance content for high-risk execution or secrets.
-12. When multiple readiness documents are missing, identify the current stage and explain which missing documents directly unblock the next stage. Offer a steady path for the single most important next document and an accelerated path for the named missing batch.
+12. When multiple readiness documents are missing, identify the current stage and explain which missing documents directly unblock the next stage. Offer plain-text options: a steady path for the single most important next document and an accelerated path for the named missing batch. Do not depend on UI buttons.
 13. Only then discuss first implementation planning for the first MVP slice.
 
 If the user says "not sure", offer 2-3 concrete options and ask them to choose one.
@@ -186,6 +196,8 @@ Required answer shape:
    - Steady path: create or update the single most important next document, then ask the user to review it before continuing.
    - Accelerated path: create or update the named missing batch for this stage, then run the implementation readiness audit.
 
+Render the choices as plain-text options, such as `A. Steady path` and `B. Accelerated path`, and name the exact document paths covered by each. Do not depend on UI buttons or host-specific quick actions.
+
 Do not create `apps/`, `packages/`, UI screens, API controllers, database schemas, package manager files, or runnable behavior while the audit has missing required documents. A bootstrap-only exception must be explicitly confirmed and must stay limited to empty folders, root config, Git setup, and documentation plumbing.
 
 ## Prompt: Vague Idea to Charter
@@ -199,7 +211,7 @@ Before recommending a stack or implementation plan, summarize who the project se
 ## Prompt: Implementation Readiness Audit
 
 ```text
-Before creating files outside docs or AGENTS.md, audit whether this project is ready for implementation. List the confirmed documents present, identify the current stage and the next stage, then list only the missing source-of-truth documents that directly unblock that next stage. Explain why each missing document matters now. Offer two choices: steady path for the single most important next document, or accelerated path for the named missing batch. Do not scaffold apps, packages, UI, API, database, or runnable behavior until the readiness set is complete.
+Before creating files outside docs or AGENTS.md, audit whether this project is ready for implementation. List the confirmed documents present, identify the current stage and the next stage, then list only the missing source-of-truth documents that directly unblock that next stage. Explain why each missing document matters now. Offer plain-text options: `A. Steady path` for the single most important next document, or `B. Accelerated path` for the named missing batch. Do not depend on UI buttons. Do not scaffold apps, packages, UI, API, database, or runnable behavior until the readiness set is complete.
 ```
 
 ## Prompt: Unique Tech Stack

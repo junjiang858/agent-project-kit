@@ -24,6 +24,16 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 18. First MVP slice implementation and verification.
 19. First MVP slice completion signal with evidence.
 
+## Interaction Defaults
+
+### Confirmation Prompt Rule
+
+Any confirmation, consent, approval, or path-choice prompt must include plain-text options in the assistant message. Do not depend on UI buttons, `request_user_input`, AskUserQuestion, or host-specific quick actions.
+
+### User Language Rule
+
+Use the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user asks for another language.
+
 ## Goal And Completion Signal
 
 At the beginning of a project-level workflow, state the goal in plain language:
@@ -125,6 +135,8 @@ If documents are missing, output a short stage-aware readiness audit. Name the c
 1. Steady path: create or update the single most important next document, then review it before continuing.
 2. Accelerated path: ask for consent to create or update the named missing batch for this stage, then run the implementation readiness audit.
 
+Use plain-text options, for example `A. Steady path` and `B. Accelerated path`. Do not depend on UI buttons or host-specific quick actions. Each option must name the exact document paths it covers.
+
 Do not proceed to code.
 
 ## Reference Project Scan Prompt
@@ -200,7 +212,7 @@ Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, te
 ## Implementation Readiness Prompt
 
 ```text
-Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer two choices: steady path for the single most important next document, or accelerated path for the named missing batch. Do not scaffold or implement yet.
+Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer plain-text options: `A. Steady path` for the single most important next document, or `B. Accelerated path` for the named missing batch. Do not depend on UI buttons. Do not scaffold or implement yet.
 ```
 
 ## Source-of-Truth Change Prompt

@@ -40,6 +40,40 @@ Read task-specific docs when relevant:
 - Use existing patterns before adding abstractions.
 - Never put secrets in code or Git history.
 
+## Interaction Defaults
+
+### Confirmation Prompt Rule
+
+Any request for confirmation, consent, approval, or a path choice must include plain-text options in the assistant message. Do not rely only on UI buttons, `request_user_input`, AskUserQuestion, or host-specific quick actions. State what each option authorizes before waiting for the user's reply.
+
+### User Language Rule
+
+Use the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user asks for another language.
+
+## Implementation Readiness
+
+Do not create runnable product code, package manager files, app scaffolding, API skeletons, database schemas, migrations, or dev-server behavior until the readiness gate is satisfied.
+
+Required before implementation:
+
+- `AGENTS.md`
+- `docs/project/PROJECT_CHARTER.md`
+- `docs/architecture/TECH_STACK.md`
+- `docs/architecture/ENGINEERING_BASELINE.md`
+- `docs/architecture/FRONTEND_PLAN.md` when frontend UI is in scope
+- `docs/architecture/DATABASE_DESIGN.md` or an explicit no-database decision when persistence is in scope
+- `docs/architecture/BACKEND_SPEC.md` or an explicit no-backend decision when API, worker, or service boundaries are in scope
+- `docs/workflow/AI_WORKFLOW.md`
+- `docs/ops/TOOL_POLICY.md`
+- `docs/ops/DEPLOYMENT.md` when local run, environment variables, or hosting are in scope
+
+If multiple readiness documents are missing, do not give only a single next-document suggestion. Offer plain-text options and do not depend on UI buttons:
+
+- `A. Steady path`: create or update the single most important next document, then ask for review.
+- `B. Accelerated path`: ask for consent to create or update the named missing batch for this stage, then run the implementation readiness audit.
+
+Batch consent applies only to the named missing batch and does not authorize implementation code, scaffolding, package manager files, UI pages, APIs, schemas, migrations, or runnable behavior.
+
 ## Completion Definition
 
 - [ ] Relevant tests or checks pass.

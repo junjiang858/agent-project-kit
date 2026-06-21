@@ -113,6 +113,8 @@ It combines:
 - Reference project scan gate: the agent checks concrete examples with direct project links before narrowing a vague idea.
 - Capability library scan gate: before stack confirmation, the agent maps required technical capabilities to mature, open-source, maintained third-party libraries and asks the user to confirm the combined stack and library set.
 - Confirmation gates: requirements depth, project purpose, document consent, tech stack consent, and high-risk operation confirmation.
+- Text fallback for confirmation prompts: every approval or path choice must be answerable from plain text, not only UI buttons.
+- Language adaptation: questions, confirmations, progress updates, and completion messages should match the user's current language.
 - Templates: reusable source-of-truth documents for project, architecture, workflow, and operations.
 - References: detailed stage guidance for frontend, backend, database, security, tools, and engineering baselines.
 - Validation: a local script checks that the skill keeps its required files, routes, guardrails, and document layout intact.
@@ -241,7 +243,12 @@ For Product MVP work, this usually means checking:
 - `docs/ops/TOOL_POLICY.md`
 - `docs/ops/DEPLOYMENT.md`
 
-If required documents are missing, the agent should list the gaps and ask whether to create the next document instead of writing code.
+If required documents are missing, the agent should list the stage-aware gaps instead of writing code. When multiple documents are missing, it should offer plain-text options rather than relying on UI buttons:
+
+- Steady path: create or update the single most important next document, then review it.
+- Accelerated path: authorize the named missing batch for this stage, create or update only those documents, then run the readiness audit again.
+
+The accelerated path is still limited to the named documents; it is not permission to scaffold, install dependencies, or implement product behavior.
 
 ## 🧭 Source-of-Truth Change Gate
 
