@@ -6,6 +6,11 @@
 - Target users:
 - Core scenario:
 
+## Purpose Confirmation
+
+- Project purpose summary:
+- User confirmation before technical planning:
+
 ## Product Lifecycle
 
 - Lifecycle: Product MVP / throwaway prototype / internal tool / platform

@@ -7,18 +7,20 @@ Use this reference for cognition calibration, project charter work, technology s
 - AI lowers the cost of writing code, not the need for product judgment, technical boundaries, and acceptance responsibility.
 - The dangerous shortcut is handing a vague idea directly to AI for implementation.
 - The first deliverable is clarity: target user, core problem, MVP scope, non-goals, risks, and acceptance criteria.
+- The project purpose must be summarized and confirmed before technical or implementation planning.
 - Technology choice should follow product shape, team capability, launch pressure, ecosystem maturity, documentation quality, security posture, and licensing.
 - Git is the rollback and comparison mechanism for fast AI edits; initialize it before meaningful implementation.
 
 ## Stage Flow
 
 1. Calibrate the project idea.
-2. Create an isolated project folder with a clear English name.
-3. Discuss requirements without writing code.
-4. Produce `docs/project/PROJECT_CHARTER.md`.
-5. Choose exactly one main technical route and write `docs/architecture/TECH_STACK.md`.
-6. Define `docs/architecture/ENGINEERING_BASELINE.md` before implementation.
-7. Initialize Git, create the first checkpoint, and define commit rules.
+2. Discuss requirements without writing code.
+3. Summarize the project purpose and ask the user to confirm or correct it.
+4. Create an isolated project folder with a clear English name.
+5. Produce `docs/project/PROJECT_CHARTER.md`.
+6. Choose exactly one main technical route and write `docs/architecture/TECH_STACK.md`.
+7. Define `docs/architecture/ENGINEERING_BASELINE.md` before implementation.
+8. Initialize Git, create the first checkpoint, and define commit rules.
 
 ## Guided Intake
 
@@ -33,13 +35,27 @@ Start with the smallest question that unlocks the next artifact:
 
 Do not ask all four at once. Ask the next question only after the previous answer is reflected back briefly.
 
+## Project Purpose Confirmation
+
+After target users and the core pain or workflow are clear, summarize the project purpose in plain language before drafting technical plans.
+
+The summary must cover:
+
+- Who the project serves.
+- What problem or workflow it solves.
+- What the product's core role is.
+- What the MVP should cover first.
+
+Ask the user to confirm or correct the summary. Do not choose a technology stack or plan implementation until the user confirms the project purpose.
+
 Move in this order:
 
 1. Gather enough context for `docs/project/PROJECT_CHARTER.md`.
-2. Draft `docs/project/PROJECT_CHARTER.md` and ask for confirmation.
-3. After confirmation, move to `docs/architecture/TECH_STACK.md`.
-4. After stack confirmation, move to root `AGENTS.md`, `docs/architecture/ENGINEERING_BASELINE.md`, and `docs/ops/TOOL_POLICY.md`.
-5. Only then discuss first implementation planning.
+2. Summarize the project purpose and get user confirmation.
+3. Draft `docs/project/PROJECT_CHARTER.md` and ask for confirmation.
+4. After confirmation, move to `docs/architecture/TECH_STACK.md`.
+5. After stack confirmation, move to root `AGENTS.md`, `docs/architecture/ENGINEERING_BASELINE.md`, and `docs/ops/TOOL_POLICY.md`.
+6. Only then discuss first implementation planning.
 
 If the user says "not sure", offer 2-3 concrete options and ask them to choose one.
 
@@ -79,6 +95,7 @@ If the user says "not sure", offer 2-3 concrete options and ask them to choose o
 
 ```text
 I want to build a small project with AI, but the idea is still vague. Do not write code yet. Act as a product partner and technical advisor. Guide me step by step. Ask only one question at a time, reflect my answer briefly, and continue until there is enough context to draft docs/project/PROJECT_CHARTER.md.
+Before recommending a stack or implementation plan, summarize who the project serves, what problem it solves, what the product does, and what the MVP covers first. Wait for my confirmation.
 ```
 
 ## Prompt: Unique Tech Stack

@@ -13,6 +13,14 @@ Guide an AI-assisted software project through staged clarification, documented d
 
 Do not jump from a vague idea to implementation. First identify the current project stage, load only the relevant reference, produce or update the stage artifact, then ask for approval before irreversible or high-risk work.
 
+## Default Workflow Priority
+
+When this skill is loaded or the user request matches AI-assisted project initiation, planning, architecture, frontend, backend, database, security, tool permissions, acceptance, or delivery workflow, Agent Project Kit is the default primary workflow.
+
+Use overlapping skills, including `superpowers` planning, TDD, execution, or review skills, only as auxiliary method libraries. Do not let overlapping skills replace this skill's stage router, confirmation gates, or required artifacts.
+
+Skip this priority only when the user explicitly names another skill or process as the primary workflow, or when the task is a local code fix, code explanation, single command, or other non-project-level task.
+
 ## Guided Interaction
 
 Ask one question at a time when gathering missing project context. Do not present a full intake questionnaire unless the user explicitly asks for one.
@@ -26,6 +34,12 @@ For vague project starts, use this loop:
 5. Continue only to the next necessary question or draft.
 
 If two details are inseparable, ask at most two short questions. Prefer multiple-choice options when they reduce effort.
+
+## Project Purpose Confirmation
+
+Before moving beyond project initiation, summarize the project purpose for the user: who it serves, what problem it solves, what the product does, and what the MVP should cover first. Ask the user to confirm or correct that summary.
+
+Do not move into technology stack, frontend, backend, database, or implementation planning until the user confirms the project purpose summary.
 
 ## Stage Router
 
@@ -50,9 +64,10 @@ If two details are inseparable, ask at most two short questions. Prefer multiple
 3. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
 4. Check whether required upstream artifacts exist. If they are missing, create or request only the next missing artifact, not the entire chain.
 5. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
-6. Produce the smallest useful stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
-7. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
-8. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+6. For project initiation, complete Project Purpose Confirmation before technical or implementation planning.
+7. Produce the smallest useful stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
+8. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
+9. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
 
 ## Required Artifacts
 
@@ -74,6 +89,7 @@ When a `templates/` directory is available, copy and adapt its matching template
 | Mistake | Correction |
 | --- | --- |
 | Asking AI to code before scope is clear | Create or update the project charter first. |
+| Planning implementation before confirming project purpose | Summarize the target user, problem, product role, and MVP; wait for user confirmation. |
 | Letting AI choose many possible stacks forever | Discuss alternatives, then commit to one documented main route. |
 | Treating Git as an afterthought | Initialize Git early and commit every stable stage. |
 | Putting every rule into the Agent constitution | Keep project rules short; move task-specific procedures into skills or references. |

@@ -141,6 +141,23 @@ def check_product_mvp_baseline() -> None:
             fail(f"{path} must include {phrase}")
 
 
+def check_workflow_priority_and_confirmation() -> None:
+    required_pairs = [
+        ("SKILL.md", "Default Workflow Priority"),
+        ("SKILL.md", "Agent Project Kit is the default primary workflow"),
+        ("SKILL.md", "overlapping skills"),
+        ("SKILL.md", "Project Purpose Confirmation"),
+        ("SKILL.md", "Do not move into technology stack, frontend, backend, database, or implementation planning until the user confirms"),
+        ("references/project-initiation.md", "Project Purpose Confirmation"),
+        ("references/project-initiation.md", "Summarize the project purpose"),
+        ("references/project-initiation.md", "Do not choose a technology stack or plan implementation until the user confirms"),
+        ("templates/docs/project/PROJECT_CHARTER.md", "Purpose Confirmation"),
+    ]
+    for path, phrase in required_pairs:
+        if phrase not in read(path):
+            fail(f"{path} must include {phrase}")
+
+
 def main() -> None:
     require_files()
     check_skill_frontmatter()
@@ -150,6 +167,7 @@ def main() -> None:
     check_guided_interaction()
     check_project_document_layout()
     check_product_mvp_baseline()
+    check_workflow_priority_and_confirmation()
     print("Repository validation passed.")
 
 
