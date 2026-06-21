@@ -43,3 +43,7 @@
 - Business line:
 - Operations line:
 - Health check:
+
+## Change Rule
+
+- Update this document before implementing changes to APIs, request/response contracts, validation, error shape, permissions, backend workflows, integrations, workers, or data flow.

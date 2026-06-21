@@ -30,6 +30,7 @@ Describe frontend needs with:
 
 - Save the frontend plan as `docs/architecture/FRONTEND_PLAN.md`.
 - Confirm that the Project Specification Readiness Gate is satisfied before creating frontend files or routes.
+- If the implementation changes routes, components, UI states, data dependencies, permissions, or interaction behavior, update `docs/architecture/FRONTEND_PLAN.md` before editing frontend code.
 - Confirm product tone, target user, and visual density.
 - Choose framework, UI component library, icon library, and chart library.
 - Define directory structure, routes, layout boundaries, and component split rules.
@@ -41,6 +42,7 @@ Describe frontend needs with:
 
 - Do not generate all pages horizontally before shared rules exist.
 - Do not let each page invent its own layout, CSS scale, data-loading pattern, or error style.
+- Do not let code become the first record of a frontend design change; update the source-of-truth plan first.
 - Preserve framework conventions and existing project components.
 - Verification should include build/type checks and browser inspection for key flows.
 

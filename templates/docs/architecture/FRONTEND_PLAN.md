@@ -43,6 +43,10 @@
 2. 
 3. 
 
+## Change Rule
+
+- Update this document before implementing changes to routes, components, UI states, data dependencies, permissions, or interaction behavior.
+
 ## Verification
 
 - [ ] Type/build check

@@ -37,3 +37,7 @@
 - Tool:
 - First migration:
 - Rollback or recovery note:
+
+## Change Rule
+
+- Update this document before implementing changes to tables, fields, relations, indexes, enums, seeds, schemas, migrations, ownership, retention, or rollback behavior.

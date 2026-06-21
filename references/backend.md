@@ -24,6 +24,8 @@ Produce `docs/architecture/BACKEND_SPEC.md` before implementation. Include:
 - Parameter validation, error handling, and logging rules.
 - Recommended language/framework and why alternatives are not chosen.
 
+If a later task changes an API, request/response contract, validation rule, error shape, permission boundary, backend workflow, integration, worker, or data flow, update `docs/architecture/BACKEND_SPEC.md` before editing backend code.
+
 ## Minimal Backend Skeleton
 
 The goal is the smallest runnable structure, not full feature coverage.
@@ -57,6 +59,7 @@ Backend "can start" is not enough. Accept it by checking:
 - Authentication/permission entry points.
 - Framework reuse boundaries: use framework conventions instead of custom scattered patterns.
 - Evidence: command output, test result, health check, API sample.
+- Source-of-truth sync: changed backend contracts are reflected in `docs/architecture/BACKEND_SPEC.md` before implementation evidence is accepted.
 
 ## Prompt: Backend Business Boundary
 

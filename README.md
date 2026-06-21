@@ -58,6 +58,7 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 - Prevent premature document creation, technology choices, and implementation.
 - Choose one main technical route based on product shape, lifecycle, team capability, launch pressure, migration cost, and production compatibility.
 - Create durable project source-of-truth documents under `docs/` instead of scattering planning notes across chat history.
+- Update source-of-truth documents before code when a later task changes frontend design, API contracts, database shape, permissions, deployment, tools, or operations.
 - Establish AI working rules through `AGENTS.md`, engineering baselines, tool permission policies, and workflow documents.
 - Plan frontend, backend, database, security, deployment, and acceptance work with verification evidence instead of "trust me" completion claims.
 
@@ -217,6 +218,16 @@ For Product MVP work, this usually means checking:
 
 If required documents are missing, the agent should list the gaps and ask whether to create the next document instead of writing code.
 
+## 🧭 Source-of-Truth Change Gate
+
+When a later task changes design or contracts, the agent should update the original project document before implementation:
+
+- Frontend routes, components, states, data dependencies, or interactions: `docs/architecture/FRONTEND_PLAN.md`.
+- APIs, validation, responses, errors, permissions, backend workflows, integrations, or data flow: `docs/architecture/BACKEND_SPEC.md`.
+- Tables, fields, relations, indexes, enums, schemas, migrations, ownership, retention, or rollback: `docs/architecture/DATABASE_DESIGN.md`.
+
+OpenSpec, GitHub Spec Kit, issue specs, and chat plans can guide a change, but they do not replace the repo's source-of-truth docs unless the project explicitly says so.
+
 ## 🎉 Goal And Completion Signal
 
 Agent Project Kit makes each project-level run name its goal before it continues:
@@ -229,13 +240,13 @@ For a new Product MVP, the default goal is usually: project engineering baseline
 
 That goal is reached when the project purpose is confirmed, the required source-of-truth documents are present or marked not applicable, the implementation readiness gate has passed, and the user has confirmed the readiness result or approved the next implementation step.
 
-When that happens, the agent closes with:
+When that happens, the agent closes with a concise readiness message in the user's current language. For English users:
 
 ```text
-🎉 恭喜，项目工程基线已就绪！
+🎉 Project engineering baseline is ready!
 
-✅ 项目目标、技术路线、核心文档和实现前门禁已经到位。
-🚀 下一步可以从第一个已批准的产品闭环开始实现。
+✅ The project goal, technical route, core documents, and implementation readiness gate are in place.
+🚀 Next, you can start implementing the first approved product loop.
 ```
 
 ## 🧱 Workflow
@@ -253,7 +264,7 @@ The skill routes work through these stages:
 9. Tool permission matrix
 10. Deployment and AI workflow documents
 11. Implementation readiness audit before scaffolding or code
-12. Goal completion signal and congratulatory readiness message
+12. Goal completion signal and language-adaptive readiness message
 
 ## 📁 Repository Layout
 

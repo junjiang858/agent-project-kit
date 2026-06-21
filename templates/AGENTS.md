@@ -35,6 +35,7 @@ Read task-specific docs when relevant:
 - Clarify scope before implementation.
 - Preserve the documented tech stack.
 - Keep detailed project documents under `docs/`; keep this file short as the root index.
+- Update the relevant source-of-truth document before code when design, API, database, permission, deployment, tool, or operational behavior changes.
 - Keep changes small and reviewable.
 - Use existing patterns before adding abstractions.
 - Never put secrets in code or Git history.
@@ -44,7 +45,7 @@ Read task-specific docs when relevant:
 - [ ] Relevant tests or checks pass.
 - [ ] Build passes when applicable.
 - [ ] Browser/API/security evidence is provided when applicable.
-- [ ] Docs are updated when decisions change.
+- [ ] Source-of-truth docs are updated before implementation when decisions or contracts change.
 - [ ] Git diff is reviewed before commit.
 
 ## Forbidden Actions

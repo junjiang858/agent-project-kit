@@ -19,6 +19,7 @@ Use this reference when turning business flow into tables, fields, relations, co
 6. Add security fields and rules: password hash, role, owner/user id, soft delete, audit fields, sensitive data masking.
 7. Save the design as `docs/architecture/DATABASE_DESIGN.md` and version it in Git before backend implementation.
 8. Do not create schemas, migrations, seeds, or ORM files until the database design document is approved, unless the user explicitly confirms a bootstrap-only exception with no persistent product model.
+9. If a later task requires a new or changed table, field, relation, index, enum, seed, schema, migration, ownership rule, retention rule, or rollback plan, update `docs/architecture/DATABASE_DESIGN.md` before writing the database code.
 
 ## Table Checklist
 
@@ -42,6 +43,7 @@ Use this reference when turning business flow into tables, fields, relations, co
 - Many-to-many modeled as comma-separated strings.
 - Indexes missing for frequent lookup, or too many indexes without query reason.
 - Deleting business data physically when recovery or audit is needed.
+- Creating migrations first and leaving `docs/architecture/DATABASE_DESIGN.md` stale.
 
 ## Prompt: Initial Database Design
 

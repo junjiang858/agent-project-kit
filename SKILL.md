@@ -33,13 +33,24 @@ For the common "create/start this project" flow, the default target outcome is: 
 - High-risk security/tool/deployment boundaries are documented when relevant.
 - The user has confirmed the readiness result or approved the next implementation step.
 
-When this goal is achieved, end with a concise congratulatory readiness message:
+When this goal is achieved, end with a concise readiness message in the user's current language. Preserve the same meaning; do not force Chinese for non-Chinese users.
+
+Chinese example:
 
 ```text
 🎉 恭喜，项目工程基线已就绪！
 
 ✅ 项目目标、技术路线、核心文档和实现前门禁已经到位。
 🚀 下一步可以从第一个已批准的产品闭环开始实现。
+```
+
+English example:
+
+```text
+🎉 Project engineering baseline is ready!
+
+✅ The project goal, technical route, core documents, and implementation readiness gate are in place.
+🚀 Next, you can start implementing the first approved product loop.
 ```
 
 ## Default Workflow Priority
@@ -125,6 +136,26 @@ If any required artifact is missing, list only the missing documents and ask whe
 
 Bootstrap-only exception: if the user explicitly asks to create a bare repository skeleton before the readiness set is complete, confirm that the exception is limited to empty folders, root config, Git setup, and documentation plumbing. Do not add UI/API/business logic, database schema, migrations, or runnable product behavior under this exception.
 
+## Source-of-Truth Change Gate
+
+Before implementing any change that alters project design, product behavior, contracts, data shape, permissions, or operations, update the original source-of-truth document first and get the required confirmation. Treat OpenSpec, GitHub Spec Kit, issue specs, design notes, and chat plans as auxiliary inputs unless the user explicitly declares one of them to be the new source of truth.
+
+Design or contract changes include:
+
+- New or changed page, route, component responsibility, UI state, data dependency, or frontend interaction: update `docs/architecture/FRONTEND_PLAN.md`.
+- New or changed API, request/response contract, validation rule, error shape, permission rule, backend workflow, integration, worker, or data flow: update `docs/architecture/BACKEND_SPEC.md`.
+- New or changed table, field, relation, index, enum, seed, schema, migration, ownership rule, retention rule, or rollback plan: update `docs/architecture/DATABASE_DESIGN.md`.
+- New or changed framework, dependency, script, repository layout, quality gate, deployment path, environment variable, tool permission, or operational behavior: update the relevant tech stack, engineering baseline, tool policy, or deployment document.
+
+Use this sequence:
+
+1. Read the current source-of-truth documents and identify which ones the requested change affects.
+2. Propose the documentation delta before code, schema, migration, API, or UI edits.
+3. Satisfy the Document Consent Gate and update the existing document files, not only a chat summary or temporary spec.
+4. Confirm the updated documents still satisfy the Project Specification Readiness Gate.
+5. Implement the smallest code change that follows the updated documents.
+6. If implementation reveals an unavoidable design change, pause implementation, update the source-of-truth document first, then continue.
+
 ## Stage Router
 
 | User situation | Load | Primary output |
@@ -153,10 +184,11 @@ Bootstrap-only exception: if the user explicitly asks to create a bare repositor
 7. For project initiation, satisfy Requirements Depth Gate and Project Purpose Confirmation before asking to write the project charter.
 8. For every document file, satisfy Document Consent Gate before creating or updating it.
 9. Before scaffolding or implementation, satisfy the Project Specification Readiness Gate. If documents are missing, stop implementation and continue with the next approved source-of-truth document.
-10. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
-11. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
-12. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
-13. When the Goal Contract completion signal is genuinely satisfied, say so explicitly and provide the congratulatory readiness message when the project engineering baseline goal is complete.
+10. Before any implementation that changes design or contracts, satisfy the Source-of-Truth Change Gate and update the original project documents first.
+11. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
+12. For implementation work, preserve Git checkpoints and return evidence: updated source-of-truth documents when design changed, commands run, tests, build, browser/API checks, or security proof.
+13. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+14. When the Goal Contract completion signal is genuinely satisfied, say so explicitly and provide the congratulatory readiness message when the project engineering baseline goal is complete.
 
 ## Required Artifacts
 
@@ -189,6 +221,7 @@ These artifacts are not all required for every tiny task, but they are required 
 | Choosing a throwaway MVP stack for a product MVP | Keep scope small, but choose a stack and repo shape that can grow without a core rewrite. |
 | Accepting "it is secure" as proof | Require file locations, code paths, tests, and role-based evidence. |
 | Opening every tool to AI | Separate default-open tools, project-specific tools, and high-risk confirmation gates. |
+| Letting code, migrations, or APIs become the first record of a design change | Update the original source-of-truth document first, then implement against it. |
 
 ## Source Notes
 

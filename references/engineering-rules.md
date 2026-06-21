@@ -16,6 +16,7 @@ Include:
 - Tool permission principles, with details delegated to `docs/ops/TOOL_POLICY.md`.
 - Forbidden actions: secrets in code, destructive commands, production mutation without confirmation, broad rewrites without approval.
 - Conflict order: user instruction, project docs, Agent constitution, skill/reference instructions, local code conventions.
+- Source-of-truth change gate: when design or contracts change, update the original project document before implementation.
 
 Avoid:
 
@@ -47,6 +48,8 @@ A task is not complete until the agent can show evidence appropriate to the work
 - Backend: test command, health check, API sample, logs free of sensitive data.
 - Database: migration or schema diff, relationship explanation, rollback note.
 - Security: risk table, affected files, verification method, normal and forbidden path evidence.
+
+When a task changes frontend design, API/backend contracts, database shape, permissions, deployment, tools, or operations, the first evidence must be the updated source-of-truth document path and summary. Code evidence comes after that.
 
 ## Prompt: Agent Constitution
 

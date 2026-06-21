@@ -33,13 +33,24 @@ For a new Product MVP, the default goal is: project engineering baseline ready. 
 
 Do not say the goal is complete just because a single document exists. Say the goal is complete only when the readiness gate has passed or the narrower user-specified goal has its completion evidence.
 
-When the project engineering baseline is ready, close with:
+When the project engineering baseline is ready, close with a concise readiness message in the user's current language. Preserve the same meaning; do not force Chinese for non-Chinese users.
+
+Chinese example:
 
 ```text
 🎉 恭喜，项目工程基线已就绪！
 
 ✅ 项目目标、技术路线、核心文档和实现前门禁已经到位。
 🚀 下一步可以从第一个已批准的产品闭环开始实现。
+```
+
+English example:
+
+```text
+🎉 Project engineering baseline is ready!
+
+✅ The project goal, technical route, core documents, and implementation readiness gate are in place.
+🚀 Next, you can start implementing the first approved product loop.
 ```
 
 ## Deliverable Checklist
@@ -82,7 +93,18 @@ For a Product MVP that includes web UI, backend, database, local execution, depl
 
 If documents are missing, output a short readiness audit and ask whether to create the next missing document or the named missing batch. Do not proceed to code.
 
-When the readiness gate and approved engineering setup are complete, close with a short welcome message such as: "欢迎进入你的项目工程基线：当前项目工程搭建完毕，文档、技术路线和基础门禁已就位。下一步可以从第一个已批准的产品闭环开始实现。"
+When the readiness gate and approved engineering setup are complete, close with a short welcome message in the user's current language. For example, in Chinese: "欢迎进入你的项目工程基线：当前项目工程搭建完毕，文档、技术路线和基础门禁已就位。下一步可以从第一个已批准的产品闭环开始实现。" In English: "Welcome to your project engineering baseline: the core documents, technical route, and readiness gates are in place. Next, start with the first approved product loop."
+
+## Source-of-Truth Change Gate
+
+Before implementing a change that alters design or contracts, update the original project document first:
+
+- Frontend routes, components, states, data dependencies, or interactions: `docs/architecture/FRONTEND_PLAN.md`.
+- APIs, validation, response/error contracts, permissions, backend workflows, integrations, or data flow: `docs/architecture/BACKEND_SPEC.md`.
+- Tables, fields, relations, indexes, enums, schema, migrations, ownership, retention, or rollback: `docs/architecture/DATABASE_DESIGN.md`.
+- Stack, dependencies, scripts, deployment, environment, tools, or operations: the relevant tech stack, engineering baseline, deployment, or tool policy document.
+
+OpenSpec, GitHub Spec Kit, issue specs, and chat plans can guide the change, but they do not replace the repository source-of-truth documents unless the user explicitly changes that rule. If implementation reveals a design change, stop and update the affected document before continuing code.
 
 ## Default Product MVP Stack
 
@@ -135,10 +157,16 @@ Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, te
 Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. List present and missing documents. If anything required is missing, ask whether to create the next missing document and do not scaffold or implement yet.
 ```
 
+## Source-of-Truth Change Prompt
+
+```text
+Before implementing this change, identify whether it changes frontend design, API/backend contracts, database shape, permissions, stack, deployment, tools, or operations. If it does, update the affected original source-of-truth document first, ask for confirmation when required, then implement code strictly against the updated document. Treat OpenSpec or other spec artifacts as auxiliary inputs unless the project explicitly declares them as source of truth.
+```
+
 ## Goal Contract Prompt
 
 ```text
-Before continuing, state the current goal, the completion signal, and the next action. When the completion signal is satisfied, explicitly say the goal is achieved. If the project engineering baseline is ready, finish with the approved congratulatory readiness message.
+Before continuing, state the current goal, the completion signal, and the next action. When the completion signal is satisfied, explicitly say the goal is achieved. If the project engineering baseline is ready, finish with the language-adaptive readiness message.
 ```
 
 ## Testing Scripts Prompt
@@ -150,5 +178,5 @@ Based on the current stack, generate a testing and quality-check plan for docs/a
 ## Anti-Drift Prompt
 
 ```text
-Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. After finishing, provide test, build, browser, API, or deployment evidence.
+Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. If the task changes frontend/API/database/permission/operation design, update the affected source-of-truth document before code. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
 ```
