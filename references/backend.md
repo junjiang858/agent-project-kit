@@ -28,6 +28,8 @@ Produce `docs/architecture/BACKEND_SPEC.md` before implementation. Include:
 
 The goal is the smallest runnable structure, not full feature coverage.
 
+Do not build even a minimal backend skeleton until `docs/architecture/BACKEND_SPEC.md` exists and the Project Specification Readiness Gate has passed for the requested product shape.
+
 Run four lines:
 
 - Startup line: app starts with documented command and environment variables.
@@ -65,7 +67,7 @@ Do not write code yet. Based on the project charter, frontend flow, database des
 ## Prompt: Minimal Backend Skeleton
 
 ```text
-Based on docs/architecture/BACKEND_SPEC.md and docs/architecture/TECH_STACK.md, build a minimal runnable backend skeleton. First output the implementation plan and directory responsibilities, then implement startup line, interface line, business line, and operations line. Finish with startup command, test method, health check, and run evidence.
+Based on docs/architecture/BACKEND_SPEC.md and docs/architecture/TECH_STACK.md, first verify the Project Specification Readiness Gate. If ready, build a minimal runnable backend skeleton. First output the implementation plan and directory responsibilities, then implement startup line, interface line, business line, and operations line. Finish with startup command, test method, health check, and run evidence.
 ```
 
 ## Prompt: Architecture Acceptance

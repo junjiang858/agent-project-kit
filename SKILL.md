@@ -11,7 +11,36 @@ Guide an AI-assisted software project through staged clarification, documented d
 
 ## Core Rule
 
-Do not jump from a vague idea to documents, technology choices, or implementation. First identify the current project stage, load only the relevant reference, clarify the minimum facts for that stage, and ask for explicit consent before creating or updating any project document file or before irreversible or high-risk work.
+Do not jump from a vague idea to documents, technology choices, project scaffolding, or implementation. First identify the current project stage, load only the relevant reference, clarify the minimum facts for that stage, and ask for explicit consent before creating or updating any project document file or before irreversible or high-risk work.
+
+Never create application scaffolding, UI pages, API skeletons, database schemas, package manager files, or implementation directories until the Project Specification Readiness Gate is satisfied or the user explicitly confirms a narrow bootstrap-only exception.
+
+## Goal Contract
+
+At the start of every project-level run, state the current goal in one sentence. The goal must include:
+
+- Target outcome: what stage outcome the user is trying to reach.
+- Completion signal: what concrete artifacts, confirmations, or evidence prove that outcome is reached.
+- Next action: the single next question, document, audit, or implementation step.
+
+Do not declare the goal achieved merely because a document was written. Declare success only when the goal's completion signal is satisfied and the user has confirmed the relevant source-of-truth artifact or readiness result.
+
+For the common "create/start this project" flow, the default target outcome is: project engineering baseline ready. This goal is achieved when:
+
+- Project purpose is confirmed.
+- Required source-of-truth documents for the product shape are present or explicitly marked not applicable.
+- The Project Specification Readiness Gate has passed.
+- High-risk security/tool/deployment boundaries are documented when relevant.
+- The user has confirmed the readiness result or approved the next implementation step.
+
+When this goal is achieved, end with a concise congratulatory readiness message:
+
+```text
+🎉 恭喜，项目工程基线已就绪！
+
+✅ 项目目标、技术路线、核心文档和实现前门禁已经到位。
+🚀 下一步可以从第一个已批准的产品闭环开始实现。
+```
 
 ## Default Workflow Priority
 
@@ -73,6 +102,29 @@ Before asking to write `docs/project/PROJECT_CHARTER.md`, gather enough context 
 
 If these are not known yet, keep asking one focused question at a time. If the user is unsure, offer 2-3 concrete options and ask them to choose or revise one.
 
+## Project Specification Readiness Gate
+
+Before creating or modifying implementation files, scaffolding a repo, adding package manager files, creating `apps/` or `packages/`, writing UI/API/database code, or starting a dev server, verify that the relevant source-of-truth documents exist and are confirmed by the user.
+
+For a Product MVP with web, backend, database, tool execution, deployment, or AI workflow concerns, the implementation readiness set is:
+
+- `AGENTS.md`
+- `docs/project/PROJECT_CHARTER.md`
+- `docs/architecture/TECH_STACK.md`
+- `docs/architecture/ENGINEERING_BASELINE.md`
+- `docs/architecture/FRONTEND_PLAN.md` when any frontend UI will be created.
+- `docs/architecture/DATABASE_DESIGN.md` when any database, schema, migration, or persistent data model will be created.
+- `docs/architecture/BACKEND_SPEC.md` when any API, backend service, worker, tool execution, or integration boundary will be created.
+- `docs/workflow/AI_WORKFLOW.md`
+- `docs/ops/TOOL_POLICY.md`
+- `docs/ops/DEPLOYMENT.md` when local run, environment variables, deployment, or operational setup is needed.
+
+For high-risk projects involving uploaded executable content, tool execution, secrets, payments, production data, external writes, or privileged local access, also require explicit security acceptance content before implementation. This can live in `docs/architecture/BACKEND_SPEC.md`, `docs/ops/TOOL_POLICY.md`, or a separately approved security document if the user requests one.
+
+If any required artifact is missing, list only the missing documents and ask whether to create the next one or the full named batch. Do not create code or scaffolding while the gate is incomplete.
+
+Bootstrap-only exception: if the user explicitly asks to create a bare repository skeleton before the readiness set is complete, confirm that the exception is limited to empty folders, root config, Git setup, and documentation plumbing. Do not add UI/API/business logic, database schema, migrations, or runnable product behavior under this exception.
+
 ## Stage Router
 
 | User situation | Load | Primary output |
@@ -88,19 +140,23 @@ If these are not known yet, keep asking one focused question at a time. If the u
 | Checking backend safety, secrets, logs, dependencies, database risk | `references/security.md` | security boundary table, bottom-layer security evidence |
 | Deciding which tools or MCPs AI may use | `references/tool-policy.md` | `docs/ops/TOOL_POLICY.md` or tool permission matrix |
 | Need whole-project flow, default stack, or reusable prompt pack | `references/workflow-checklists.md` | roadmap, docs checklist, default workflow docs |
+| User asks to create the project, scaffold the app, or start implementation | `references/workflow-checklists.md`, then the missing stage references | implementation readiness audit before any code |
 
 ## Execution Flow
 
 1. Classify the request into one stage from the router.
-2. Read the matching reference file before giving instructions or editing project files.
-3. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
-4. Check whether required upstream artifacts exist. If they are missing, request only the next missing artifact or fact, not the entire chain.
-5. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
-6. For project initiation, satisfy Requirements Depth Gate and Project Purpose Confirmation before asking to write the project charter.
-7. For every document file, satisfy Document Consent Gate before creating or updating it.
-8. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
-9. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
-10. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+2. State the Goal Contract for the current run: target outcome, completion signal, and next action.
+3. Read the matching reference file before giving instructions or editing project files.
+4. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
+5. Check whether required upstream artifacts exist. If they are missing, request only the next missing artifact or fact, not the entire chain.
+6. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
+7. For project initiation, satisfy Requirements Depth Gate and Project Purpose Confirmation before asking to write the project charter.
+8. For every document file, satisfy Document Consent Gate before creating or updating it.
+9. Before scaffolding or implementation, satisfy the Project Specification Readiness Gate. If documents are missing, stop implementation and continue with the next approved source-of-truth document.
+10. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report.
+11. For implementation work, preserve Git checkpoints and return evidence: commands run, tests, build, browser/API checks, or security proof.
+12. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+13. When the Goal Contract completion signal is genuinely satisfied, say so explicitly and provide the congratulatory readiness message when the project engineering baseline goal is complete.
 
 ## Required Artifacts
 
@@ -117,6 +173,8 @@ When a `templates/` directory is available, copy and adapt its matching template
 - `docs/ops/TOOL_POLICY.md`: default tools, project tools, high-risk confirmations.
 - `docs/ops/DEPLOYMENT.md`: local, staging, production, environment variables, health checks, rollback.
 
+These artifacts are not all required for every tiny task, but they are required before implementation when the project contains the corresponding surface. Do not treat `PROJECT_CHARTER.md`, `TECH_STACK.md`, and `ENGINEERING_BASELINE.md` alone as enough to start a Product MVP scaffold with frontend, backend, database, tool execution, or deployment concerns.
+
 ## Common Mistakes
 
 | Mistake | Correction |
@@ -124,6 +182,7 @@ When a `templates/` directory is available, copy and adapt its matching template
 | Asking AI to code before scope is clear | Create or update the project charter first. |
 | Planning implementation before confirming project purpose | Summarize the target user, problem, product role, and MVP; wait for user confirmation. |
 | Letting AI choose many possible stacks forever | Discuss alternatives, then commit to one documented main route. |
+| Starting a scaffold after only a charter, stack, and engineering baseline | Run the Project Specification Readiness Gate and create frontend, database, backend, workflow, tool policy, deployment, and Agent rule documents as applicable before implementation. |
 | Treating Git as an afterthought | Initialize Git early and commit every stable stage. |
 | Putting every rule into the Agent constitution | Keep project rules short; move task-specific procedures into skills or references. |
 | Dumping every project document in the repository root | Keep only `AGENTS.md` as the root index; put detailed documents under `docs/`. |

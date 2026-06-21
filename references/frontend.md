@@ -29,6 +29,7 @@ Describe frontend needs with:
 ## Frontend Skeleton Checklist
 
 - Save the frontend plan as `docs/architecture/FRONTEND_PLAN.md`.
+- Confirm that the Project Specification Readiness Gate is satisfied before creating frontend files or routes.
 - Confirm product tone, target user, and visual density.
 - Choose framework, UI component library, icon library, and chart library.
 - Define directory structure, routes, layout boundaries, and component split rules.
@@ -53,4 +54,10 @@ Based on my product flow, create a frontend page inventory. For each page, outpu
 
 ```text
 Do not generate every page at once. Based on docs/project/PROJECT_CHARTER.md and docs/architecture/TECH_STACK.md, create docs/architecture/FRONTEND_PLAN.md covering design style, component library, directory structure, routes, shared layout, design tokens, base components, and the order for the first pages.
+```
+
+## Prompt: Frontend Scaffold Readiness
+
+```text
+Before creating frontend code, verify that PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, AI_WORKFLOW.md, TOOL_POLICY.md, and AGENTS.md exist. If any required document is missing, list it and ask to create it before scaffolding.
 ```

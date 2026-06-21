@@ -8,6 +8,8 @@ Build a Product MVP by default: keep the feature scope small, but choose a repos
 
 Do not choose, write, or lock a technology stack from a vague project idea. Technology selection starts only after the project purpose and charter facts are confirmed, and writing `docs/architecture/TECH_STACK.md` requires explicit consent for that document.
 
+A confirmed technology stack is not permission to scaffold or implement. Before creating package manager files, apps, packages, UI/API code, database schema, migrations, or runnable behavior, run the Project Specification Readiness Gate from `SKILL.md` and confirm that all product-shape documents are present.
+
 ## Community Anchors
 
 Use mature ecosystem conventions as defaults:
@@ -69,6 +71,8 @@ Before implementation, document:
 - Migration Cost: which choices would be expensive to replace later.
 - Explicit Non-Replacement: core framework, database family, package manager, deployment model, auth approach.
 - Re-Evaluation Triggers: product shape, team capability, compliance, performance, cost, or ecosystem risk changes.
+
+Before scaffolding, also document the frontend plan, database design, backend spec, AI workflow, tool policy, deployment plan, and Agent rules when those surfaces exist. If any are missing, ask to create the next source-of-truth document instead of writing code.
 
 ## Anti-Patterns
 

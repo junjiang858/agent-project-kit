@@ -6,6 +6,8 @@ Use this reference when defining repo hygiene, scripts, CI, code quality, migrat
 
 MVP means fewer product features, not weaker engineering foundations. A Product MVP should have enough structure to extend safely without replacing the core stack.
 
+An engineering baseline is necessary but not sufficient for implementation. Before creating runnable project files, also require the relevant frontend plan, database design, backend spec, AI workflow, tool policy, deployment plan, and Agent rules for the product shape.
+
 ## Required Scripts
 
 For JavaScript/TypeScript projects, prefer these root scripts:

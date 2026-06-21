@@ -18,6 +18,29 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 12. Bottom-layer security acceptance.
 13. Tool permission matrix.
 14. AI-friendly stack and workflow specification.
+15. Implementation readiness audit.
+16. Project scaffold or implementation only after readiness passes.
+
+## Goal And Completion Signal
+
+At the beginning of a project-level workflow, state the goal in plain language:
+
+- Target outcome: the stage or project state the user wants to reach.
+- Completion signal: the artifacts, confirmations, audits, or evidence that prove the goal is reached.
+- Next action: the next question, document, audit, or implementation step.
+
+For a new Product MVP, the default goal is: project engineering baseline ready. This means the agent has clarified the project, created or confirmed the required source-of-truth documents, passed the implementation readiness audit, and received user confirmation to proceed.
+
+Do not say the goal is complete just because a single document exists. Say the goal is complete only when the readiness gate has passed or the narrower user-specified goal has its completion evidence.
+
+When the project engineering baseline is ready, close with:
+
+```text
+🎉 恭喜，项目工程基线已就绪！
+
+✅ 项目目标、技术路线、核心文档和实现前门禁已经到位。
+🚀 下一步可以从第一个已批准的产品闭环开始实现。
+```
 
 ## Deliverable Checklist
 
@@ -30,14 +53,36 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 - [ ] `docs/architecture/FRONTEND_PLAN.md`
 - [ ] `docs/architecture/DATABASE_DESIGN.md`
 - [ ] `docs/architecture/BACKEND_SPEC.md`
-- [ ] Minimal backend skeleton run evidence
 - [ ] Backend architecture acceptance report
 - [ ] Backend security boundary table
 - [ ] Bottom-layer security checklist
 - [ ] `docs/ops/TOOL_POLICY.md`
 - [ ] `docs/workflow/AI_WORKFLOW.md`
 - [ ] `docs/ops/DEPLOYMENT.md`
+- [ ] Implementation readiness audit passed
+- [ ] Minimal backend skeleton run evidence
 - [ ] Testing and quality check scripts
+
+## Implementation Readiness Gate
+
+Before creating a project scaffold, package manager files, `apps/`, `packages/`, UI screens, API controllers, database schemas, migrations, or runnable behavior, confirm that the relevant source-of-truth documents exist and match the requested product shape.
+
+For a Product MVP that includes web UI, backend, database, local execution, deployment, or AI-assisted workflow, do not start implementation until these are present or explicitly declared not applicable:
+
+- `AGENTS.md`
+- `docs/project/PROJECT_CHARTER.md`
+- `docs/architecture/TECH_STACK.md`
+- `docs/architecture/ENGINEERING_BASELINE.md`
+- `docs/architecture/FRONTEND_PLAN.md`
+- `docs/architecture/DATABASE_DESIGN.md`
+- `docs/architecture/BACKEND_SPEC.md`
+- `docs/workflow/AI_WORKFLOW.md`
+- `docs/ops/TOOL_POLICY.md`
+- `docs/ops/DEPLOYMENT.md`
+
+If documents are missing, output a short readiness audit and ask whether to create the next missing document or the named missing batch. Do not proceed to code.
+
+When the readiness gate and approved engineering setup are complete, close with a short welcome message such as: "欢迎进入你的项目工程基线：当前项目工程搭建完毕，文档、技术路线和基础门禁已就位。下一步可以从第一个已批准的产品闭环开始实现。"
 
 ## Default Product MVP Stack
 
@@ -84,6 +129,18 @@ Generate docs/workflow/AI_WORKFLOW.md for this project. Combine Superpowers-styl
 Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, test environment, production environment, frontend deployment, backend deployment, database, environment variables, logs, rollback, health checks, and pre-launch acceptance checklist.
 ```
 
+## Implementation Readiness Prompt
+
+```text
+Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. List present and missing documents. If anything required is missing, ask whether to create the next missing document and do not scaffold or implement yet.
+```
+
+## Goal Contract Prompt
+
+```text
+Before continuing, state the current goal, the completion signal, and the next action. When the completion signal is satisfied, explicitly say the goal is achieved. If the project engineering baseline is ready, finish with the approved congratulatory readiness message.
+```
+
 ## Testing Scripts Prompt
 
 ```text
@@ -93,5 +150,5 @@ Based on the current stack, generate a testing and quality-check plan for docs/a
 ## Anti-Drift Prompt
 
 ```text
-Before implementing, read AGENTS.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/workflow/AI_WORKFLOW.md, and docs/ops/TOOL_POLICY.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. After finishing, provide test, build, browser, API, or deployment evidence.
+Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. After finishing, provide test, build, browser, API, or deployment evidence.
 ```

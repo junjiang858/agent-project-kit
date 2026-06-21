@@ -11,6 +11,7 @@ Use this reference for cognition calibration, project charter work, technology s
 - No project document file should be created or updated until the user explicitly agrees to write that specific document.
 - Technology choice should follow product shape, team capability, launch pressure, ecosystem maturity, documentation quality, security posture, and licensing.
 - Git is the rollback and comparison mechanism for fast AI edits; initialize it before meaningful implementation.
+- `PROJECT_CHARTER.md`, `TECH_STACK.md`, and `ENGINEERING_BASELINE.md` alone are not enough to begin a Product MVP scaffold when the project also has frontend, backend, database, tool execution, deployment, or AI workflow concerns.
 
 ## Stage Flow
 
@@ -22,7 +23,9 @@ Use this reference for cognition calibration, project charter work, technology s
 6. Ask whether to move to technology selection.
 7. Choose exactly one main technical route and ask whether to write `docs/architecture/TECH_STACK.md`.
 8. Define `docs/architecture/ENGINEERING_BASELINE.md` before implementation, again only after consent to write it.
-9. Initialize Git, create the first checkpoint, and define commit rules.
+9. Define the remaining implementation-readiness documents before scaffolding: `AGENTS.md`, `docs/architecture/FRONTEND_PLAN.md`, `docs/architecture/DATABASE_DESIGN.md`, `docs/architecture/BACKEND_SPEC.md`, `docs/workflow/AI_WORKFLOW.md`, `docs/ops/TOOL_POLICY.md`, and `docs/ops/DEPLOYMENT.md` as applicable.
+10. Initialize Git, create the first documentation checkpoint, and define commit rules.
+11. Only after the readiness set is complete should the agent ask whether to scaffold or implement.
 
 ## Guided Intake
 
@@ -87,7 +90,8 @@ Move in this order:
 5. After charter confirmation, ask whether to move to technology selection.
 6. Recommend exactly one technical route and get user confirmation before writing `docs/architecture/TECH_STACK.md`.
 7. After stack confirmation and document-write consent, move to root `AGENTS.md`, `docs/architecture/ENGINEERING_BASELINE.md`, and `docs/ops/TOOL_POLICY.md`.
-8. Only then discuss first implementation planning.
+8. Before implementation, complete the project-specific readiness set: frontend plan for UI work, database design for persisted data, backend spec for API/service/tool execution, AI workflow for agent process, deployment plan for local or hosted runtime, and explicit security acceptance content for high-risk execution or secrets.
+9. Only then discuss first implementation planning.
 
 If the user says "not sure", offer 2-3 concrete options and ask them to choose one.
 
@@ -125,11 +129,30 @@ If the user says "not sure", offer 2-3 concrete options and ask them to choose o
 - Before remote push or public release, scan for secrets, private configs, accounts, test data, and private assets.
 - Put commit rhythm and forbidden files in the Agent constitution.
 
+## Implementation Readiness Audit
+
+When the user says "create the project", "start coding", "build the app", "scaffold it", or similar, audit documents before writing implementation files.
+
+Required answer shape:
+
+1. State whether implementation is ready.
+2. List present source-of-truth documents.
+3. List missing documents for the requested product shape.
+4. Ask whether to create the next missing document or a named batch of missing documents.
+
+Do not create `apps/`, `packages/`, UI screens, API controllers, database schemas, package manager files, or runnable behavior while the audit has missing required documents. A bootstrap-only exception must be explicitly confirmed and must stay limited to empty folders, root config, Git setup, and documentation plumbing.
+
 ## Prompt: Vague Idea to Charter
 
 ```text
 I want to build a small project with AI, but the idea is still vague. Do not write code yet. Act as a product partner and technical advisor. Guide me step by step. Ask only one question at a time, reflect my answer briefly, and continue until there is enough context to draft docs/project/PROJECT_CHARTER.md.
 Before recommending a stack or implementation plan, summarize who the project serves, what problem it solves, what the product does, and what the MVP covers first. Wait for my confirmation. After I confirm the purpose, ask whether you should write docs/project/PROJECT_CHARTER.md and do not create or edit that file until I explicitly agree.
+```
+
+## Prompt: Implementation Readiness Audit
+
+```text
+Before creating files outside docs or AGENTS.md, audit whether this project is ready for implementation. List the confirmed documents present, the missing source-of-truth documents required by this product shape, and ask whether to create the next missing document. Do not scaffold apps, packages, UI, API, database, or runnable behavior until the readiness set is complete.
 ```
 
 ## Prompt: Unique Tech Stack

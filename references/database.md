@@ -18,6 +18,7 @@ Use this reference when turning business flow into tables, fields, relations, co
 5. Add indexes for high-frequency queries, not as decoration.
 6. Add security fields and rules: password hash, role, owner/user id, soft delete, audit fields, sensitive data masking.
 7. Save the design as `docs/architecture/DATABASE_DESIGN.md` and version it in Git before backend implementation.
+8. Do not create schemas, migrations, seeds, or ORM files until the database design document is approved, unless the user explicitly confirms a bootstrap-only exception with no persistent product model.
 
 ## Table Checklist
 
