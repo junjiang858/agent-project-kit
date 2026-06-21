@@ -4,6 +4,7 @@
 
 - Project charter or equivalent facts confirmed:
 - User agreed to enter technology selection:
+- Capability library scan reviewed by user:
 - User confirmed this stack:
 - User approved writing this document:
 - Last reviewed:
@@ -35,6 +36,20 @@
 | UI |  |  |
 | Deployment |  |  |
 | Testing |  |  |
+
+## Capability Library Scan
+
+### Required Technical Capabilities
+
+| Capability | Requirement source | Needed in MVP? |
+| --- | --- | --- |
+|  |  | Yes / Later / No |
+
+### Third-Party Library Decisions
+
+| Capability | Library name | Direct link | Ecosystem | Open-source or inspectable | Maintenance evidence | Why include/defer/reject | Risk or lock-in note | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |  | Included / Deferred / Rejected |
 
 ## Production Compatibility
 

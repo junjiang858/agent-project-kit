@@ -55,8 +55,10 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 ## 🧩 What It Helps You Do
 
 - Turn vague ideas into PRD-quality project charters.
+- Scan concrete reference projects with direct project links before narrowing a vague idea.
 - Prevent premature document creation, technology choices, and implementation.
 - Choose one main technical route based on product shape, lifecycle, team capability, launch pressure, migration cost, and production compatibility.
+- Review project-needed third-party libraries with direct links, maintenance evidence, and include/defer/reject decisions before confirming the stack.
 - Create durable project source-of-truth documents under `docs/` instead of scattering planning notes across chat history.
 - Update source-of-truth documents before code when a later task changes frontend design, API contracts, database shape, permissions, deployment, tools, or operations.
 - Establish AI working rules through `AGENTS.md`, engineering baselines, tool permission policies, and workflow documents.
@@ -91,12 +93,14 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 User: Help me create a project.
 Agent: Current stage: project initiation. What are you trying to build?
 
-User: An AI tool debugging console.
-Agent: I should not write files yet. What does "AI tool" mean here:
-HTTP APIs, MCP tools, function tools, local commands, workflows, or something else?
+User: A tiny app for saving reading notes.
+Agent: Before narrowing requirements, I should scan concrete references:
+Omnivore (https://github.com/omnivore-app/omnivore), Logseq (https://github.com/logseq/logseq),
+and Reor (https://github.com/reorproject/reor). I will compare what to borrow, what not to copy,
+and how each changes the MVP direction.
 
-User: MCP tools and HTTP endpoints.
-Agent: Got it. Next I need to clarify who uses it and what first workflow should succeed.
+User: I like the lightweight read-it-later angle from Omnivore.
+Agent: Got it. I will use that direction, then clarify who uses it and which first workflow must succeed.
 ```
 
 ## 🔍 Why This Is Different
@@ -106,10 +110,24 @@ Agent Project Kit is not just a prompt collection.
 It combines:
 
 - Stage routing: the agent loads only the reference needed for the current phase.
+- Reference project scan gate: the agent checks concrete examples with direct project links before narrowing a vague idea.
+- Capability library scan gate: before stack confirmation, the agent maps required technical capabilities to mature, open-source, maintained third-party libraries and asks the user to confirm the combined stack and library set.
 - Confirmation gates: requirements depth, project purpose, document consent, tech stack consent, and high-risk operation confirmation.
 - Templates: reusable source-of-truth documents for project, architecture, workflow, and operations.
 - References: detailed stage guidance for frontend, backend, database, security, tools, and engineering baselines.
 - Validation: a local script checks that the skill keeps its required files, routes, guardrails, and document layout intact.
+
+## 🧭 Similar Project Comparison
+
+Mature skill packs such as [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) and Superpowers focus on the full engineering lifecycle: spec, plan, build, test, review, security, performance, and shipping. Agent Project Kit focuses one layer earlier: turning a vague project idea into confirmed product and engineering source-of-truth before implementation starts.
+
+| Compared with | Agent Project Kit emphasizes |
+| --- | --- |
+| Full-lifecycle skill packs | Reference scans, project initiation, source-of-truth documents, and implementation readiness before code. |
+| Autonomous execution frameworks | User-confirmed decisions, one-question-at-a-time clarification, and explicit write or high-risk consent. |
+| Generic prompt collections | Reusable templates, stage routing, source-of-truth change gates, and local validation. |
+
+Use it as the primary router while the product shape is still forming. Pair it with mature lifecycle skills later for TDD, code review, security, performance, and launch.
 
 ## 🚫 What It Is Not
 
@@ -177,20 +195,27 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 
 By default, the skill guides project startup step by step. It should ask one question at a time, not dump a long intake questionnaire.
 
-For vague ideas, it now uses three startup guardrails before writing files:
+For vague ideas, it now uses four startup guardrails before writing files:
 
+- Reference project scan gate: before deep refinement, provide 3-7 concrete projects, products, repos, plugins, templates, or adjacent implementations with direct project links, borrowable lessons, cautions, and direction choices.
 - Requirements depth gate: clarify target users, core workflow, domain objects, operations, boundaries, risks, and objective acceptance criteria before drafting a PRD-quality charter.
 - Document consent gate: do not create or update `AGENTS.md`, files under `docs/`, or other source-of-truth documents until the user agrees to that specific file.
 - Tech stack confirmation gate: do not choose, lock, or write `docs/architecture/TECH_STACK.md` until the project purpose and charter facts are confirmed and the user agrees to enter technology selection.
+
+During technology selection, it also uses a capability library scan gate: derive technical capabilities from the confirmed charter, research project-needed third-party libraries with direct links and maintenance evidence, then present the core stack plus included/deferred/rejected libraries for user confirmation.
 
 Usage examples:
 
 ```text
 Use $agent-project-kit to help me clarify a vague product idea. Ask one question at a time and do not write files until I approve.
 
+Use $agent-project-kit to scan concrete reference projects for my vague app idea. Include direct project links, what to borrow, what not to copy, and direction choices before asking deeper requirements questions.
+
 Use $agent-project-kit to turn this confirmed product direction into docs/project/PROJECT_CHARTER.md. First summarize the purpose and ask before writing the file.
 
 Use $agent-project-kit to recommend exactly one tech stack after the project charter is confirmed. Ask before writing docs/architecture/TECH_STACK.md.
+
+Use $agent-project-kit to run a capability library scan before confirming the tech stack. List project-needed third-party libraries with direct links, maintenance evidence, risks, and include/defer/reject decisions.
 
 Use $agent-project-kit to create root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo. Ask before writing each document.
 
@@ -236,11 +261,11 @@ Agent Project Kit makes each project-level run name its goal before it continues
 - Completion signal: what artifacts, confirmations, audits, or evidence prove the target has been reached.
 - Next action: the next question, document, readiness audit, or implementation step.
 
-For a new Product MVP, the default goal is usually: project engineering baseline ready.
+For a new Product MVP, the default goal is usually: first MVP slice accepted after the project engineering baseline is ready.
 
-That goal is reached when the project purpose is confirmed, the required source-of-truth documents are present or marked not applicable, the implementation readiness gate has passed, and the user has confirmed the readiness result or approved the next implementation step.
+This has two milestones. The project engineering baseline is reached when the project purpose is confirmed, the required source-of-truth documents are present or marked not applicable, the implementation readiness gate has passed, and the user has confirmed the readiness result or approved the next implementation step. The first MVP slice is reached when one approved product loop has been implemented and verified with fresh build, test, browser, API, CLI, worker, or run evidence.
 
-When that happens, the agent closes with a concise readiness message in the user's current language. For English users:
+When the baseline milestone is reached, the agent closes with a concise readiness message in the user's current language. For English users:
 
 ```text
 🎉 Project engineering baseline is ready!
@@ -249,22 +274,33 @@ When that happens, the agent closes with a concise readiness message in the user
 🚀 Next, you can start implementing the first approved product loop.
 ```
 
+When the first MVP slice is complete, the second milestone message is:
+
+```text
+🎉 First MVP slice is complete!
+
+✅ The first approved product loop has been implemented with run, build, browser, API, or task verification evidence.
+🚀 Next, you can expand the remaining pages, data flows, APIs, jobs, or deployment path.
+```
+
 ## 🧱 Workflow
 
 The skill routes work through these stages:
 
 1. Project initiation and MVP boundary
-2. Project purpose confirmation and document consent
-3. Technology stack decision and Git safety
-4. Agent constitution and reusable skill workflow
-5. Frontend page map and skeleton plan
-6. Database design
-7. Backend business spec and minimal skeleton
-8. Architecture and security acceptance
-9. Tool permission matrix
-10. Deployment and AI workflow documents
-11. Implementation readiness audit before scaffolding or code
-12. Goal completion signal and language-adaptive readiness message
+2. Reference project scan and direction choice
+3. Project purpose confirmation and document consent
+4. Technology stack decision with capability library scan and Git safety
+5. Agent constitution and reusable skill workflow
+6. Frontend page map and skeleton plan
+7. Database design
+8. Backend business spec and minimal skeleton
+9. Architecture and security acceptance
+10. Tool permission matrix
+11. Deployment and AI workflow documents
+12. Implementation readiness audit before scaffolding or code
+13. First MVP slice implementation and verification
+14. Goal milestone signals and language-adaptive completion messages
 
 ## 📁 Repository Layout
 
@@ -322,7 +358,7 @@ python3 scripts/validate.py
 ```
 
 This checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, and Product MVP baseline coverage.
-It also checks that initiation guardrails remain present: requirements depth, document consent, tech stack confirmation, and a generic domain-object clarification flow instead of a one-domain hardcoded branch.
+It also checks that initiation guardrails remain present: reference project scan, requirements depth, document consent, tech stack confirmation, and a generic domain-object clarification flow instead of a one-domain hardcoded branch.
 
 ## 💡 Why This Exists
 

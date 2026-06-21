@@ -55,8 +55,10 @@ Agent Project Kit 会帮助 Agent 创建和维护这些项目真源文档：
 ## 🧩 它能帮你做什么
 
 - 把模糊想法沉淀成 PRD 级项目章程，包含目标用户、核心流程、领域对象、非目标、风险和可客观检查的验收标准。
+- 在收敛模糊想法前，先扫描带具体项目链接的真实参考项目。
 - 通过项目目的确认和逐文件同意机制，避免 AI 过早创建文档、拍板技术栈或开始实现。
 - 基于产品形态、项目生命周期、团队能力、上线压力、迁移成本和生产兼容性，收敛到一条主技术路线。
+- 在确认技术栈前，审阅项目需要的第三方库，包含具体链接、维护证据和纳入/暂缓/拒绝决策。
 - 把项目真源文档放进 `docs/`，避免关键规划散落在聊天记录里。
 - 后续任务如果改变前端设计、API 契约、数据库结构、权限、部署、工具或运维行为，先更新真源文档，再实施代码。
 - 通过 `AGENTS.md`、工程基线、工具权限策略和工作流文档，建立 AI 在项目中的长期工作规则。
@@ -91,12 +93,13 @@ Agent Project Kit 会帮助 Agent 创建和维护这些项目真源文档：
 用户：帮我创建一个项目。
 Agent：当前阶段是项目立项。你想做一个什么项目？
 
-用户：一个 AI 工具调试台。
-Agent：我现在还不能写文件。这里的“AI 工具”具体指什么：
-HTTP API、MCP 工具、函数工具、本地命令、工作流，还是其它东西？
+用户：一个保存读书笔记的小应用。
+Agent：在细化需求前，我先扫描具体参考项目：
+Omnivore（https://github.com/omnivore-app/omnivore）、Logseq（https://github.com/logseq/logseq）
+和 Reor（https://github.com/reorproject/reor）。我会说明可借鉴点、不应照搬的地方，以及它们如何影响 MVP 方向。
 
-用户：MCP 工具和 HTTP endpoint。
-Agent：明白。下一步我要确认谁会使用它，以及第一版哪个流程必须跑通。
+用户：我更喜欢 Omnivore 那种轻量 read-it-later 方向。
+Agent：明白。我会按这个方向继续确认目标用户，以及第一版哪个流程必须跑通。
 ```
 
 ## 🔍 它有什么不同
@@ -106,10 +109,24 @@ Agent Project Kit 不是普通提示词合集。
 它组合了：
 
 - 阶段路由：Agent 只加载当前阶段需要的 reference。
+- 参考项目扫描门禁：在收敛模糊想法前，先查看带具体项目链接的真实参考项目。
+- 能力库扫描门禁：技术栈确认前，先把项目所需技术能力映射到成熟、开源、维护度高的第三方库，并让用户确认“核心栈 + 库清单”。
 - 确认门禁：需求深度、项目目的、文档写入、技术栈和高风险操作都要确认。
 - 文档模板：复用项目、架构、工作流和运维真源文档。
 - 阶段参考：覆盖前端、后端、数据库、安全、工具权限和工程基线。
 - 本地校验：脚本检查必需文件、路由、门禁和文档布局是否仍然完整。
+
+## 🧭 与成熟类似项目的区别
+
+像 [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills)、Superpowers 这类成熟 skill 包，更偏完整工程生命周期：spec、plan、build、test、review、安全、性能和发布。Agent Project Kit 聚焦更前置的项目成型层：先澄清产品目的、保留用户确认、沉淀真源文档，并在项目未就绪前阻止实现。
+
+| 对比对象 | Agent Project Kit 更强调 |
+| --- | --- |
+| 全生命周期 skill 包 | 参考项目扫描、立项、真源文档、实现前就绪门禁，然后才写代码。 |
+| 自主执行型框架 | 用户确认的决策、一次一个问题的澄清、写文件和高风险操作前的显式同意。 |
+| 普通提示词合集 | 可复用模板、阶段路由、真源文档变更门禁和本地校验。 |
+
+当产品形态还在成型时，适合让它做主流程；进入实现后，再搭配成熟生命周期 skill 做 TDD、代码审查、安全、性能和发布。
 
 ## 🚫 它不是什么
 
@@ -177,20 +194,27 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 
 默认情况下，这个 skill 会分步引导项目启动。它应该一次只问一个问题，而不是一次性丢出很长的问卷。
 
-对于模糊想法，它现在会在写文件前执行三道启动门禁：
+对于模糊想法，它现在会在写文件前执行四道启动门禁：
 
+- 参考项目扫描门禁：深入细化前，先提供 3-7 个具体项目、产品、repo、插件、模板或相邻实现，包含具体项目链接、可借鉴点、不应照搬的地方和方向选择。
 - 需求深度门禁：先澄清目标用户、核心流程、领域对象、用户操作、边界、风险和可客观检查的验收标准，再进入 PRD 级项目章程。
 - 文档同意门禁：没有得到用户对具体文件的同意前，不创建或更新 `AGENTS.md`、`docs/` 下文件或其它项目真源文档。
 - 技术栈确认门禁：项目目的和章程事实确认前，不选择、不锁定、不写入 `docs/architecture/TECH_STACK.md`；进入技术选型也需要用户同意。
+
+进入技术选型后，它还会执行能力库扫描门禁：根据已确认的章程提取技术能力，调研项目需要的第三方库，给出具体链接、维护证据、风险和纳入/暂缓/拒绝决策，再把“核心技术栈 + 第三方库清单”一起交给用户确认。
 
 使用示例：
 
 ```text
 Use $agent-project-kit to help me clarify a vague product idea. Ask one question at a time and do not write files until I approve.
 
+Use $agent-project-kit to scan concrete reference projects for my vague app idea. Include direct project links, what to borrow, what not to copy, and direction choices before asking deeper requirements questions.
+
 Use $agent-project-kit to turn this confirmed product direction into docs/project/PROJECT_CHARTER.md. First summarize the purpose and ask before writing the file.
 
 Use $agent-project-kit to recommend exactly one tech stack after the project charter is confirmed. Ask before writing docs/architecture/TECH_STACK.md.
+
+Use $agent-project-kit to run a capability library scan before confirming the tech stack. List project-needed third-party libraries with direct links, maintenance evidence, risks, and include/defer/reject decisions.
 
 Use $agent-project-kit to create root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo. Ask before writing each document.
 
@@ -236,11 +260,11 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
 - 完成信号：哪些文档、确认、审计或证据能证明目标已经达成。
 - 下一步动作：下一个问题、文档、就绪审计或实现步骤。
 
-对于新的 Product MVP，默认目标通常是：项目工程基线已就绪。
+对于新的 Product MVP，默认目标通常是：项目工程基线就绪后，首个 MVP 切片完成并通过验收。
 
-当项目目的已经确认、必要真源文档已经存在或明确不适用、实现前就绪门禁已经通过，并且用户确认就绪结果或批准下一步实现时，才算达成这个目标。
+这个目标分两个里程碑。项目目的已经确认、必要真源文档已经存在或明确不适用、实现前就绪门禁已经通过，并且用户确认就绪结果或批准下一步实现时，算达成“项目工程基线已就绪”。当第一个已批准的产品闭环被实现，并提供构建、测试、浏览器、API、CLI、worker 或运行证据后，才算达成“首个 MVP 切片已完成”。
 
-达成后，Agent 会使用用户当前语言输出简短的就绪提示。中文用户会看到类似：
+达成工程基线里程碑后，Agent 会使用用户当前语言输出简短的就绪提示。中文用户会看到类似：
 
 ```text
 🎉 恭喜，项目工程基线已就绪！
@@ -249,22 +273,33 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
 🚀 下一步可以从第一个已批准的产品闭环开始实现。
 ```
 
+首个 MVP 切片完成后，会输出第二个里程碑提示：
+
+```text
+🎉 恭喜，首个 MVP 切片已完成！
+
+✅ 第一个已批准的产品闭环已经实现，并提供了运行、构建、浏览器、API 或任务验收证据。
+🚀 下一步可以继续扩展后续页面、数据流、接口、任务或部署发布。
+```
+
 ## 🧱 工作流
 
 这个 skill 会按阶段路由任务：
 
 1. 项目立项与 MVP 边界
-2. 项目目的确认与文档写入同意
-3. 技术栈决策与 Git 保险
-4. Agent 宪法与可复用 skill 流程
-5. 前端页面地图与骨架计划
-6. 数据库设计
-7. 后端业务说明与最小后端骨架
-8. 架构验收与安全验收
-9. 工具权限矩阵
-10. 部署与 AI 工作流文档
-11. 实现前就绪审计，然后才进入脚手架或代码实现
-12. 输出目标完成信号和语言自适应就绪提示
+2. 参考项目扫描与方向选择
+3. 项目目的确认与文档写入同意
+4. 技术栈决策、能力库扫描与 Git 保险
+5. Agent 宪法与可复用 skill 流程
+6. 前端页面地图与骨架计划
+7. 数据库设计
+8. 后端业务说明与最小后端骨架
+9. 架构验收与安全验收
+10. 工具权限矩阵
+11. 部署与 AI 工作流文档
+12. 实现前就绪审计，然后才进入脚手架或代码实现
+13. 实现并验证首个 MVP 切片
+14. 输出目标里程碑信号和语言自适应完成提示
 
 ## 📁 仓库结构
 
@@ -322,7 +357,7 @@ python3 scripts/validate.py
 ```
 
 它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter、阶段 reference 路由、生成项目的文档布局，以及 Product MVP 基线覆盖。
-它也会检查启动门禁是否仍然存在：需求深度、文档同意、技术栈确认，以及通用的领域对象澄清流程，避免把流程硬编码到某一个业务类型。
+它也会检查启动门禁是否仍然存在：参考项目扫描、需求深度、文档同意、技术栈确认，以及通用的领域对象澄清流程，避免把流程硬编码到某一个业务类型。
 
 ## 💡 为什么做它
 

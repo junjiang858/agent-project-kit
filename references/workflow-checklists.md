@@ -6,20 +6,23 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 
 1. Cognition calibration.
 2. Project initiation.
-3. Technology selection.
-4. Git version safety.
-5. Agent constitution.
-6. Skill workflow.
-7. Frontend/backend/database technical understanding.
-8. Frontend skeleton and database design.
-9. Backend business spec and minimal backend skeleton.
-10. Backend architecture acceptance.
-11. Backend security acceptance.
-12. Bottom-layer security acceptance.
-13. Tool permission matrix.
-14. AI-friendly stack and workflow specification.
-15. Implementation readiness audit.
-16. Project scaffold or implementation only after readiness passes.
+3. Reference project scan with concrete project links.
+4. Technology selection with capability library scan.
+5. Git version safety.
+6. Agent constitution.
+7. Skill workflow.
+8. Frontend/backend/database technical understanding.
+9. Frontend skeleton and database design.
+10. Backend business spec and minimal backend skeleton.
+11. Backend architecture acceptance.
+12. Backend security acceptance.
+13. Bottom-layer security acceptance.
+14. Tool permission matrix.
+15. AI-friendly stack and workflow specification.
+16. Implementation readiness audit.
+17. Project scaffold or implementation only after readiness passes.
+18. First MVP slice implementation and verification.
+19. First MVP slice completion signal with evidence.
 
 ## Goal And Completion Signal
 
@@ -29,7 +32,10 @@ At the beginning of a project-level workflow, state the goal in plain language:
 - Completion signal: the artifacts, confirmations, audits, or evidence that prove the goal is reached.
 - Next action: the next question, document, audit, or implementation step.
 
-For a new Product MVP, the default goal is: project engineering baseline ready. This means the agent has clarified the project, created or confirmed the required source-of-truth documents, passed the implementation readiness audit, and received user confirmation to proceed.
+For a new Product MVP, the default goal is: first MVP slice accepted after the project engineering baseline is ready. This has two milestones:
+
+1. Project engineering baseline ready: the agent has clarified the project, created or confirmed the required source-of-truth documents, passed the implementation readiness audit, and received user confirmation to proceed.
+2. First MVP slice complete: the agent has implemented one approved, user-verifiable product slice and returned fresh verification evidence.
 
 Do not say the goal is complete just because a single document exists. Say the goal is complete only when the readiness gate has passed or the narrower user-specified goal has its completion evidence.
 
@@ -53,8 +59,30 @@ English example:
 🚀 Next, you can start implementing the first approved product loop.
 ```
 
+When the first MVP slice is complete, close with the second milestone message in the user's current language. For web products, the first MVP slice usually includes the first MVP page as the entry point, but the standard is the approved product slice, not a static page.
+
+Chinese example:
+
+```text
+🎉 恭喜，首个 MVP 切片已完成！
+
+✅ 第一个已批准的产品闭环已经实现，并提供了运行、构建、浏览器、API 或任务验收证据。
+🚀 下一步可以继续扩展后续页面、数据流、接口、任务或部署发布。
+```
+
+English example:
+
+```text
+🎉 First MVP slice is complete!
+
+✅ The first approved product loop has been implemented with run, build, browser, API, or task verification evidence.
+🚀 Next, you can expand the remaining pages, data flows, APIs, jobs, or deployment path.
+```
+
 ## Deliverable Checklist
 
+- [ ] Reference project scan completed with concrete project links and selected direction
+- [ ] Capability library scan completed with each required technical capability mapped to included, deferred, or rejected libraries
 - [ ] `AGENTS.md`
 - [ ] `docs/project/PROJECT_CHARTER.md`
 - [ ] `docs/architecture/TECH_STACK.md`
@@ -71,6 +99,7 @@ English example:
 - [ ] `docs/workflow/AI_WORKFLOW.md`
 - [ ] `docs/ops/DEPLOYMENT.md`
 - [ ] Implementation readiness audit passed
+- [ ] First MVP slice implemented and verified
 - [ ] Minimal backend skeleton run evidence
 - [ ] Testing and quality check scripts
 
@@ -91,7 +120,24 @@ For a Product MVP that includes web UI, backend, database, local execution, depl
 - `docs/ops/TOOL_POLICY.md`
 - `docs/ops/DEPLOYMENT.md`
 
-If documents are missing, output a short readiness audit and ask whether to create the next missing document or the named missing batch. Do not proceed to code.
+If documents are missing, output a short stage-aware readiness audit. Name the current stage, identify only the missing documents that directly unblock the next stage, explain why each one matters now, and offer two choices:
+
+1. Steady path: create or update the single most important next document, then review it before continuing.
+2. Accelerated path: ask for consent to create or update the named missing batch for this stage, then run the implementation readiness audit.
+
+Do not proceed to code.
+
+## Reference Project Scan Prompt
+
+```text
+Before refining this idea into a project charter, scan for 3-7 concrete reference projects, products, repositories, plugins, templates, or adjacent implementations. Include project name, direct link, source type, what to borrow, what not to copy blindly, and how each reference changes the possible MVP direction. Then offer 2-4 direction choices grounded in those links and ask me to choose, combine, or reject a direction. Do not move to project purpose confirmation, tech stack, or implementation planning until I choose a direction.
+```
+
+## Capability Library Scan Prompt
+
+```text
+Before confirming the technology stack, extract the required technical capabilities from the confirmed project charter. For each capability, research mature, open-source or inspectable, actively maintained third-party libraries that fit this project. Include capability, library name, direct link, ecosystem, open-source or inspectability status, maintenance evidence, why it fits or does not fit, risk or lock-in note, and decision: Included, Deferred, or Rejected. Then present one combined recommendation: core stack plus project-needed third-party libraries. Do not write docs/architecture/TECH_STACK.md, install packages, or scaffold code until I confirm the combined stack and library set.
+```
 
 When the readiness gate and approved engineering setup are complete, close with a short welcome message in the user's current language. For example, in Chinese: "欢迎进入你的项目工程基线：当前项目工程搭建完毕，文档、技术路线和基础门禁已就位。下一步可以从第一个已批准的产品闭环开始实现。" In English: "Welcome to your project engineering baseline: the core documents, technical route, and readiness gates are in place. Next, start with the first approved product loop."
 
@@ -136,7 +182,7 @@ SQLite, local JSON files, ad hoc SQL files, and no-migration setups are allowed 
 ## TECH_STACK.md Prompt
 
 ```text
-Based on the project charter, target users, scope, budget, launch time, and team capability, recommend exactly one Product MVP tech stack for docs/architecture/TECH_STACK.md. Cover architecture track, repository shape, frontend framework, UI library, icon library, chart library, backend framework, database, migrations, deployment platform, AI SDK, and AI workflow discipline. Explain production compatibility, migration cost, choices, rejected alternatives, risks, and re-evaluation triggers.
+Based on the project charter, target users, scope, budget, launch time, and team capability, recommend exactly one Product MVP tech stack for docs/architecture/TECH_STACK.md. Before confirming the stack, run a capability library scan: map required technical capabilities to mature, open-source or inspectable, actively maintained third-party libraries with direct links, maintenance evidence, include/defer/reject decisions, risks, and license notes. Cover architecture track, repository shape, frontend framework, UI library, icon library, chart library, backend framework, database, migrations, deployment platform, AI SDK, and AI workflow discipline. Explain production compatibility, migration cost, choices, rejected alternatives, risks, and re-evaluation triggers.
 ```
 
 ## AI_WORKFLOW.md Prompt
@@ -154,7 +200,7 @@ Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, te
 ## Implementation Readiness Prompt
 
 ```text
-Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. List present and missing documents. If anything required is missing, ask whether to create the next missing document and do not scaffold or implement yet.
+Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer two choices: steady path for the single most important next document, or accelerated path for the named missing batch. Do not scaffold or implement yet.
 ```
 
 ## Source-of-Truth Change Prompt
@@ -166,7 +212,7 @@ Before implementing this change, identify whether it changes frontend design, AP
 ## Goal Contract Prompt
 
 ```text
-Before continuing, state the current goal, the completion signal, and the next action. When the completion signal is satisfied, explicitly say the goal is achieved. If the project engineering baseline is ready, finish with the language-adaptive readiness message.
+Before continuing, state the current goal, the completion signal, and the next action. For a new Product MVP, use two milestones by default: project engineering baseline ready, then first MVP slice complete with evidence. When a milestone is satisfied, explicitly say so. If the project engineering baseline is ready, finish with the language-adaptive baseline message. If the first MVP slice is implemented and verified, finish with the language-adaptive first MVP slice message.
 ```
 
 ## Testing Scripts Prompt

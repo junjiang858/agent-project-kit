@@ -6,7 +6,7 @@ Use this reference when choosing the project architecture track, repository shap
 
 Build a Product MVP by default: keep the feature scope small, but choose a repository shape and core stack that can grow without replacing the foundation. Use a throwaway stack only when the user explicitly says the work is a disposable prototype.
 
-Do not choose, write, or lock a technology stack from a vague project idea. Technology selection starts only after the project purpose and charter facts are confirmed, and writing `docs/architecture/TECH_STACK.md` requires explicit consent for that document.
+Do not choose, write, or lock a technology stack from a vague project idea. Technology selection starts only after the project purpose and charter facts are confirmed, the Capability Library Scan Gate has been completed, and writing `docs/architecture/TECH_STACK.md` requires explicit consent for that document.
 
 A confirmed technology stack is not permission to scaffold or implement. Before creating package manager files, apps, packages, UI/API code, database schema, migrations, or runnable behavior, run the Project Specification Readiness Gate from `SKILL.md` and confirm that all product-shape documents are present.
 
@@ -28,6 +28,38 @@ Reference URLs:
 - https://nextjs.org/docs/app/getting-started/project-structure
 - https://docs.nestjs.com/modules
 - https://docs.nestjs.com/providers
+
+## Capability Library Scan Gate
+
+Before recommending or confirming a technology stack, extract the project's required technical capabilities from the confirmed charter facts. Examples include authentication, forms, validation, tables, charts, rich text, file upload, search, background jobs, payments, email, realtime, AI SDKs, workflow orchestration, observability, testing, and deployment.
+
+Then research project-needed third-party libraries only for those capabilities. Do not produce a generic "popular libraries" list.
+
+Required output shape:
+
+| Capability | Library name | Direct link | Ecosystem | Open-source or inspectable | Maintenance evidence | Why include/defer/reject | Risk or lock-in note | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |  | Included / Deferred / Rejected |
+
+Rules:
+
+- Include a capability, library name, direct link, and decision for every row.
+- Prefer mature, open-source, actively maintained, well-documented libraries when they fit the project.
+- Use official docs, GitHub repositories, package registries, release notes, or security advisories for maintenance evidence.
+- Mention license or commercial-use constraints when relevant.
+- Include rejected or deferred candidates when they explain why the chosen stack stays smaller.
+- Avoid adding dependencies for framework-native capabilities unless the project has a concrete need.
+- If current maintenance status matters, use live research. If live research is unavailable, say maintenance evidence is incomplete.
+
+After the table, present one combined recommendation for user review:
+
+1. Core stack: product form, architecture track, framework, runtime, database, deployment, package manager, testing.
+2. Included libraries: only libraries needed by the MVP.
+3. Deferred libraries: useful later, not needed for the first slice.
+4. Rejected libraries: considered but not a fit.
+5. Re-evaluation triggers: when a deferred or rejected library should be reconsidered.
+
+Do not confirm the stack, write `docs/architecture/TECH_STACK.md`, install packages, or scaffold files until the user confirms the combined stack and library set.
 
 ## Architecture Tracks
 
@@ -57,6 +89,7 @@ Before recommending the stack, confirm:
 
 - `docs/project/PROJECT_CHARTER.md` exists or the equivalent charter facts have been confirmed in conversation.
 - The user has agreed to enter technology selection.
+- The Capability Library Scan Gate has mapped required technical capabilities to included, deferred, and rejected libraries.
 - Product form is known: web, mini program, mobile app, backend service, automation, hybrid, or something else.
 - Product lifecycle is known: Product MVP, throwaway prototype, internal tool, or platform.
 - Team capability, launch pressure, budget or hosting constraints, and expected users are known enough to guide tradeoffs.
@@ -67,6 +100,7 @@ Before implementation, document:
 
 - Architecture Track.
 - Product Lifecycle: Product MVP, throwaway prototype, internal tool, or platform.
+- Capability Library Scan: which project-needed third-party libraries are included, deferred, or rejected, with maintenance evidence.
 - Production Compatibility: what can remain unchanged after launch.
 - Migration Cost: which choices would be expensive to replace later.
 - Explicit Non-Replacement: core framework, database family, package manager, deployment model, auth approach.
@@ -79,5 +113,7 @@ Before scaffolding, also document the frontend plan, database design, backend sp
 - Choosing SQLite, in-memory stores, ad hoc files, or no migrations for a product expected to launch with real users.
 - Starting with a single `App.tsx` and no route/component/data boundaries for an app expected to grow.
 - Creating custom backend patterns while ignoring framework conventions.
+- Confirming a stack before researching third-party libraries needed by the project's actual capabilities.
+- Adding a popular library without a project capability, direct source link, maintenance evidence, and include/defer/reject decision.
 - Adding monorepo complexity for a one-file script or disposable experiment.
 - Introducing a second framework or database before documenting why the current stack cannot handle the need.

@@ -12,6 +12,17 @@
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
+## First MVP Page
+
+- Related first MVP slice:
+- Route or screen:
+- Target user:
+- Primary action:
+- Success outcome:
+- Required states:
+- Data/API/mock behavior:
+- Browser verification evidence:
+
 ## Component Map
 
 | Component | Purpose | Reuse scope |
@@ -39,7 +50,7 @@
 
 ## Implementation Order
 
-1. 
+1. First MVP page for the first MVP slice:
 2. 
 3. 
 

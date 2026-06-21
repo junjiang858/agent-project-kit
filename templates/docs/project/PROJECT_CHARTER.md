@@ -6,6 +6,15 @@
 - User approved writing this document:
 - Last reviewed:
 
+## Reference Project Scan
+
+- Scan completed before purpose confirmation:
+- Selected direction after reviewing references:
+
+| Project | Direct link | Source type | What to borrow | What not to copy blindly | Direction impact |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |
+
 ## Product Definition
 
 - One-sentence product:
@@ -27,6 +36,13 @@
 - Budget or operating constraints:
 
 ## MVP Scope
+
+### First MVP Slice
+
+- User scenario:
+- Primary surface or page:
+- Useful outcome:
+- Acceptance evidence:
 
 ### Must Have
 

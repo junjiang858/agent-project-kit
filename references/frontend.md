@@ -38,6 +38,19 @@ Describe frontend needs with:
 - Build the smallest stable skeleton first: app shell, navigation, core layout, shared components, one or two representative pages.
 - Expand page by page after the skeleton demonstrates conventions.
 
+## First MVP Page Acceptance
+
+For web products, the first MVP page is usually the user entry for the first MVP slice. Do not treat a static page as complete unless it proves the approved product slice from entry to useful outcome.
+
+The first MVP page should define:
+
+- The approved first MVP slice it belongs to.
+- Route or screen name and target user.
+- Primary user action and success outcome.
+- Required components, states, and data/API/mock behavior.
+- Empty, loading, error, success, and disabled states when relevant.
+- Verification evidence: build/type check plus browser inspection for the key flow and responsive layout.
+
 ## Guardrails
 
 - Do not generate all pages horizontally before shared rules exist.
@@ -55,7 +68,7 @@ Based on my product flow, create a frontend page inventory. For each page, outpu
 ## Prompt: Frontend Skeleton Plan
 
 ```text
-Do not generate every page at once. Based on docs/project/PROJECT_CHARTER.md and docs/architecture/TECH_STACK.md, create docs/architecture/FRONTEND_PLAN.md covering design style, component library, directory structure, routes, shared layout, design tokens, base components, and the order for the first pages.
+Do not generate every page at once. Based on docs/project/PROJECT_CHARTER.md and docs/architecture/TECH_STACK.md, create docs/architecture/FRONTEND_PLAN.md covering design style, component library, directory structure, routes, shared layout, design tokens, base components, the first MVP page as the entry for the first MVP slice, and the order for later pages.
 ```
 
 ## Prompt: Frontend Scaffold Readiness
