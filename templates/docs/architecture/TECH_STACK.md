@@ -1,5 +1,22 @@
 # TECH_STACK
 
+## Decision Status
+
+- Project charter or equivalent facts confirmed:
+- User agreed to enter technology selection:
+- User confirmed this stack:
+- User approved writing this document:
+- Last reviewed:
+
+## Selection Context
+
+- Product form:
+- Product lifecycle:
+- Target users or expected scale:
+- Team capability:
+- Launch pressure:
+- Budget, hosting, compliance, or operational constraints:
+
 ## Architecture Track
 
 - Track: Single Web App / Web + API / Multi-App Platform

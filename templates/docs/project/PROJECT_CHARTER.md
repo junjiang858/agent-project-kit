@@ -1,10 +1,19 @@
 # PROJECT_CHARTER
 
-## Problem
+## Document Status
 
-- One-sentence problem:
-- Target users:
+- Purpose summary confirmed by user:
+- User approved writing this document:
+- Last reviewed:
+
+## Product Definition
+
+- One-sentence product:
+- Target users and roles:
 - Core scenario:
+- Current workaround or pain:
+- Product role:
+- Why now:
 
 ## Purpose Confirmation
 
@@ -21,27 +30,52 @@
 
 ### Must Have
 
-- 
+-
+
+### Should Have
+
+-
 
 ### Non-Goals
 
-- 
+-
 
 ### Later
 
-- 
+-
 
-## Core Flow
+## Core Workflows
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
-## Data Objects
+## Domain Model
+
+### Core Objects
 
 | Object | Why it exists | Owner |
 | --- | --- | --- |
 |  |  |  |
+
+### Operations And States
+
+| Object or workflow | User operation | Important states | Evidence or history |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+### External Systems And Resources
+
+| System or resource | Purpose | Boundary or risk |
+| --- | --- | --- |
+|  |  |  |
+
+## Rules And Permissions
+
+- Roles:
+- Permission boundaries:
+- Safety constraints:
+- Failure handling:
 
 ## Risks
 
@@ -51,4 +85,8 @@
 
 ## Acceptance Criteria
 
-- [ ] 
+- [ ]
+
+## Open Questions
+
+-

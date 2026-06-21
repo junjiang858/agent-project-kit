@@ -53,6 +53,12 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 
 By default, the skill guides project startup step by step. It should ask one question at a time, not dump a long intake questionnaire.
 
+For vague ideas, it now uses three startup guardrails before writing files:
+
+- Requirements depth gate: clarify target users, core workflow, domain objects, operations, boundaries, risks, and objective acceptance criteria before drafting a PRD-quality charter.
+- Document consent gate: do not create or update `AGENTS.md`, files under `docs/`, or other source-of-truth documents until the user agrees to that specific file.
+- Tech stack confirmation gate: do not choose, lock, or write `docs/architecture/TECH_STACK.md` until the project purpose and charter facts are confirmed and the user agrees to enter technology selection.
+
 Typical requests:
 
 ```text
@@ -67,14 +73,15 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 The skill routes work through these stages:
 
 1. Project initiation and MVP boundary
-2. Technology stack and Git safety
-3. Agent constitution and reusable skill workflow
-4. Frontend page map and skeleton plan
-5. Database design
-6. Backend business spec and minimal skeleton
-7. Architecture and security acceptance
-8. Tool permission matrix
-9. Deployment and AI workflow documents
+2. Project purpose confirmation and document consent
+3. Technology stack decision and Git safety
+4. Agent constitution and reusable skill workflow
+5. Frontend page map and skeleton plan
+6. Database design
+7. Backend business spec and minimal skeleton
+8. Architecture and security acceptance
+9. Tool permission matrix
+10. Deployment and AI workflow documents
 
 ## Repository Layout
 
@@ -132,6 +139,7 @@ python3 scripts/validate.py
 ```
 
 This checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, and Product MVP baseline coverage.
+It also checks that initiation guardrails remain present: requirements depth, document consent, tech stack confirmation, and a generic domain-object clarification flow instead of a one-domain hardcoded branch.
 
 ## Why This Exists
 

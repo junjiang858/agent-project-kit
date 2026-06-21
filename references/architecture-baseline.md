@@ -6,6 +6,8 @@ Use this reference when choosing the project architecture track, repository shap
 
 Build a Product MVP by default: keep the feature scope small, but choose a repository shape and core stack that can grow without replacing the foundation. Use a throwaway stack only when the user explicitly says the work is a disposable prototype.
 
+Do not choose, write, or lock a technology stack from a vague project idea. Technology selection starts only after the project purpose and charter facts are confirmed, and writing `docs/architecture/TECH_STACK.md` requires explicit consent for that document.
+
 ## Community Anchors
 
 Use mature ecosystem conventions as defaults:
@@ -48,6 +50,16 @@ For ordinary long-lived web products:
 - Build orchestration: plain pnpm scripts are enough for small repos; add Turborepo or Nx when multiple packages need coordinated caching, affected builds, or task pipelines.
 
 ## Stack Decision Rules
+
+Before recommending the stack, confirm:
+
+- `docs/project/PROJECT_CHARTER.md` exists or the equivalent charter facts have been confirmed in conversation.
+- The user has agreed to enter technology selection.
+- Product form is known: web, mini program, mobile app, backend service, automation, hybrid, or something else.
+- Product lifecycle is known: Product MVP, throwaway prototype, internal tool, or platform.
+- Team capability, launch pressure, budget or hosting constraints, and expected users are known enough to guide tradeoffs.
+
+Before writing `docs/architecture/TECH_STACK.md`, ask for consent and state the target path. Consent to write the project charter does not imply consent to write the tech stack document.
 
 Before implementation, document:
 

@@ -147,15 +147,37 @@ def check_workflow_priority_and_confirmation() -> None:
         ("SKILL.md", "Agent Project Kit is the default primary workflow"),
         ("SKILL.md", "overlapping skills"),
         ("SKILL.md", "Project Purpose Confirmation"),
+        ("SKILL.md", "Document Consent Gate"),
+        ("SKILL.md", "Requirements Depth Gate"),
+        ("SKILL.md", "ambiguous domain nouns"),
         ("SKILL.md", "Do not move into technology stack, frontend, backend, database, or implementation planning until the user confirms"),
         ("references/project-initiation.md", "Project Purpose Confirmation"),
+        ("references/project-initiation.md", "Requirements Depth Gate"),
+        ("references/project-initiation.md", "unpack the core nouns"),
+        ("references/project-initiation.md", "No project document file should be created or updated until the user explicitly agrees"),
         ("references/project-initiation.md", "Summarize the project purpose"),
         ("references/project-initiation.md", "Do not choose a technology stack or plan implementation until the user confirms"),
+        ("references/architecture-baseline.md", "Technology selection starts only after the project purpose and charter facts are confirmed"),
+        ("references/architecture-baseline.md", "Before writing `docs/architecture/TECH_STACK.md`, ask for consent"),
+        ("templates/docs/project/PROJECT_CHARTER.md", "Document Status"),
         ("templates/docs/project/PROJECT_CHARTER.md", "Purpose Confirmation"),
+        ("templates/docs/project/PROJECT_CHARTER.md", "Domain Model"),
+        ("templates/docs/project/PROJECT_CHARTER.md", "Operations And States"),
+        ("templates/docs/architecture/TECH_STACK.md", "Decision Status"),
+        ("templates/docs/architecture/TECH_STACK.md", "Selection Context"),
     ]
     for path, phrase in required_pairs:
         if phrase not in read(path):
             fail(f"{path} must include {phrase}")
+
+    overfit_phrases = [
+        "For AI-tool management",
+        "For AI tool management",
+    ]
+    checked = read("SKILL.md") + "\n" + read("references/project-initiation.md")
+    for phrase in overfit_phrases:
+        if phrase in checked:
+            fail(f"project initiation flow is overfit to one domain: {phrase}")
 
 
 def main() -> None:

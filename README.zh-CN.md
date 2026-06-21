@@ -53,6 +53,12 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 
 默认情况下，这个 skill 会分步引导项目启动。它应该一次只问一个问题，而不是一次性丢出很长的问卷。
 
+对于模糊想法，它现在会在写文件前执行三道启动门禁：
+
+- 需求深度门禁：先澄清目标用户、核心流程、领域对象、用户操作、边界、风险和可客观检查的验收标准，再进入 PRD 级项目章程。
+- 文档同意门禁：没有得到用户对具体文件的同意前，不创建或更新 `AGENTS.md`、`docs/` 下文件或其它项目真源文档。
+- 技术栈确认门禁：项目目的和章程事实确认前，不选择、不锁定、不写入 `docs/architecture/TECH_STACK.md`；进入技术选型也需要用户同意。
+
 常见请求：
 
 ```text
@@ -67,14 +73,15 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 这个 skill 会按阶段路由任务：
 
 1. 项目立项与 MVP 边界
-2. 技术栈选择与 Git 保险
-3. Agent 宪法与可复用 skill 流程
-4. 前端页面地图与骨架计划
-5. 数据库设计
-6. 后端业务说明与最小后端骨架
-7. 架构验收与安全验收
-8. 工具权限矩阵
-9. 部署与 AI 工作流文档
+2. 项目目的确认与文档写入同意
+3. 技术栈决策与 Git 保险
+4. Agent 宪法与可复用 skill 流程
+5. 前端页面地图与骨架计划
+6. 数据库设计
+7. 后端业务说明与最小后端骨架
+8. 架构验收与安全验收
+9. 工具权限矩阵
+10. 部署与 AI 工作流文档
 
 ## 仓库结构
 
@@ -132,6 +139,7 @@ python3 scripts/validate.py
 ```
 
 它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter、阶段 reference 路由、生成项目的文档布局，以及 Product MVP 基线覆盖。
+它也会检查启动门禁是否仍然存在：需求深度、文档同意、技术栈确认，以及通用的领域对象澄清流程，避免把流程硬编码到某一个业务类型。
 
 ## 为什么做它
 
