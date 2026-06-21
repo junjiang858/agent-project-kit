@@ -21,26 +21,53 @@ Agent Project Kit 是一个面向 Codex 的 skill，用来把 AI 编程项目从
 - 不是普通提示词合集。
 - 不能替代测试、Code Review、Git 纪律和人的产品判断。
 
-## 安装
+## 克隆到本地
 
-克隆仓库后，把运行时 skill 文件安装到 Codex skills 目录：
+先把仓库克隆到本地工作区：
 
 ```bash
 git clone https://github.com/junjiang858/agent-project-kit.git
 cd agent-project-kit
+```
+
+如果你想放到指定目录：
+
+```bash
+git clone https://github.com/junjiang858/agent-project-kit.git ~/skills/agent-project-kit
+cd ~/skills/agent-project-kit
+```
+
+## 安装
+
+把运行时 skill 文件安装到 Codex skills 目录：
+
+```bash
 ./scripts/install.sh
 ```
 
-默认安装位置：
+默认安装位置是：
 
 ```text
 ${CODEX_HOME:-$HOME/.codex}/skills/agent-project-kit
 ```
 
-也可以指定安装位置：
+如果你希望把 skill 放进某个项目本地目录，可以指定项目内 `.codex/skills` 路径：
 
 ```bash
-./scripts/install.sh /path/to/skills/agent-project-kit
+./scripts/install.sh /path/to/project/.codex/skills/agent-project-kit
+```
+
+示例：
+
+```bash
+./scripts/install.sh ~/projects/my-app/.codex/skills/agent-project-kit
+```
+
+后续拉取更新后，重新运行同一个安装命令即可刷新已安装的 skill：
+
+```bash
+git pull
+./scripts/install.sh
 ```
 
 ## 使用
@@ -59,12 +86,19 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 - 文档同意门禁：没有得到用户对具体文件的同意前，不创建或更新 `AGENTS.md`、`docs/` 下文件或其它项目真源文档。
 - 技术栈确认门禁：项目目的和章程事实确认前，不选择、不锁定、不写入 `docs/architecture/TECH_STACK.md`；进入技术选型也需要用户同意。
 
-常见请求：
+使用示例：
 
 ```text
-Use $agent-project-kit to help me choose a tech stack for this product idea.
-Use $agent-project-kit to draft root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo.
+Use $agent-project-kit to help me clarify a vague product idea. Ask one question at a time and do not write files until I approve.
+
+Use $agent-project-kit to turn this confirmed product direction into docs/project/PROJECT_CHARTER.md. First summarize the purpose and ask before writing the file.
+
+Use $agent-project-kit to recommend exactly one tech stack after the project charter is confirmed. Ask before writing docs/architecture/TECH_STACK.md.
+
+Use $agent-project-kit to create root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo. Ask before writing each document.
+
 Use $agent-project-kit to plan the backend skeleton and acceptance checklist.
+
 Use $agent-project-kit to review whether this backend is safe enough to deploy.
 ```
 

@@ -21,26 +21,53 @@ The default posture is Product MVP: small feature scope, but a production-compat
 - Not a generic prompt dump.
 - Not a replacement for tests, review, Git discipline, or human product judgment.
 
-## Install
+## Clone Locally
 
-Clone this repository, then install the runtime skill files into your Codex skills directory:
+Clone this repository to a local workspace:
 
 ```bash
 git clone https://github.com/junjiang858/agent-project-kit.git
 cd agent-project-kit
+```
+
+If you prefer a specific local path:
+
+```bash
+git clone https://github.com/junjiang858/agent-project-kit.git ~/skills/agent-project-kit
+cd ~/skills/agent-project-kit
+```
+
+## Install
+
+Install the runtime skill files into your Codex skills directory:
+
+```bash
 ./scripts/install.sh
 ```
 
-The default target is:
+The default install target is:
 
 ```text
 ${CODEX_HOME:-$HOME/.codex}/skills/agent-project-kit
 ```
 
-You can install to another directory:
+Install into a project-local skills directory when you want the skill bundled with a specific project:
 
 ```bash
-./scripts/install.sh /path/to/skills/agent-project-kit
+./scripts/install.sh /path/to/project/.codex/skills/agent-project-kit
+```
+
+Example:
+
+```bash
+./scripts/install.sh ~/projects/my-app/.codex/skills/agent-project-kit
+```
+
+Run the same command again to refresh an existing installation after pulling updates:
+
+```bash
+git pull
+./scripts/install.sh
 ```
 
 ## Use
@@ -59,12 +86,19 @@ For vague ideas, it now uses three startup guardrails before writing files:
 - Document consent gate: do not create or update `AGENTS.md`, files under `docs/`, or other source-of-truth documents until the user agrees to that specific file.
 - Tech stack confirmation gate: do not choose, lock, or write `docs/architecture/TECH_STACK.md` until the project purpose and charter facts are confirmed and the user agrees to enter technology selection.
 
-Typical requests:
+Usage examples:
 
 ```text
-Use $agent-project-kit to help me choose a tech stack for this product idea.
-Use $agent-project-kit to draft root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo.
+Use $agent-project-kit to help me clarify a vague product idea. Ask one question at a time and do not write files until I approve.
+
+Use $agent-project-kit to turn this confirmed product direction into docs/project/PROJECT_CHARTER.md. First summarize the purpose and ask before writing the file.
+
+Use $agent-project-kit to recommend exactly one tech stack after the project charter is confirmed. Ask before writing docs/architecture/TECH_STACK.md.
+
+Use $agent-project-kit to create root AGENTS.md and docs/ops/TOOL_POLICY.md for this repo. Ask before writing each document.
+
 Use $agent-project-kit to plan the backend skeleton and acceptance checklist.
+
 Use $agent-project-kit to review whether this backend is safe enough to deploy.
 ```
 
