@@ -47,6 +47,7 @@ Agent Project Kit 会帮助 Agent 创建和维护这些项目真源文档：
 
 - `docs/project/PROJECT_CHARTER.md`：用户、问题、MVP 范围、核心流程、领域对象、风险和验收标准。
 - `docs/architecture/TECH_STACK.md`：唯一技术栈、拒绝的备选方案、迁移成本、生产兼容性和重新评估规则。
+- `docs/architecture/FRONTEND_PLAN.md`：页面地图、设计判断、Product MVP UI 质量门禁、设计系统、组件边界和浏览器 UI 验证。
 - `AGENTS.md`：项目级 Agent 规则和文档索引。
 - `docs/architecture/ENGINEERING_BASELINE.md`：脚本、质量门禁、测试、迁移、环境规则和提交纪律。
 - `docs/ops/TOOL_POLICY.md`：默认开放工具、项目专用工具和高风险确认门禁。
@@ -61,6 +62,7 @@ Agent Project Kit 会帮助 Agent 创建和维护这些项目真源文档：
 - 在确认技术栈前，审阅项目需要的第三方库，包含具体链接、维护证据和纳入/暂缓/拒绝决策。
 - 把项目真源文档放进 `docs/`，避免关键规划散落在聊天记录里。
 - 后续任务如果改变前端设计、API 契约、数据库结构、权限、部署、工具或运维行为，先更新真源文档，再实施代码。
+- 让 MVP 前端保持小范围，但不接受粗糙 UI：Product MVP UI 质量门禁会要求设计判断、设计 token、完整交互状态、反模板约束和浏览器验收。
 - 通过 `AGENTS.md`、工程基线、工具权限策略和工作流文档，建立 AI 在项目中的长期工作规则。
 - 为前端、后端、数据库、安全、部署和验收规划提供可复用流程，让“完成了”必须带测试、构建、接口、浏览器或安全证据。
 
@@ -111,6 +113,7 @@ Agent Project Kit 不是普通提示词合集。
 - 阶段路由：Agent 只加载当前阶段需要的 reference。
 - 参考项目扫描门禁：在收敛模糊想法前，先查看带具体项目链接的真实参考项目。
 - 能力库扫描门禁：技术栈确认前，先把项目所需技术能力映射到成熟、开源、维护度高的第三方库，并让用户确认“核心栈 + 库清单”。
+- Product MVP UI 质量门禁：进入前端代码前，先记录设计判断、上下文相关的设计刻度、设计系统和交互状态，并执行反模板检查；不会把 landing page 的 taste 规则硬套到后台、数据表或产品工作台。
 - 确认门禁：需求深度、项目目的、文档写入、技术栈和高风险操作都要确认。
 - 确认类提示文字兜底：所有批准或路径选择都必须能通过文字选项回复，不能只依赖 UI 按钮。
 - 语言自适应：问题、确认、进度更新和完成提示应该匹配用户当前语言。
@@ -249,6 +252,8 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 
 如果涉及前端，`docs/architecture/FRONTEND_PLAN.md` 必须先定义前端工程化契约：源码目录树、路由/页面职责、共享 UI 与业务组件位置、状态/config/i18n/utils 归属和 import 边界。只有页面清单或视觉风格说明，不足以开始写前端代码。
 
+它还必须定义 Product MVP UI 质量门禁：设计判断、设计刻度、设计系统 token、UI 组件策略、状态与交互契约、响应式和可访问性要求、反模板约束，以及浏览器 UI 质量验证。MVP 范围可以很小，但首个页面仍然应该像一个统一的产品界面。
+
 ## 🧭 真源文档变更门禁
 
 后续任务一旦改变设计或契约，Agent 应该先更新原来的项目真源文档，再进入实现：
@@ -299,7 +304,7 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
 3. 项目目的确认与文档写入同意
 4. 技术栈决策、能力库扫描与 Git 保险
 5. Agent 宪法与可复用 skill 流程
-6. 前端页面地图与骨架计划
+6. 前端页面地图、设计判断、UI 质量门禁与骨架计划
 7. 数据库设计
 8. 后端业务说明与最小后端骨架
 9. 架构验收与安全验收
@@ -364,7 +369,7 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
 python3 scripts/validate.py
 ```
 
-它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter、阶段 reference 路由、生成项目的文档布局，以及 Product MVP 基线覆盖。
+它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter、阶段 reference 路由、生成项目的文档布局、Product MVP 基线覆盖，以及 Product MVP UI 质量门禁覆盖。
 它也会检查启动门禁是否仍然存在：参考项目扫描、需求深度、文档同意、技术栈确认，以及通用的领域对象澄清流程，避免把流程硬编码到某一个业务类型。
 
 ## 💡 为什么做它

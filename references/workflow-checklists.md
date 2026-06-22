@@ -22,7 +22,8 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 16. Implementation readiness audit.
 17. Project scaffold or implementation only after readiness passes.
 18. First MVP slice implementation and verification.
-19. First MVP slice completion signal with evidence.
+19. Product MVP UI quality checked when the slice includes frontend UI.
+20. First MVP slice completion signal with evidence.
 
 ## Interaction Defaults
 
@@ -109,6 +110,7 @@ English example:
 - [ ] `docs/workflow/AI_WORKFLOW.md`
 - [ ] `docs/ops/DEPLOYMENT.md`
 - [ ] Implementation readiness audit passed
+- [ ] Product MVP UI quality checked for frontend work
 - [ ] First MVP slice implemented and verified
 - [ ] Minimal backend skeleton run evidence
 - [ ] Testing and quality check scripts
@@ -139,6 +141,8 @@ Use plain-text options, for example `A. Steady path` and `B. Accelerated path`. 
 
 Do not proceed to code.
 
+For frontend work, also verify that `docs/architecture/FRONTEND_PLAN.md` includes the Product MVP UI Quality Gate: Design Read, Design Dials, design system tokens, UI component strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification. If these are missing, update the frontend plan before code.
+
 ## Reference Project Scan Prompt
 
 ```text
@@ -149,6 +153,12 @@ Before refining this idea into a project charter, scan for 3-7 concrete referenc
 
 ```text
 Before confirming the technology stack, extract the required technical capabilities from the confirmed project charter. For each capability, research mature, open-source or inspectable, actively maintained third-party libraries that fit this project. Include capability, library name, direct link, ecosystem, open-source or inspectability status, maintenance evidence, why it fits or does not fit, risk or lock-in note, and decision: Included, Deferred, or Rejected. Then present one combined recommendation: core stack plus project-needed third-party libraries. Do not write docs/architecture/TECH_STACK.md, install packages, or scaffold code until I confirm the combined stack and library set.
+```
+
+## UI Quality Gate Prompt
+
+```text
+Before frontend implementation, update or audit docs/architecture/FRONTEND_PLAN.md for the Product MVP UI Quality Gate. Include a Design Read, Design Dials, design system tokens, UI component strategy, state and interaction contract, responsive rules, accessibility expectations, anti-slop guardrails, and browser UI quality verification. Do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI. For the first MVP page, require loading, empty, error, success, disabled, saving, focus, hover, active, desktop, and mobile behavior where relevant. Do not write UI code until the plan covers these items.
 ```
 
 When the readiness gate and approved engineering setup are complete, close with a short welcome message in the user's current language. For example, in Chinese: "欢迎进入你的项目工程基线：当前项目工程搭建完毕，文档、技术路线和基础门禁已就位。下一步可以从第一个已批准的产品闭环开始实现。" In English: "Welcome to your project engineering baseline: the core documents, technical route, and readiness gates are in place. Next, start with the first approved product loop."
@@ -213,7 +223,7 @@ Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, te
 ## Implementation Readiness Prompt
 
 ```text
-Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. For frontend work, verify that FRONTEND_PLAN.md includes the frontend source tree, file responsibilities, component split rules, state/config/i18n/utils ownership, and import boundaries. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer plain-text options: `A. Steady path` for the single most important next document, or `B. Accelerated path` for the named missing batch. Do not depend on UI buttons. Do not scaffold or implement yet.
+Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. For frontend work, verify that FRONTEND_PLAN.md includes the frontend source tree, file responsibilities, component split rules, state/config/i18n/utils ownership, import boundaries, Design Read, Design Dials, Product MVP UI Quality Gate, design system tokens, state and interaction contract, responsive/accessibility rules, anti-slop guardrails, and browser UI quality verification. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer plain-text options: `A. Steady path` for the single most important next document, or `B. Accelerated path` for the named missing batch. Do not depend on UI buttons. Do not scaffold or implement yet.
 ```
 
 ## Source-of-Truth Change Prompt
@@ -237,5 +247,5 @@ Based on the current stack, generate a testing and quality-check plan for docs/a
 ## Anti-Drift Prompt
 
 ```text
-Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. If the task changes frontend source tree, component boundaries, state/config/i18n/utils ownership, frontend/API/database/permission/operation design, update the affected source-of-truth document before code. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
+Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. If the task changes frontend source tree, component boundaries, state/config/i18n/utils ownership, frontend UI quality gate, frontend/API/database/permission/operation design, update the affected source-of-truth document before code. For frontend work, return browser UI quality evidence for desktop and mobile along with test/build evidence. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
 ```

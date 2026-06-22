@@ -37,6 +37,7 @@ Read task-specific docs when relevant:
 - Keep detailed project documents under `docs/`; keep this file short as the root index.
 - Update the relevant source-of-truth document before code when design, API, database, permission, deployment, tool, or operational behavior changes.
 - For frontend work, follow `docs/architecture/FRONTEND_PLAN.md` for source tree, file responsibilities, component split rules, state/config/i18n/utils ownership, and import boundaries before editing UI code.
+- For frontend work, also follow the Product MVP UI Quality Gate in `docs/architecture/FRONTEND_PLAN.md`: Design Read, design system tokens, state and interaction contract, responsive/accessibility expectations, anti-slop guardrails, and browser UI quality verification.
 - Keep changes small and reviewable.
 - Use existing patterns before adding abstractions.
 - Never put secrets in code or Git history.
@@ -70,6 +71,8 @@ Required before implementation:
 
 When frontend UI is in scope, `docs/architecture/FRONTEND_PLAN.md` must define the frontend engineering contract, not only the visual style or page list. It must cover source tree, route/page responsibilities, shared UI and business component locations, state ownership, config/messages/icons/assets/utilities ownership, and import boundaries.
 
+It must also define the Product MVP UI Quality Gate before UI code starts. The plan must include Design Read, Design Dials, design system tokens, UI component strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification. Do not use the accelerated path to skip this gate; after creating or updating the named missing batch, rerun the implementation readiness audit and block frontend code if the UI quality gate is incomplete.
+
 If multiple readiness documents are missing, do not give only a single next-document suggestion. Offer plain-text options and do not depend on UI buttons:
 
 - `A. Steady path`: create or update the single most important next document, then ask for review.
@@ -82,6 +85,7 @@ Batch consent applies only to the named missing batch and does not authorize imp
 - [ ] Relevant tests or checks pass.
 - [ ] Build passes when applicable.
 - [ ] Browser/API/security evidence is provided when applicable.
+- [ ] Frontend browser UI quality evidence is provided for desktop and mobile when UI is changed.
 - [ ] Source-of-truth docs are updated before implementation when decisions or contracts change.
 - [ ] Frontend files follow the documented source tree and component boundaries when UI is changed.
 - [ ] Git diff is reviewed before commit.

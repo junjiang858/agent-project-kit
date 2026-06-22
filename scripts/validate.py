@@ -141,6 +141,41 @@ def check_product_mvp_baseline() -> None:
             fail(f"{path} must include {phrase}")
 
 
+def check_product_mvp_ui_quality_gate() -> None:
+    required_pairs = [
+        ("SKILL.md", "Product MVP UI Quality Gate"),
+        ("SKILL.md", "MVP scope may be small, but UI/UX/design system quality is not optional"),
+        ("SKILL.md", "Design Read"),
+        ("SKILL.md", "do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI"),
+        ("references/frontend.md", "Product MVP UI Quality Gate"),
+        ("references/frontend.md", "Design Read"),
+        ("references/frontend.md", "Design Dials"),
+        ("references/frontend.md", "State And Interaction Contract"),
+        ("references/frontend.md", "Anti-Slop Guardrails"),
+        ("references/frontend.md", "Browser UI Quality Verification"),
+        ("references/workflow-checklists.md", "Product MVP UI quality checked"),
+        ("references/workflow-checklists.md", "UI Quality Gate Prompt"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Design Read"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Design Dials"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Product MVP UI Quality Gate"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "State And Interaction Contract"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Anti-Slop Preflight"),
+        ("templates/AGENTS.md", "Product MVP UI Quality Gate"),
+        ("templates/AGENTS.md", "Design Read"),
+        ("templates/AGENTS.md", "anti-slop guardrails"),
+        ("README.md", "Product MVP UI Quality Gate"),
+        ("README.md", "Design Read"),
+        ("README.md", "anti-slop"),
+        ("README.zh-CN.md", "Product MVP UI 质量门禁"),
+        ("README.zh-CN.md", "设计判断"),
+        ("README.zh-CN.md", "反模板"),
+        ("examples/tiny-webapp/README.md", "Product MVP UI quality gate"),
+    ]
+    for path, phrase in required_pairs:
+        if phrase not in read(path):
+            fail(f"{path} must include {phrase}")
+
+
 def check_workflow_priority_and_confirmation() -> None:
     required_pairs = [
         ("SKILL.md", "Default Workflow Priority"),
@@ -329,6 +364,7 @@ def main() -> None:
     check_guided_interaction()
     check_project_document_layout()
     check_product_mvp_baseline()
+    check_product_mvp_ui_quality_gate()
     check_workflow_priority_and_confirmation()
     print("Repository validation passed.")
 

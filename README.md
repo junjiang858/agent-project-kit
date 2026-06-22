@@ -47,6 +47,7 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 
 - `docs/project/PROJECT_CHARTER.md` — users, problem, MVP scope, workflows, domain objects, risks, and acceptance criteria.
 - `docs/architecture/TECH_STACK.md` — one chosen stack, rejected alternatives, migration cost, production compatibility, and re-evaluation rules.
+- `docs/architecture/FRONTEND_PLAN.md` — page map, Design Read, Product MVP UI Quality Gate, design system, component boundaries, and browser UI verification.
 - `AGENTS.md` — project-level agent rules and document index.
 - `docs/architecture/ENGINEERING_BASELINE.md` — scripts, quality gates, testing, migrations, environment rules, and commit discipline.
 - `docs/ops/TOOL_POLICY.md` — default tools, project-specific tools, and high-risk confirmation gates.
@@ -61,6 +62,7 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 - Review project-needed third-party libraries with direct links, maintenance evidence, and include/defer/reject decisions before confirming the stack.
 - Create durable project source-of-truth documents under `docs/` instead of scattering planning notes across chat history.
 - Update source-of-truth documents before code when a later task changes frontend design, API contracts, database shape, permissions, deployment, tools, or operations.
+- Keep MVP frontend scope small without accepting generic UI: the Product MVP UI Quality Gate requires a Design Read, design system tokens, complete interaction states, anti-slop guardrails, and browser verification.
 - Establish AI working rules through `AGENTS.md`, engineering baselines, tool permission policies, and workflow documents.
 - Plan frontend, backend, database, security, deployment, and acceptance work with verification evidence instead of "trust me" completion claims.
 
@@ -112,6 +114,7 @@ It combines:
 - Stage routing: the agent loads only the reference needed for the current phase.
 - Reference project scan gate: the agent checks concrete examples with direct project links before narrowing a vague idea.
 - Capability library scan gate: before stack confirmation, the agent maps required technical capabilities to mature, open-source, maintained third-party libraries and asks the user to confirm the combined stack and library set.
+- Product MVP UI Quality Gate: before frontend code, the agent records a Design Read, chooses context-aware design dials, defines the design system and interaction states, and applies anti-slop checks without forcing landing-page taste rules onto dashboards or product workspaces.
 - Confirmation gates: requirements depth, project purpose, document consent, tech stack consent, and high-risk operation confirmation.
 - Text fallback for confirmation prompts: every approval or path choice must be answerable from plain text, not only UI buttons.
 - Language adaptation: questions, confirmations, progress updates, and completion messages should match the user's current language.
@@ -252,6 +255,8 @@ The accelerated path is still limited to the named documents; it is not permissi
 
 For frontend work, `docs/architecture/FRONTEND_PLAN.md` must define the frontend engineering contract before code starts: source tree, route/page responsibilities, shared UI and business component locations, state/config/i18n/utils ownership, and import boundaries. A page list or visual style note alone is not enough.
 
+It must also define the Product MVP UI Quality Gate: Design Read, design dials, design system tokens, UI component strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification. MVP scope can be narrow, but the first page should still feel like a coherent product surface.
+
 ## 🧭 Source-of-Truth Change Gate
 
 When a later task changes design or contracts, the agent should update the original project document before implementation:
@@ -302,7 +307,7 @@ The skill routes work through these stages:
 3. Project purpose confirmation and document consent
 4. Technology stack decision with capability library scan and Git safety
 5. Agent constitution and reusable skill workflow
-6. Frontend page map and skeleton plan
+6. Frontend page map, Design Read, UI quality gate, and skeleton plan
 7. Database design
 8. Backend business spec and minimal skeleton
 9. Architecture and security acceptance
@@ -367,7 +372,7 @@ Run local validation before publishing changes:
 python3 scripts/validate.py
 ```
 
-This checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, and Product MVP baseline coverage.
+This checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, Product MVP baseline coverage, and Product MVP UI Quality Gate coverage.
 It also checks that initiation guardrails remain present: reference project scan, requirements depth, document consent, tech stack confirmation, and a generic domain-object clarification flow instead of a one-domain hardcoded branch.
 
 ## 💡 Why This Exists

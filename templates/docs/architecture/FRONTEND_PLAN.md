@@ -6,6 +6,42 @@
 - Visual density:
 - Accessibility expectations:
 
+## Design Read
+
+- Surface type:
+- Audience:
+- Product tone:
+- Reference signals:
+- Existing brand assets:
+- Quiet constraints:
+- One-sentence direction:
+
+## Design Dials
+
+| Dial | Value | Rationale |
+| --- | --- | --- |
+| Design variance |  |  |
+| Motion intensity |  |  |
+| Visual density |  |  |
+
+Rules:
+
+- Do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI.
+- For operational UI, prioritize scannable density, efficient controls, clear state, restrained motion, and mature design-system patterns.
+- For marketing or brand surfaces, document the visual asset strategy and anti-slop checks.
+
+## Product MVP UI Quality Gate
+
+- MVP UI quality standard:
+- First user loop:
+- Design system foundation:
+- Layout contract:
+- Interaction completeness:
+- Responsive requirement:
+- Accessibility requirement:
+- Anti-slop constraints:
+- Browser UI quality verification:
+
 ## Page Map
 
 | Route or screen | Goal | Primary action | Data needed | States |
@@ -37,6 +73,8 @@
 - Data fetching pattern:
 - Form and validation pattern:
 - Error and empty-state pattern:
+- Responsive layout pattern:
+- Accessibility pattern:
 
 ## Frontend Source Tree
 
@@ -93,11 +131,51 @@ Rules:
 
 - UI library:
 - Icon library:
-- Color tokens:
-- Typography:
-- Spacing:
-- Radius:
+- Theme strategy:
+- Semantic color tokens:
+- Typography scale:
+- Spacing scale:
+- Radius scale:
+- Border and shadow:
 - Breakpoints:
+- Z-index scale:
+- Motion tokens:
+- Component baseline:
+- Customization rule:
+
+## State And Interaction Contract
+
+| State or interaction | Pattern | Components affected | Notes |
+| --- | --- | --- | --- |
+| Loading |  |  |  |
+| Empty |  |  |  |
+| Error |  |  |  |
+| Success |  |  |  |
+| Disabled |  |  |  |
+| Validating or saving |  |  |  |
+| Selected or editing |  |  |  |
+| Destructive action |  |  |  |
+| Focus and keyboard |  |  |  |
+| Hover, active, touch |  |  |  |
+
+Rules:
+
+- Forms use visible labels, optional helper text, error text below fields, and accessible focus rings.
+- Loading states use skeletons or layout-matched placeholders rather than generic spinners when possible.
+- Empty states identify the next useful action.
+- Error states are inline or contextual; toasts are only for transient feedback.
+
+## Anti-Slop Preflight
+
+- [ ] No generic AI-purple gradient default, random glow, or decorative effect replacing information architecture
+- [ ] No fake product previews made from decorative div rectangles
+- [ ] No gratuitous glassmorphism, bento, marquee, or motion in dense operational UI
+- [ ] No ungrounded metrics, fake-precise numbers, or generic placeholder names
+- [ ] No placeholder-as-label forms
+- [ ] No low-contrast ghost buttons or invisible focus states
+- [ ] No text overflow, clipped labels, button wrapping on desktop, or incoherent overlap
+- [ ] No card-in-card layout unless the nested frame represents a real tool, modal, or repeated item
+- [ ] UI library components are customized through tokens or documented component variants, not scattered one-off styles
 
 ## Implementation Order
 
@@ -114,8 +192,13 @@ Rules:
 
 - [ ] Type/build check
 - [ ] Browser verification for key flow
-- [ ] Responsive layout check
+- [ ] Desktop responsive layout check
+- [ ] Mobile responsive layout check
 - [ ] Source tree matches this document
 - [ ] Entry and route files are orchestration-focused
 - [ ] UI, config, messages, state, icons, assets, and utilities have separate approved locations
 - [ ] Components are split by documented user/domain/interaction boundaries
+- [ ] Design Read, Design Dials, and Product MVP UI Quality Gate are followed
+- [ ] Required loading, empty, error, success, disabled, and saving states render
+- [ ] Text fits controls, cards, table cells, badges, and empty/error states
+- [ ] Contrast, focus rings, keyboard navigation, and touch targets are usable

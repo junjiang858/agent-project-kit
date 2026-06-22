@@ -81,6 +81,7 @@ A first MVP slice must include:
 - One approved core user scenario from entry to useful outcome.
 - The necessary UI page, API, worker, CLI, automation, or integration surface for that scenario.
 - Required states, data/API/mock behavior, and acceptance criteria from the source-of-truth documents.
+- For frontend slices, a UI/UX/design system result that satisfies the Product MVP UI Quality Gate.
 - Fresh verification evidence such as build, test, browser, API, CLI, worker, or run logs.
 
 Chinese example:
@@ -232,6 +233,8 @@ For high-risk projects involving uploaded executable content, tool execution, se
 
 For frontend work, `docs/architecture/FRONTEND_PLAN.md` must include a frontend engineering contract before implementation: source tree, route and app-shell responsibilities, component split rules, state/config/i18n/icon/asset/utility ownership, and import boundaries. A page map or visual style note alone is not enough to start frontend code.
 
+For frontend work, `docs/architecture/FRONTEND_PLAN.md` must also satisfy the Product MVP UI Quality Gate before implementation. It must include the Design Read, design system tokens, UI component strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification plan. A first MVP page may be narrow, but it must not be a throwaway or visually generic surface.
+
 If any required artifact is missing, do not dump a raw checklist. State the current stage, identify only the documents that directly unblock the next stage, explain why each one matters now, and offer the steady path or accelerated path from the Document Consent Gate. Use plain-text options and do not depend on UI buttons. Do not create code or scaffolding while the gate is incomplete.
 
 Bootstrap-only exception: if the user explicitly asks to create a bare repository skeleton before the readiness set is complete, confirm that the exception is limited to empty folders, root config, Git setup, and documentation plumbing. Do not add UI/API/business logic, database schema, migrations, or runnable product behavior under this exception.
@@ -256,6 +259,28 @@ Use this sequence:
 4. Confirm the updated documents still satisfy the Project Specification Readiness Gate.
 5. Implement the smallest code change that follows the updated documents.
 6. If implementation reveals an unavoidable design change, pause implementation, update the source-of-truth document first, then continue.
+
+## Product MVP UI Quality Gate
+
+MVP scope may be small, but UI/UX/design system quality is not optional. A Product MVP should cut features, not ship a careless interface. For web products, the first MVP page is the user's entry into the first product loop, so it must feel like a coherent product surface rather than a temporary demo.
+
+Before creating or updating `docs/architecture/FRONTEND_PLAN.md`, run a Design Read:
+
+- Identify the surface type: marketing site, product workspace, SaaS app, admin panel, dashboard, data table, multi-step flow, internal tool, content surface, mobile app, mini program, or hardware UI.
+- Identify audience, product tone, visual density, interaction complexity, accessibility constraints, existing brand assets, and reference signals.
+- State one concise design direction for the plan. If two directions would materially change the product, ask one clarifying question.
+- Use taste-skill and anti-slop rules contextually; do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI. For operational product UI, prefer scannable density, efficient controls, clear state, restrained motion, and mature design-system or data-grid patterns.
+
+`docs/architecture/FRONTEND_PLAN.md` must define:
+
+- Design system foundation: selected UI library, icon library, typography, semantic color tokens, spacing, radius, shadow, border, breakpoints, z-index, motion, and theme strategy.
+- Layout contract: app shell, navigation, toolbar, content regions, sidebars, detail panels, tables/lists/cards, dialogs, and mobile collapse rules.
+- State and interaction contract: loading, empty, error, success, disabled, selected, validating, saving, optimistic, permission-denied, focus, hover, active, keyboard, toast, dialog, destructive-action, and undo patterns when relevant.
+- Component strategy: use the approved UI library for common controls, avoid hand-written duplicate base components, customize tokens rather than scattering one-off styles, and split business components by user concept, interaction state, and data boundary.
+- Anti-slop guardrails: no generic AI-purple gradient default, no fake product previews made from decorative divs, no gratuitous glassmorphism or motion, no repeated equal-card layouts unless the product data truly calls for them, no ungrounded metrics, no placeholder-as-label forms, no text overflow, and no incoherent overlaps.
+- Browser UI quality verification: build/type check plus browser inspection of the key flow on desktop and mobile, including visual hierarchy, readable contrast, text fit, stable dimensions, responsive layout, keyboard/focus behavior, and required states.
+
+Before declaring a first frontend MVP slice complete, verify that the page proves the approved product loop, follows the documented design system, exposes the expected states, and has fresh browser evidence. If the UI looks generic, fragmented, inaccessible, or structurally inconsistent with `FRONTEND_PLAN.md`, the slice is not complete even if the happy path works.
 
 ## Stage Router
 

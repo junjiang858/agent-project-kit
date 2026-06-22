@@ -15,6 +15,10 @@ Before narrowing the MVP, scan a few concrete note-taking or reading-list produc
 
 Before confirming the tech stack, map the tiny notes workflow to project-needed third-party libraries. For this small MVP, validation and forms may be included if they reduce code risk, while rich text editing, full-text search, AI embeddings, sync engines, and analytics should usually be deferred unless the selected direction requires them. Each candidate should include a direct link, maintenance evidence, risk note, and Included / Deferred / Rejected decision.
 
+## Product MVP UI quality gate
+
+Before implementing the notes page, document a Design Read for a small, focused product workspace. The page should use a coherent design system, clear form/list states, accessible controls, responsive layout, and anti-slop checks without adding decorative landing-page sections.
+
 ## Stage Artifacts
 
 1. Reference project scan: include direct project links such as Omnivore (https://github.com/omnivore-app/omnivore), Logseq (https://github.com/logseq/logseq), and Reor (https://github.com/reorproject/reor), then choose whether the app is a read-it-later tool, knowledge base companion, or local AI notes app.
@@ -23,7 +27,7 @@ Before confirming the tech stack, map the tiny notes workflow to project-needed 
 4. `docs/project/PROJECT_CHARTER.md`: define user, MVP boundary, non-goals, and acceptance criteria.
 5. `docs/architecture/TECH_STACK.md`: pick one Product MVP route, for example Next.js + TypeScript + Supabase/Postgres, plus the confirmed third-party library set.
 6. `docs/architecture/ENGINEERING_BASELINE.md`: define scripts, lint/type/test/build checks, CI, env, and migration expectations.
-7. `docs/architecture/FRONTEND_PLAN.md`: map pages, components, states, frontend source tree, file boundaries, and skeleton order.
+7. `docs/architecture/FRONTEND_PLAN.md`: map pages, Design Read, Product MVP UI quality gate, components, states, frontend source tree, file boundaries, and skeleton order.
 8. `docs/architecture/DATABASE_DESIGN.md`: model `notes` with title, body, status, owner, and timestamps.
 9. `docs/architecture/BACKEND_SPEC.md`: define create/list/update-review APIs or server actions.
 10. `docs/ops/TOOL_POLICY.md`: allow local tests and browser checks; require confirmation for deployment.
@@ -38,7 +42,8 @@ After the engineering baseline passes, the first MVP slice should be one narrow 
 2. User creates a short reading note.
 3. User sees the note in the list.
 4. User marks the note as reviewed.
-5. The agent returns build, browser, or API verification evidence for that flow.
+5. The page shows loading, empty, error, success, disabled, and saving states when relevant.
+6. The agent returns build, browser, responsive UI, or API verification evidence for that flow.
 
 ## Example Prompt
 
@@ -46,4 +51,5 @@ After the engineering baseline passes, the first MVP slice should be one narrow 
 Use $agent-project-kit for this idea: I want a tiny app for saving reading notes and marking them reviewed. Do not write code yet. Guide me step by step and ask only one question at a time until docs/project/PROJECT_CHARTER.md is ready to draft.
 Before deep requirement questions, scan concrete reference projects with direct project links and ask me to choose the direction.
 Before confirming the tech stack, run a capability library scan and list Included / Deferred / Rejected third-party libraries.
+Before frontend implementation, include a Product MVP UI quality gate in FRONTEND_PLAN.md with Design Read, design tokens, interaction states, responsive rules, accessibility expectations, and anti-slop checks.
 ```
