@@ -108,10 +108,14 @@ Before implementation, document:
 
 Before scaffolding, also document the frontend plan, database design, backend spec, AI workflow, tool policy, deployment plan, and Agent rules when those surfaces exist. If any are missing, ask to create the next source-of-truth document instead of writing code.
 
+For frontend applications, the frontend plan must document the engineering structure before UI code is generated: framework-owned directories, project-owned directories, route/page responsibilities, shared UI location, business component boundaries, state ownership, config and i18n ownership, utility boundaries, and import rules. Directory structure and component decomposition are architecture decisions, not cleanup tasks after scaffolding.
+
 ## Anti-Patterns
 
 - Choosing SQLite, in-memory stores, ad hoc files, or no migrations for a product expected to launch with real users.
 - Starting with a single `App.tsx` and no route/component/data boundaries for an app expected to grow.
+- Treating `App.tsx`, `page.tsx`, or a route file as the container for all UI, config, messages, state, icons, mock data, and utilities.
+- Creating a flat `components/` or `utils.ts` dump without documented ownership, domain boundaries, or import rules.
 - Creating custom backend patterns while ignoring framework conventions.
 - Confirming a stack before researching third-party libraries needed by the project's actual capabilities.
 - Adding a popular library without a project capability, direct source link, maintenance evidence, and include/defer/reject decision.

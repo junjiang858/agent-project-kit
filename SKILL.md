@@ -230,6 +230,8 @@ For a Product MVP with web, backend, database, tool execution, deployment, or AI
 
 For high-risk projects involving uploaded executable content, tool execution, secrets, payments, production data, external writes, or privileged local access, also require explicit security acceptance content before implementation. This can live in `docs/architecture/BACKEND_SPEC.md`, `docs/ops/TOOL_POLICY.md`, or a separately approved security document if the user requests one.
 
+For frontend work, `docs/architecture/FRONTEND_PLAN.md` must include a frontend engineering contract before implementation: source tree, route and app-shell responsibilities, component split rules, state/config/i18n/icon/asset/utility ownership, and import boundaries. A page map or visual style note alone is not enough to start frontend code.
+
 If any required artifact is missing, do not dump a raw checklist. State the current stage, identify only the documents that directly unblock the next stage, explain why each one matters now, and offer the steady path or accelerated path from the Document Consent Gate. Use plain-text options and do not depend on UI buttons. Do not create code or scaffolding while the gate is incomplete.
 
 Bootstrap-only exception: if the user explicitly asks to create a bare repository skeleton before the readiness set is complete, confirm that the exception is limited to empty folders, root config, Git setup, and documentation plumbing. Do not add UI/API/business logic, database schema, migrations, or runnable product behavior under this exception.
@@ -241,6 +243,7 @@ Before implementing any change that alters project design, product behavior, con
 Design or contract changes include:
 
 - New or changed page, route, component responsibility, UI state, data dependency, or frontend interaction: update `docs/architecture/FRONTEND_PLAN.md`.
+- New or changed frontend source tree, folder responsibility, component split rule, import boundary, shared UI location, i18n/config/state/utils ownership, or file colocation rule: update `docs/architecture/FRONTEND_PLAN.md`.
 - New or changed API, request/response contract, validation rule, error shape, permission rule, backend workflow, integration, worker, or data flow: update `docs/architecture/BACKEND_SPEC.md`.
 - New or changed table, field, relation, index, enum, seed, schema, migration, ownership rule, retention rule, or rollback plan: update `docs/architecture/DATABASE_DESIGN.md`.
 - New or changed framework, dependency, script, repository layout, quality gate, deployment path, environment variable, tool permission, or operational behavior: update the relevant tech stack, engineering baseline, tool policy, or deployment document.
@@ -297,7 +300,7 @@ When a `templates/` directory is available, copy and adapt its matching template
 - `docs/project/PROJECT_CHARTER.md`: reference project scan, target user, problem, MVP scope, non-goals, risks, acceptance criteria.
 - `docs/architecture/TECH_STACK.md`: chosen stack, architecture track, capability library scan, rejected alternatives, re-evaluation rules, forbidden drift.
 - `docs/architecture/ENGINEERING_BASELINE.md`: scripts, code quality, CI, migrations, env, testing, commit discipline.
-- `docs/architecture/FRONTEND_PLAN.md`: pages, routes, components, states, design system, frontend skeleton plan.
+- `docs/architecture/FRONTEND_PLAN.md`: pages, routes, components, states, design system, frontend source tree, file boundary contract, component split rules, import boundaries, frontend skeleton plan.
 - `docs/architecture/DATABASE_DESIGN.md`: objects, tables, fields, relations, indexes, security notes.
 - `docs/architecture/BACKEND_SPEC.md`: business rules, API boundary, permissions, data flow, error handling.
 - `docs/workflow/AI_WORKFLOW.md`: clarify, spec, plan, implement, verify, archive.
@@ -316,6 +319,8 @@ These artifacts are not all required for every tiny task, but they are required 
 | Confirming a stack without library research | Run a Capability Library Scan Gate and review project-needed third-party libraries with links, maintenance evidence, and include/defer/reject decisions. |
 | Letting AI choose many possible stacks forever | Discuss alternatives, then commit to one documented main route. |
 | Starting a scaffold after only a charter, stack, and engineering baseline | Run the Project Specification Readiness Gate and create frontend, database, backend, workflow, tool policy, deployment, and Agent rule documents as applicable before implementation. |
+| Treating frontend directory structure as cleanup after code generation | Define the frontend engineering contract in `docs/architecture/FRONTEND_PLAN.md` before writing UI code, then implement against it. |
+| Putting UI, config, messages, state, icons, mock data, and utilities into one route or app file | Split code by route composition, shared UI, business components, config, i18n, state, assets, and capability-scoped utilities. |
 | Treating Git as an afterthought | Initialize Git early and commit every stable stage. |
 | Putting every rule into the Agent constitution | Keep project rules short; move task-specific procedures into skills or references. |
 | Dumping every project document in the repository root | Keep only `AGENTS.md` as the root index; put detailed documents under `docs/`. |

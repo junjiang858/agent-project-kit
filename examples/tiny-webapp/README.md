@@ -23,7 +23,7 @@ Before confirming the tech stack, map the tiny notes workflow to project-needed 
 4. `docs/project/PROJECT_CHARTER.md`: define user, MVP boundary, non-goals, and acceptance criteria.
 5. `docs/architecture/TECH_STACK.md`: pick one Product MVP route, for example Next.js + TypeScript + Supabase/Postgres, plus the confirmed third-party library set.
 6. `docs/architecture/ENGINEERING_BASELINE.md`: define scripts, lint/type/test/build checks, CI, env, and migration expectations.
-7. `docs/architecture/FRONTEND_PLAN.md`: map pages, components, states, and skeleton order.
+7. `docs/architecture/FRONTEND_PLAN.md`: map pages, components, states, frontend source tree, file boundaries, and skeleton order.
 8. `docs/architecture/DATABASE_DESIGN.md`: model `notes` with title, body, status, owner, and timestamps.
 9. `docs/architecture/BACKEND_SPEC.md`: define create/list/update-review APIs or server actions.
 10. `docs/ops/TOOL_POLICY.md`: allow local tests and browser checks; require confirmation for deployment.

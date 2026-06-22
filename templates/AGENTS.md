@@ -36,6 +36,7 @@ Read task-specific docs when relevant:
 - Preserve the documented tech stack.
 - Keep detailed project documents under `docs/`; keep this file short as the root index.
 - Update the relevant source-of-truth document before code when design, API, database, permission, deployment, tool, or operational behavior changes.
+- For frontend work, follow `docs/architecture/FRONTEND_PLAN.md` for source tree, file responsibilities, component split rules, state/config/i18n/utils ownership, and import boundaries before editing UI code.
 - Keep changes small and reviewable.
 - Use existing patterns before adding abstractions.
 - Never put secrets in code or Git history.
@@ -67,6 +68,8 @@ Required before implementation:
 - `docs/ops/TOOL_POLICY.md`
 - `docs/ops/DEPLOYMENT.md` when local run, environment variables, or hosting are in scope
 
+When frontend UI is in scope, `docs/architecture/FRONTEND_PLAN.md` must define the frontend engineering contract, not only the visual style or page list. It must cover source tree, route/page responsibilities, shared UI and business component locations, state ownership, config/messages/icons/assets/utilities ownership, and import boundaries.
+
 If multiple readiness documents are missing, do not give only a single next-document suggestion. Offer plain-text options and do not depend on UI buttons:
 
 - `A. Steady path`: create or update the single most important next document, then ask for review.
@@ -80,6 +83,7 @@ Batch consent applies only to the named missing batch and does not authorize imp
 - [ ] Build passes when applicable.
 - [ ] Browser/API/security evidence is provided when applicable.
 - [ ] Source-of-truth docs are updated before implementation when decisions or contracts change.
+- [ ] Frontend files follow the documented source tree and component boundaries when UI is changed.
 - [ ] Git diff is reviewed before commit.
 
 ## Forbidden Actions
@@ -88,3 +92,4 @@ Batch consent applies only to the named missing batch and does not authorize imp
 - Destructive Git or filesystem operations without confirmation.
 - Broad rewrites without a plan.
 - New major dependencies without documented approval.
+- Packing unrelated frontend UI, config, messages, state, mock data, icons, and utilities into a single app, page, or route file.

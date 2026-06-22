@@ -250,11 +250,14 @@ If required documents are missing, the agent should list the stage-aware gaps in
 
 The accelerated path is still limited to the named documents; it is not permission to scaffold, install dependencies, or implement product behavior.
 
+For frontend work, `docs/architecture/FRONTEND_PLAN.md` must define the frontend engineering contract before code starts: source tree, route/page responsibilities, shared UI and business component locations, state/config/i18n/utils ownership, and import boundaries. A page list or visual style note alone is not enough.
+
 ## 🧭 Source-of-Truth Change Gate
 
 When a later task changes design or contracts, the agent should update the original project document before implementation:
 
 - Frontend routes, components, states, data dependencies, or interactions: `docs/architecture/FRONTEND_PLAN.md`.
+- Frontend source tree, component boundaries, shared UI location, state/config/i18n/utils ownership, or import boundaries: `docs/architecture/FRONTEND_PLAN.md`.
 - APIs, validation, responses, errors, permissions, backend workflows, integrations, or data flow: `docs/architecture/BACKEND_SPEC.md`.
 - Tables, fields, relations, indexes, enums, schemas, migrations, ownership, retention, or rollback: `docs/architecture/DATABASE_DESIGN.md`.
 

@@ -247,11 +247,14 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 - 稳步推进：只创建或更新当前最关键的下一个文档，然后请用户 review。
 - 快速推进：让用户授权本阶段命名的缺失文档批次，只创建或更新这些文档，然后重新运行就绪审计。
 
+如果涉及前端，`docs/architecture/FRONTEND_PLAN.md` 必须先定义前端工程化契约：源码目录树、路由/页面职责、共享 UI 与业务组件位置、状态/config/i18n/utils 归属和 import 边界。只有页面清单或视觉风格说明，不足以开始写前端代码。
+
 ## 🧭 真源文档变更门禁
 
 后续任务一旦改变设计或契约，Agent 应该先更新原来的项目真源文档，再进入实现：
 
 - 前端路由、组件、状态、数据依赖或交互变化：更新 `docs/architecture/FRONTEND_PLAN.md`。
+- 前端源码目录、组件边界、共享 UI 位置、状态/config/i18n/utils 归属或 import 边界变化：更新 `docs/architecture/FRONTEND_PLAN.md`。
 - API、校验、响应、错误、权限、后端流程、集成或数据流变化：更新 `docs/architecture/BACKEND_SPEC.md`。
 - 数据表、字段、关系、索引、枚举、schema、migration、归属、保留或回滚变化：更新 `docs/architecture/DATABASE_DESIGN.md`。
 

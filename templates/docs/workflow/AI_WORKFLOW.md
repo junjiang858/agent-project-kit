@@ -5,7 +5,7 @@
 1. Clarify the request.
 2. Read `AGENTS.md` and relevant project documents under `docs/`.
 3. Produce or update a plan.
-4. If the task changes design, contracts, data shape, permissions, tools, deployment, or operations, update the affected source-of-truth document first.
+4. If the task changes design, frontend source tree, component boundaries, contracts, data shape, permissions, tools, deployment, or operations, update the affected source-of-truth document first.
 5. Implement the smallest useful change against the updated documents.
 6. Run checks.
 7. Report changed-doc summary and evidence.
@@ -30,6 +30,7 @@
 | Security | risk table, code locations, verification |
 
 When implementation changes design or contracts, docs evidence must come before code evidence.
+When frontend implementation changes source tree, file responsibilities, component boundaries, state/config/i18n/utils ownership, or import boundaries, `docs/architecture/FRONTEND_PLAN.md` evidence must come before code evidence.
 
 ## Session Handoff
 

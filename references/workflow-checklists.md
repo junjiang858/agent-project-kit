@@ -158,6 +158,7 @@ When the readiness gate and approved engineering setup are complete, close with 
 Before implementing a change that alters design or contracts, update the original project document first:
 
 - Frontend routes, components, states, data dependencies, or interactions: `docs/architecture/FRONTEND_PLAN.md`.
+- Frontend source tree, file responsibilities, component split rules, shared UI location, state/config/i18n/utils ownership, or import boundaries: `docs/architecture/FRONTEND_PLAN.md`.
 - APIs, validation, response/error contracts, permissions, backend workflows, integrations, or data flow: `docs/architecture/BACKEND_SPEC.md`.
 - Tables, fields, relations, indexes, enums, schema, migrations, ownership, retention, or rollback: `docs/architecture/DATABASE_DESIGN.md`.
 - Stack, dependencies, scripts, deployment, environment, tools, or operations: the relevant tech stack, engineering baseline, deployment, or tool policy document.
@@ -212,13 +213,13 @@ Based on the current stack, generate docs/ops/DEPLOYMENT.md. Cover local run, te
 ## Implementation Readiness Prompt
 
 ```text
-Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer plain-text options: `A. Steady path` for the single most important next document, or `B. Accelerated path` for the named missing batch. Do not depend on UI buttons. Do not scaffold or implement yet.
+Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CHARTER.md, TECH_STACK.md, ENGINEERING_BASELINE.md, FRONTEND_PLAN.md, DATABASE_DESIGN.md, BACKEND_SPEC.md, AI_WORKFLOW.md, TOOL_POLICY.md, and DEPLOYMENT.md. For frontend work, verify that FRONTEND_PLAN.md includes the frontend source tree, file responsibilities, component split rules, state/config/i18n/utils ownership, and import boundaries. State the current stage, list present documents, and list only the missing documents that directly unblock the next stage. Explain why each missing document matters now. If anything required is missing, offer plain-text options: `A. Steady path` for the single most important next document, or `B. Accelerated path` for the named missing batch. Do not depend on UI buttons. Do not scaffold or implement yet.
 ```
 
 ## Source-of-Truth Change Prompt
 
 ```text
-Before implementing this change, identify whether it changes frontend design, API/backend contracts, database shape, permissions, stack, deployment, tools, or operations. If it does, update the affected original source-of-truth document first, ask for confirmation when required, then implement code strictly against the updated document. Treat OpenSpec or other spec artifacts as auxiliary inputs unless the project explicitly declares them as source of truth.
+Before implementing this change, identify whether it changes frontend design, frontend source tree, component boundaries, state/config/i18n/utils ownership, API/backend contracts, database shape, permissions, stack, deployment, tools, or operations. If it does, update the affected original source-of-truth document first, ask for confirmation when required, then implement code strictly against the updated document. Treat OpenSpec or other spec artifacts as auxiliary inputs unless the project explicitly declares them as source of truth.
 ```
 
 ## Goal Contract Prompt
@@ -236,5 +237,5 @@ Based on the current stack, generate a testing and quality-check plan for docs/a
 ## Anti-Drift Prompt
 
 ```text
-Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. If the task changes frontend/API/database/permission/operation design, update the affected source-of-truth document before code. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
+Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. If the task changes frontend source tree, component boundaries, state/config/i18n/utils ownership, frontend/API/database/permission/operation design, update the affected source-of-truth document before code. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
 ```
