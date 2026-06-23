@@ -161,6 +161,8 @@ Each recommended or rejected candidate must include capability, library name, di
 
 Prefer mature, well-documented, actively maintained, open-source libraries when they fit the project. Do not add a library just because it is popular; if the MVP can use framework-native functionality without losing clarity, mark the library as deferred or unnecessary.
 
+Treat default stack recommendations as context-aware candidates, not hard requirements. Confirm repository shape, UI library, icon library, framework, build tool, package manager, and backend/database boundaries from the product shape, design system, implementation needs, and migration cost. A single deployable frontend app can stay a single package when all code has one ownership boundary and no shared package boundary exists; a workspace is appropriate only when local packages such as shared schemas, reusable media/core logic, workers, SDKs, or multiple apps have real ownership. For design-heavy frontend work, linked designs, screenshots, existing design systems, and brand assets may justify replacing default UI or icon libraries after documenting the reason and receiving approval.
+
 If the library landscape may have changed, use live search, official docs, package registries, GitHub repositories, release notes, or security advisories. If live research is unavailable, say that maintenance confidence is incomplete and ask whether to continue with known candidates or wait for research.
 
 Present the final review as one combined stack decision:
@@ -277,6 +279,7 @@ Before creating or updating `docs/architecture/FRONTEND_PLAN.md`, run a Design R
 - Layout contract: app shell, navigation, toolbar, content regions, sidebars, detail panels, tables/lists/cards, dialogs, and mobile collapse rules.
 - State and interaction contract: loading, empty, error, success, disabled, selected, validating, saving, optimistic, permission-denied, focus, hover, active, keyboard, toast, dialog, destructive-action, and undo patterns when relevant.
 - Component strategy: use the approved UI library for common controls, avoid hand-written duplicate base components, customize tokens rather than scattering one-off styles, and split business components by user concept, interaction state, and data boundary.
+- Design-system dependency rule: selected UI and icon libraries are approved project decisions, not fixed skill defaults. When a Figma/Stitch/design-system source or existing codebase uses a different component or icon language, propose the replacement, update `TECH_STACK.md` and `FRONTEND_PLAN.md`, get approval, then implement through a local adapter or component layer.
 - Anti-slop guardrails: no generic AI-purple gradient default, no fake product previews made from decorative divs, no gratuitous glassmorphism or motion, no repeated equal-card layouts unless the product data truly calls for them, no ungrounded metrics, no placeholder-as-label forms, no text overflow, and no incoherent overlaps.
 - Browser UI quality verification: build/type check plus browser inspection of the key flow on desktop and mobile, including visual hierarchy, readable contrast, text fit, stable dimensions, responsive layout, keyboard/focus behavior, and required states.
 
@@ -350,6 +353,7 @@ These artifacts are not all required for every tiny task, but they are required 
 | Putting every rule into the Agent constitution | Keep project rules short; move task-specific procedures into skills or references. |
 | Dumping every project document in the repository root | Keep only `AGENTS.md` as the root index; put detailed documents under `docs/`. |
 | Choosing a throwaway MVP stack for a product MVP | Keep scope small, but choose a stack and repo shape that can grow without a core rewrite. |
+| Treating default stack suggestions as mandatory | Use defaults as candidates; document why the project needs a single package, workspace, UI library, icon library, backend, or database before locking it. |
 | Accepting "it is secure" as proof | Require file locations, code paths, tests, and role-based evidence. |
 | Opening every tool to AI | Separate default-open tools, project-specific tools, and high-risk confirmation gates. |
 | Letting code, migrations, or APIs become the first record of a design change | Update the original source-of-truth document first, then implement against it. |

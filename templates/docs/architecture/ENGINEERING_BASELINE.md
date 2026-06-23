@@ -20,6 +20,13 @@
 - TypeScript strictness:
 - Shared config package:
 
+## Repository Shape
+
+- Approved shape:
+- Reason this shape fits:
+- App/package boundaries:
+- Rule for adding `apps/*` or `packages/*` later:
+
 ## CI
 
 - Provider:

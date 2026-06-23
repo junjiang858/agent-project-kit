@@ -176,6 +176,37 @@ def check_product_mvp_ui_quality_gate() -> None:
             fail(f"{path} must include {phrase}")
 
 
+def check_default_stack_flexibility() -> None:
+    required_pairs = [
+        ("SKILL.md", "default stack recommendations as context-aware candidates"),
+        ("SKILL.md", "A single deployable frontend app can stay a single package"),
+        ("SKILL.md", "Design-system dependency rule"),
+        ("references/architecture-baseline.md", "Repository Shape Decision"),
+        ("references/architecture-baseline.md", "Do not create empty shared packages"),
+        ("references/architecture-baseline.md", "Single package frontend app"),
+        ("references/frontend.md", "For small single-package frontend apps"),
+        ("references/frontend.md", "Treat common choices such as shadcn/ui and lucide as candidates"),
+        ("references/frontend.md", "Do not replace UI or icon libraries silently"),
+        ("references/workflow-checklists.md", "Defaults are candidates, not mandates"),
+        ("references/workflow-checklists.md", "UI library, and icon library must be justified"),
+        ("templates/docs/architecture/TECH_STACK.md", "Repository shape rationale"),
+        ("templates/docs/architecture/TECH_STACK.md", "| Icons |"),
+        ("templates/docs/architecture/TECH_STACK.md", "UI/icon/repository choices that may be replaced with approval"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "UI library rationale"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Icon library rationale"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Design-source alignment"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "Replacement rule"),
+        ("templates/docs/architecture/FRONTEND_PLAN.md", "<approved frontend root"),
+        ("templates/docs/architecture/ENGINEERING_BASELINE.md", "Repository Shape"),
+        ("templates/AGENTS.md", "repository shape, UI library, and icon library"),
+        ("README.md", "default stack choices as candidates"),
+        ("README.zh-CN.md", "默认技术栈当作候选"),
+    ]
+    for path, phrase in required_pairs:
+        if phrase not in read(path):
+            fail(f"{path} must include flexible stack rule: {phrase}")
+
+
 def check_workflow_priority_and_confirmation() -> None:
     required_pairs = [
         ("SKILL.md", "Default Workflow Priority"),
@@ -365,6 +396,7 @@ def main() -> None:
     check_project_document_layout()
     check_product_mvp_baseline()
     check_product_mvp_ui_quality_gate()
+    check_default_stack_flexibility()
     check_workflow_priority_and_confirmation()
     print("Repository validation passed.")
 

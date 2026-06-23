@@ -81,7 +81,7 @@ Rules:
 Document the approved frontend file structure before implementation. Mark which folders are framework conventions and which are project conventions.
 
 ```text
-apps/web/src/
+<approved frontend root, such as src/ or apps/web/src/>
 ```
 
 ## File Boundary Contract
@@ -130,7 +130,11 @@ Rules:
 ## Design System
 
 - UI library:
+- UI library rationale:
 - Icon library:
+- Icon library rationale:
+- Design-source alignment:
+- Replacement rule:
 - Theme strategy:
 - Semantic color tokens:
 - Typography scale:
@@ -176,6 +180,7 @@ Rules:
 - [ ] No text overflow, clipped labels, button wrapping on desktop, or incoherent overlap
 - [ ] No card-in-card layout unless the nested frame represents a real tool, modal, or repeated item
 - [ ] UI library components are customized through tokens or documented component variants, not scattered one-off styles
+- [ ] UI and icon libraries match the approved design source or have a documented, approved reason to differ
 
 ## Implementation Order
 

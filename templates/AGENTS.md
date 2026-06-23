@@ -40,6 +40,7 @@ Read task-specific docs when relevant:
 - For frontend work, also follow the Product MVP UI Quality Gate in `docs/architecture/FRONTEND_PLAN.md`: Design Read, design system tokens, state and interaction contract, responsive/accessibility expectations, anti-slop guardrails, and browser UI quality verification.
 - Keep changes small and reviewable.
 - Use existing patterns before adding abstractions.
+- Preserve the approved repository shape, UI library, and icon library unless the source-of-truth documents are updated and the user approves the change.
 - Never put secrets in code or Git history.
 
 ## Interaction Defaults
@@ -96,4 +97,5 @@ Batch consent applies only to the named missing batch and does not authorize imp
 - Destructive Git or filesystem operations without confirmation.
 - Broad rewrites without a plan.
 - New major dependencies without documented approval.
+- Changing repository shape, UI library, or icon library without documented approval.
 - Packing unrelated frontend UI, config, messages, state, mock data, icons, and utilities into a single app, page, or route file.

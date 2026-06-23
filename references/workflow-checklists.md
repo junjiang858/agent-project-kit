@@ -181,11 +181,11 @@ Use as a default for ordinary individual or small-team web products unless proje
 
 | Layer | Default | Role |
 | --- | --- | --- |
-| Repository | pnpm workspace with `apps/*`, `packages/*`, `docs/*` | mature monorepo shape without forcing heavy tooling |
+| Repository | Single package or workspace, chosen from real boundaries | one deployable frontend app can stay single-package; use `apps/*` and `packages/*` only for real app/shared-package ownership |
 | Frontend | Next.js + TypeScript | pages, routing, SSR/full-stack entry |
 | Styling | Tailwind CSS | consistent styling constraints |
-| UI | shadcn/ui | readable, editable, AI-friendly component source |
-| Icons | lucide-react | consistent icon language |
+| UI | shadcn/ui or project-approved design-system strategy | readable, editable defaults; replace when design source or platform conventions justify it |
+| Icons | lucide-react or project-approved icon family | consistent icon language; replace when Figma/Stitch/brand/system icons are the real baseline |
 | Charts | Recharts or Apache ECharts | business charts and advanced visualization |
 | Backend | NestJS for independent APIs; Next.js route handlers/server actions for same-app light backend | modules, APIs, services, permission and validation boundaries |
 | Database | PostgreSQL or Supabase/Postgres | relational data, auth/storage acceleration when needed |
@@ -198,7 +198,7 @@ Use as a default for ordinary individual or small-team web products unless proje
 | Spec management | OpenSpec or GitHub Spec Kit | durable requirements, design, tasks, acceptance |
 | AI app SDK | Vercel AI SDK, OpenAI Agents SDK, LangGraph, Dify, n8n | chat, agents, workflows, automation by scenario |
 
-Rule: mature technology reduces AI error rate; workflow discipline constrains execution; tests, browser checks, API checks, builds, and deploy logs form the evidence chain.
+Rule: mature technology reduces AI error rate; workflow discipline constrains execution; tests, browser checks, API checks, builds, and deploy logs form the evidence chain. Defaults are candidates, not mandates: repository shape, UI library, and icon library must be justified by product shape, design-system evidence, implementation boundaries, and migration cost.
 
 SQLite, local JSON files, ad hoc SQL files, and no-migration setups are allowed only for explicit local-first or throwaway prototypes.
 
@@ -247,5 +247,5 @@ Based on the current stack, generate a testing and quality-check plan for docs/a
 ## Anti-Drift Prompt
 
 ```text
-Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, state library, backend framework, database, deployment platform, or AI workflow tool. If the task changes frontend source tree, component boundaries, state/config/i18n/utils ownership, frontend UI quality gate, frontend/API/database/permission/operation design, update the affected source-of-truth document before code. For frontend work, return browser UI quality evidence for desktop and mobile along with test/build evidence. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
+Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, icon library, state library, backend framework, database, deployment platform, package manager, repository shape, or AI workflow tool. If the task changes frontend source tree, component boundaries, state/config/i18n/utils ownership, frontend UI quality gate, frontend/API/database/permission/operation design, update the affected source-of-truth document before code. For frontend work, return browser UI quality evidence for desktop and mobile along with test/build evidence. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
 ```

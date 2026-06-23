@@ -12,9 +12,9 @@ A confirmed technology stack is not permission to scaffold or implement. Before 
 
 ## Community Anchors
 
-Use mature ecosystem conventions as defaults:
+Use mature ecosystem conventions as defaults, then narrow them to the project's actual shape:
 
-- Turborepo and pnpm workspace conventions: `apps/*` for applications or services, `packages/*` for shared libraries and tooling, root package manager config, and lockfile.
+- Turborepo and pnpm workspace conventions: `apps/*` for applications or services, `packages/*` for shared libraries and tooling, root package manager config, and lockfile. Use these only when the project has real application/package boundaries.
 - Nx workspace conventions: keep applications and libraries separated so boundaries stay clear as the repo grows.
 - Next.js conventions: preserve framework-owned routing and file conventions instead of inventing a custom application layout.
 - NestJS conventions: use modules, providers, controllers, services, validation, and dependency injection for APIs with real business rules.
@@ -67,7 +67,7 @@ Choose one track and record it in `docs/architecture/TECH_STACK.md`.
 
 | Track | Use when | Default shape |
 | --- | --- | --- |
-| Single Web App | One deployable web product, backend needs are light or handled by framework/server actions | `apps/web`, `packages/shared`, `packages/config`, optional `packages/db` |
+| Single Web App | One deployable web product, backend needs are light or handled by framework/server actions | Single package when no shared boundary exists; otherwise `apps/web` plus only real `packages/*` libraries |
 | Web + API | Web app plus independent backend API, real business rules, permissions, integrations, or mobile/API clients | `apps/web`, `apps/api`, `packages/shared`, `packages/config`, `packages/db` |
 | Multi-App Platform | Admin app, worker, multiple clients, or platform-style growth expected | `apps/web`, `apps/admin`, `apps/api`, `apps/worker`, `packages/shared`, `packages/config`, `packages/db`, optional `packages/auth` |
 
@@ -75,13 +75,25 @@ Choose one track and record it in `docs/architecture/TECH_STACK.md`.
 
 For ordinary long-lived web products:
 
-- Package manager: `pnpm` workspace with `apps/*` and `packages/*`.
+- Package manager and repository shape: use a single package for one deployable frontend app with one ownership boundary and no shared library boundary; use a workspace with `apps/*` and `packages/*` only when local packages have real ownership.
 - Web: Next.js + TypeScript when SSR, routing, API adjacency, or Vercel deployment matters; otherwise React + Vite is acceptable for frontend-only tools.
 - API: NestJS for independent product backends with modules, validation, auth, and business boundaries. Fastify is acceptable for narrow services when the architecture document explains how modules, validation, errors, and observability are handled.
 - Database: PostgreSQL or Supabase/Postgres for long-lived relational products. SQLite is acceptable for explicit local-first, embedded, or throwaway prototypes.
 - Data access: Prisma or Drizzle with migrations. Do not rely on hand-written schema files as the only migration story.
-- Shared packages: put cross-app types, schemas, clients, config, and database access in `packages/` only when they are actually shared.
+- Shared packages: put cross-app types, schemas, clients, config, database access, reusable media/core logic, worker contracts, or SDK-like APIs in `packages/` only when they are actually shared or meaningfully isolated from UI.
 - Build orchestration: plain pnpm scripts are enough for small repos; add Turborepo or Nx when multiple packages need coordinated caching, affected builds, or task pipelines.
+
+## Repository Shape Decision
+
+Before recommending a workspace, classify the repository boundary:
+
+| Shape | Use when | Avoid when |
+| --- | --- | --- |
+| Single package frontend app | One deployable frontend app, all code has one ownership boundary, no shared schemas/core logic, no worker package, no near-term second app | The app already has reusable domain logic, worker contracts, or package-level tests that would be clearer outside UI |
+| pnpm workspace | There are two or more real packages, such as `apps/web` plus shared schemas, media/core logic, workers, SDKs, generated clients, or future deployable apps | The `packages/*` folders would be empty placeholders or only speculative "future-proofing" |
+| Turborepo/Nx workspace | Multiple packages need task caching, affected builds, generators, dependency graph visibility, or CI optimization | Plain pnpm scripts are still easy to understand and fast enough |
+
+Do not create empty shared packages just because the default Product MVP stack mentions workspaces. If the project starts as a single package and later gains a real boundary, update `TECH_STACK.md`, `ENGINEERING_BASELINE.md`, `FRONTEND_PLAN.md`, and root agent rules before moving files.
 
 ## Stack Decision Rules
 
@@ -114,6 +126,7 @@ For frontend applications, the frontend plan must document the engineering struc
 
 - Choosing SQLite, in-memory stores, ad hoc files, or no migrations for a product expected to launch with real users.
 - Starting with a single `App.tsx` and no route/component/data boundaries for an app expected to grow.
+- Creating `apps/*` and `packages/*` before a real app/package boundary exists.
 - Treating `App.tsx`, `page.tsx`, or a route file as the container for all UI, config, messages, state, icons, mock data, and utilities.
 - Creating a flat `components/` or `utils.ts` dump without documented ownership, domain boundaries, or import rules.
 - Creating custom backend patterns while ignoring framework conventions.
