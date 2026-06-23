@@ -52,6 +52,7 @@ Agent Project Kit 会帮助 Agent 创建和维护这些项目真源文档：
 - `docs/architecture/ENGINEERING_BASELINE.md`：脚本、质量门禁、测试、迁移、环境规则和提交纪律。
 - `docs/ops/TOOL_POLICY.md`：默认开放工具、项目专用工具和高风险确认门禁。
 - `docs/workflow/AI_WORKFLOW.md`：澄清、规格、计划、实现、验证和归档流程。
+- `docs/features/`、`docs/changes/`、`docs/decisions/` 和 `docs/agent-project-kit/`：稳定功能说明、单次变更细节、长期决策，以及不应塞进当前状态文档的 Agent Project Kit 过程产物。
 
 ## 🧩 它能帮你做什么
 
@@ -63,6 +64,9 @@ Agent Project Kit 会帮助 Agent 创建和维护这些项目真源文档：
 - 把默认技术栈当作候选，而不是硬约束：仓库形态、UI 库和图标库都要由产品形态、设计系统证据和真实包边界来证明。
 - 把项目真源文档放进 `docs/`，避免关键规划散落在聊天记录里。
 - 后续任务如果改变前端设计、API 契约、数据库结构、权限、部署、工具或运维行为，先更新真源文档，再实施代码。
+- 把功能开发分流到 Project Baseline Path、Contract-Changing Feature Path、Bounded Feature Path 或 Local Fix Path，避免小改动反复重跑完整项目基线。
+- 把 Superpowers、OpenSpec、GitHub Spec Kit 等工具当作可选增强；未安装时使用内置的澄清、Contract Impact Check、计划、实现、验证和证据回报流程。
+- 通过真源文档蒸馏，让核心文档只保留当前有效契约，把功能、变更、决策和过程细节放入专门目录。
 - 让 MVP 前端保持小范围，但不接受粗糙 UI：Product MVP UI 质量门禁会要求设计判断、设计 token、完整交互状态、反模板约束和浏览器验收。
 - 通过 `AGENTS.md`、工程基线、工具权限策略和工作流文档，建立 AI 在项目中的长期工作规则。
 - 为前端、后端、数据库、安全、部署和验收规划提供可复用流程，让“完成了”必须带测试、构建、接口、浏览器或安全证据。
@@ -124,15 +128,16 @@ Agent Project Kit 不是普通提示词合集。
 
 ## 🧭 与成熟类似项目的区别
 
-像 [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills)、Superpowers 这类成熟 skill 包，更偏完整工程生命周期：spec、plan、build、test、review、安全、性能和发布。Agent Project Kit 聚焦更前置的项目成型层：先澄清产品目的、保留用户确认、沉淀真源文档，并在项目未就绪前阻止实现。
+像 [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills)、Superpowers 这类成熟 skill 包，更偏完整工程生命周期：spec、plan、build、test、review、安全、性能和发布。OpenSpec、GitHub Spec Kit 这类规格工具更偏 change proposal、spec、plan、task 和归档。Agent Project Kit 聚焦它们外层的治理层：项目基线、当前状态真源文档、实现前就绪、契约变化路由和用户确认。
 
 | 对比对象 | Agent Project Kit 更强调 |
 | --- | --- |
-| 全生命周期 skill 包 | 参考项目扫描、立项、真源文档、实现前就绪门禁，然后才写代码。 |
+| 全生命周期 skill 包 | 参考项目扫描、立项、真源文档、实现前就绪门禁，以及进入实现纪律前的轻量交接。 |
+| 规格驱动工具 | 仓库级真源优先级、当前状态文档蒸馏，以及外部规格工具不可用时的 fallback。 |
 | 自主执行型框架 | 用户确认的决策、一次一个问题的澄清、写文件和高风险操作前的显式同意。 |
 | 普通提示词合集 | 可复用模板、阶段路由、真源文档变更门禁和本地校验。 |
 
-当产品形态还在成型时，适合让它做主流程；进入实现后，再搭配成熟生命周期 skill 做 TDD、代码审查、安全、性能和发布。
+当产品形态或契约还在成型时，适合让它做主流程；进入实现后，再搭配成熟生命周期 skill 做 TDD、代码审查、安全、性能和发布。对于已经被批准文档覆盖的边界内功能，它应该先分类再交接，而不是重新启动完整项目基线。
 
 ## 🚫 它不是什么
 
@@ -209,6 +214,15 @@ Use $agent-project-kit to turn my app idea into a project charter and implementa
 
 进入技术选型后，它还会执行能力库扫描门禁：根据已确认的章程提取技术能力，调研项目需要的第三方库，给出具体链接、维护证据、风险和纳入/暂缓/拒绝决策，再把“核心技术栈 + 第三方库清单”一起交给用户确认。
 
+对于已有项目，它会使用四条实现路径：
+
+- Project Baseline Path：新项目、核心文档缺失、技术栈决策，或安全、工具、部署基线。
+- Contract-Changing Feature Path：改变产品行为、前端/API/数据库契约、权限、依赖、部署、工具或运维。
+- Bounded Feature Path：处在已批准真源契约范围内，可以轻量交接到实现纪律。
+- Local Fix Path：小 bugfix、文案/样式调整、测试修复、代码解释或单命令。
+
+Superpowers、OpenSpec、GitHub Spec Kit、issue tracker 等都是可选增强。如果不可用，Agent Project Kit 不应阻塞，而是使用内置 fallback：澄清范围、Contract Impact Check、计划、实现、验证和证据回报。
+
 使用示例：
 
 ```text
@@ -227,6 +241,8 @@ Use $agent-project-kit to create root AGENTS.md and docs/ops/TOOL_POLICY.md for 
 Use $agent-project-kit to plan the backend skeleton and acceptance checklist.
 
 Use $agent-project-kit to review whether this backend is safe enough to deploy.
+
+Use $agent-project-kit to decide whether this feature is contract-changing or bounded before implementation.
 ```
 
 ## 🧯 实现前就绪门禁
@@ -255,6 +271,8 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 
 它还必须定义 Product MVP UI 质量门禁：设计判断、设计刻度、设计系统 token、UI 组件与图标策略、状态与交互契约、响应式和可访问性要求、反模板约束，以及浏览器 UI 质量验证。MVP 范围可以很小，但首个页面仍然应该像一个统一的产品界面。
 
+当项目基线已经通过时，Agent 会先执行 Contract Impact Check。如果任务属于 Bounded Feature Path 或 Local Fix Path，就使用 Implementation Handoff，而不是重新跑完整就绪流程。
+
 ## 🧭 真源文档变更门禁
 
 后续任务一旦改变设计或契约，Agent 应该先更新原来的项目真源文档，再进入实现：
@@ -265,6 +283,16 @@ Use $agent-project-kit to review whether this backend is safe enough to deploy.
 - 数据表、字段、关系、索引、枚举、schema、migration、归属、保留或回滚变化：更新 `docs/architecture/DATABASE_DESIGN.md`。
 
 OpenSpec、GitHub Spec Kit、issue spec 和聊天计划可以辅助推导，但不能替代仓库里的真源文档，除非项目明确改变这个规则。
+
+## 🧪 真源文档蒸馏
+
+核心真源文档描述当前系统契约，不记录项目一路怎么变成现在这样。
+
+- 稳定功能行为放在 `docs/features/`。
+- 单次变更的 proposal、设计说明、任务、验收记录和临时上下文放在 `docs/changes/`。
+- 长期产品或架构决策放在 `docs/decisions/`。
+- Agent Project Kit 的参考扫描、能力库扫描、就绪审计和 handoff 等过程产物放在 `docs/agent-project-kit/`。
+- 持久有效的当前契约再蒸馏回对应核心文档。
 
 ## 🎉 目标与完成信号
 
@@ -312,8 +340,10 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
 10. 工具权限矩阵
 11. 部署与 AI 工作流文档
 12. 实现前就绪审计，然后才进入脚手架或代码实现
-13. 实现并验证首个 MVP 切片
-14. 输出目标里程碑信号和语言自适应完成提示
+13. 对边界内工作执行 Contract Impact Check 和 Implementation Handoff
+14. 实现并验证首个 MVP 切片
+15. 把结果蒸馏到当前状态文档、功能说明、变更记录、决策或 Agent Project Kit 过程产物
+16. 输出目标里程碑信号和语言自适应完成提示
 
 ## 📁 仓库结构
 
@@ -342,6 +372,10 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
     ├── architecture/FRONTEND_PLAN.md
     ├── architecture/DATABASE_DESIGN.md
     ├── architecture/BACKEND_SPEC.md
+    ├── features/<feature-name>.md
+    ├── changes/<date-or-id>-<change-name>.md
+    ├── decisions/ADR-<number>-<topic>.md
+    ├── agent-project-kit/PROCESS_ARTIFACTS.md
     ├── workflow/AI_WORKFLOW.md
     ├── ops/TOOL_POLICY.md
     └── ops/DEPLOYMENT.md
@@ -358,6 +392,10 @@ Agent Project Kit 会让每次项目级任务先说清楚当前目标：
 - `templates/docs/architecture/FRONTEND_PLAN.md`
 - `templates/docs/architecture/DATABASE_DESIGN.md`
 - `templates/docs/architecture/BACKEND_SPEC.md`
+- `templates/docs/features/FEATURE.md`
+- `templates/docs/changes/CHANGE.md`
+- `templates/docs/decisions/ADR.md`
+- `templates/docs/agent-project-kit/PROCESS_ARTIFACTS.md`
 - `templates/docs/workflow/AI_WORKFLOW.md`
 - `templates/docs/ops/TOOL_POLICY.md`
 - `templates/docs/ops/DEPLOYMENT.md`
@@ -372,6 +410,7 @@ python3 scripts/validate.py
 
 它会检查必需文件、README 语言切换链接、Markdown 代码块闭合、skill frontmatter、阶段 reference 路由、生成项目的文档布局、Product MVP 基线覆盖，以及 Product MVP UI 质量门禁覆盖。
 它也会检查启动门禁是否仍然存在：参考项目扫描、需求深度、文档同意、技术栈确认，以及通用的领域对象澄清流程，避免把流程硬编码到某一个业务类型。
+校验也覆盖边界内功能路由、可选工作流工具 fallback、Implementation Handoff、真源文档蒸馏，以及 feature/change/decision/process artifact 模板路径。
 
 ## 💡 为什么做它
 

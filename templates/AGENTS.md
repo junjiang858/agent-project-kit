@@ -20,6 +20,10 @@ Read task-specific docs when relevant:
 - Backend/API: `docs/architecture/BACKEND_SPEC.md`
 - Database: `docs/architecture/DATABASE_DESIGN.md`
 - Deployment: `docs/ops/DEPLOYMENT.md`
+- Stable feature behavior: `docs/features/`
+- One-change proposal, design, tasks, and acceptance detail: `docs/changes/`
+- Long-term product or architecture decisions: `docs/decisions/`
+- Agent Project Kit process artifacts: `docs/agent-project-kit/`
 
 ## Source of Truth
 
@@ -28,14 +32,19 @@ Read task-specific docs when relevant:
 3. `docs/architecture/TECH_STACK.md`
 4. `docs/architecture/ENGINEERING_BASELINE.md`
 5. `docs/ops/TOOL_POLICY.md`
-6. Existing code conventions
+6. Current-state feature, backend, frontend, database, deployment, and tool docs under `docs/`
+7. Existing code conventions
 
 ## Working Rules
 
 - Clarify scope before implementation.
+- Run a Contract Impact Check before feature or fix work. If the change affects product behavior, frontend/API/database contracts, permissions, dependencies, deployment, tools, or operations, update the relevant source-of-truth document before code.
+- For Bounded Feature Path or Local Fix Path work that stays inside approved contracts, state that no source-of-truth update is needed and proceed through the approved implementation discipline.
 - Preserve the documented tech stack.
 - Keep detailed project documents under `docs/`; keep this file short as the root index.
 - Update the relevant source-of-truth document before code when design, API, database, permission, deployment, tool, or operational behavior changes.
+- Keep current-state source-of-truth docs compact. Put stable feature behavior in `docs/features/`, one-change process detail in `docs/changes/`, long-term decisions in `docs/decisions/`, and Agent Project Kit process artifacts in `docs/agent-project-kit/`.
+- Superpowers, OpenSpec, GitHub Spec Kit, and similar workflow tools are optional accelerators unless this project explicitly declares one as primary. If unavailable, use the built-in clarify, Contract Impact Check, plan, implement, verify, and evidence workflow instead of blocking.
 - For frontend work, follow `docs/architecture/FRONTEND_PLAN.md` for source tree, file responsibilities, component split rules, state/config/i18n/utils ownership, and import boundaries before editing UI code.
 - For frontend work, also follow the Product MVP UI Quality Gate in `docs/architecture/FRONTEND_PLAN.md`: Design Read, design system tokens, state and interaction contract, responsive/accessibility expectations, anti-slop guardrails, and browser UI quality verification.
 - Keep changes small and reviewable.
@@ -80,6 +89,16 @@ If multiple readiness documents are missing, do not give only a single next-docu
 - `B. Accelerated path`: ask for consent to create or update the named missing batch for this stage, then run the implementation readiness audit.
 
 Batch consent applies only to the named missing batch and does not authorize implementation code, scaffolding, package manager files, UI pages, APIs, schemas, migrations, or runnable behavior.
+
+## Implementation Handoff
+
+When the implementation readiness gate has passed and the task is a Bounded Feature Path or Local Fix Path, do not rerun the full project baseline. Use the approved implementation workflow:
+
+1. Read the affected source-of-truth docs.
+2. State whether the Contract Impact Check found any source-of-truth changes.
+3. If no contract changes are needed, implement the smallest useful change.
+4. Verify with tests, build, browser, API, CLI, worker, security, or run evidence as applicable.
+5. Report changed files, source-of-truth impact, and verification evidence.
 
 ## Completion Definition
 

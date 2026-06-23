@@ -82,6 +82,7 @@ For ordinary long-lived web products:
 - Data access: Prisma or Drizzle with migrations. Do not rely on hand-written schema files as the only migration story.
 - Shared packages: put cross-app types, schemas, clients, config, database access, reusable media/core logic, worker contracts, or SDK-like APIs in `packages/` only when they are actually shared or meaningfully isolated from UI.
 - Build orchestration: plain pnpm scripts are enough for small repos; add Turborepo or Nx when multiple packages need coordinated caching, affected builds, or task pipelines.
+- AI workflow discipline: Superpowers, OpenSpec, GitHub Spec Kit, and similar tools are optional accelerators. If they are unavailable, document the built-in fallback in `docs/workflow/AI_WORKFLOW.md`: clarify scope, run the Contract Impact Check, update source-of-truth docs only when contracts change, plan, implement, verify, and report evidence.
 
 ## Repository Shape Decision
 
@@ -116,6 +117,7 @@ Before implementation, document:
 - Production Compatibility: what can remain unchanged after launch.
 - Migration Cost: which choices would be expensive to replace later.
 - Explicit Non-Replacement: core framework, database family, package manager, deployment model, auth approach.
+- Optional Workflow Tool Fallback: whether the project uses Superpowers, OpenSpec, GitHub Spec Kit, another workflow, or the built-in fallback.
 - Re-Evaluation Triggers: product shape, team capability, compliance, performance, cost, or ecosystem risk changes.
 
 Before scaffolding, also document the frontend plan, database design, backend spec, AI workflow, tool policy, deployment plan, and Agent rules when those surfaces exist. If any are missing, ask to create the next source-of-truth document instead of writing code.

@@ -38,6 +38,8 @@
 | Icons |  |  |
 | Deployment |  |  |
 | Testing |  |  |
+| AI workflow discipline | Superpowers / built-in fallback / other | Superpowers and similar tools are optional accelerators, not hard dependencies |
+| Spec management | OpenSpec / GitHub Spec Kit / repo docs / other | External spec tools are optional unless explicitly primary |
 
 ## Capability Library Scan
 
@@ -59,6 +61,7 @@
 - Choices that are acceptable only for prototype or local development:
 - What must not be replaced later without explicit approval:
 - UI/icon/repository choices that may be replaced with approval:
+- Optional Workflow Tool Fallback:
 
 ## Migration Cost
 
@@ -77,6 +80,7 @@
 - Do not introduce a new framework, database, UI kit, icon library, deployment platform, package manager, repository shape, or state library without documenting the reason and receiving approval.
 - Do not create `apps/*` or `packages/*` unless the repository shape above names a real app/package boundary.
 - Do not change UI or icon libraries only because a default stack suggests them; design-system evidence and user approval are required.
+- Do not block implementation only because Superpowers, OpenSpec, GitHub Spec Kit, or a similar optional workflow tool is unavailable. Use the documented fallback workflow unless the user explicitly made that tool primary.
 
 ## Re-Evaluation Rules
 

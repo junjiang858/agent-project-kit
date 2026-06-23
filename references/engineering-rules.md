@@ -17,6 +17,8 @@ Include:
 - Forbidden actions: secrets in code, destructive commands, production mutation without confirmation, broad rewrites without approval.
 - Conflict order: user instruction, project docs, Agent constitution, skill/reference instructions, local code conventions.
 - Source-of-truth change gate: when design or contracts change, update the original project document before implementation.
+- Source-of-truth distillation: keep current-state docs compact; place stable feature behavior in `docs/features/`, one-change detail in `docs/changes/`, long-term decisions in `docs/decisions/`, and Agent Project Kit process artifacts in `docs/agent-project-kit/`.
+- Optional workflow tool fallback: Superpowers, OpenSpec, GitHub Spec Kit, and similar tools are accelerators; when unavailable, use the repository's documented clarify, plan, implement, verify, and evidence workflow instead of blocking.
 
 Avoid:
 
@@ -24,6 +26,7 @@ Avoid:
 - Every possible style preference.
 - Tool permission matrices that belong in `docs/ops/TOOL_POLICY.md`.
 - Task-specific workflows that belong in separate skills.
+- Full change journals, task logs, or acceptance transcripts that belong in `docs/changes/`.
 
 ## Skill Workflow
 
@@ -54,7 +57,7 @@ When a task changes frontend design, API/backend contracts, database shape, perm
 ## Prompt: Agent Constitution
 
 ```text
-Based on the project charter, technical route, and collaboration rules, draft a concise root AGENTS.md. Include project goal, development boundaries, quality standards, testing requirements, commit policy, tool permission principles, forbidden actions, completion definition, and conflict handling. Index docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/workflow/AI_WORKFLOW.md, and docs/ops/TOOL_POLICY.md. Reference docs/ops/TOOL_POLICY.md for detailed tool permissions instead of embedding the full matrix.
+Based on the project charter, technical route, and collaboration rules, draft a concise root AGENTS.md. Include project goal, development boundaries, quality standards, testing requirements, commit policy, tool permission principles, forbidden actions, completion definition, conflict handling, optional workflow tool fallback, and source-of-truth distillation. Index docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, docs/features/, docs/changes/, docs/decisions/, and docs/agent-project-kit/. Reference docs/ops/TOOL_POLICY.md for detailed tool permissions instead of embedding the full matrix.
 ```
 
 ## Prompt: Skill Draft

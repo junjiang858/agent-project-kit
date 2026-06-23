@@ -20,10 +20,13 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 14. Tool permission matrix.
 15. AI-friendly stack and workflow specification.
 16. Implementation readiness audit.
-17. Project scaffold or implementation only after readiness passes.
-18. First MVP slice implementation and verification.
-19. Product MVP UI quality checked when the slice includes frontend UI.
-20. First MVP slice completion signal with evidence.
+17. Contract Impact Check for feature and fix work.
+18. Project scaffold or implementation only after readiness passes.
+19. Implementation Handoff for Bounded Feature Path or Local Fix Path.
+20. First MVP slice implementation and verification.
+21. Product MVP UI quality checked when the slice includes frontend UI.
+22. Source-of-truth distillation into current-state docs, `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`.
+23. First MVP slice completion signal with evidence.
 
 ## Interaction Defaults
 
@@ -34,6 +37,41 @@ Any confirmation, consent, approval, or path-choice prompt must include plain-te
 ### User Language Rule
 
 Use the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user asks for another language.
+
+## Task Routing
+
+Use the lightest path that protects the project:
+
+| Path | Use when | Required behavior |
+| --- | --- | --- |
+| Project Baseline Path | New project, missing core documents, technology stack choice, engineering baseline, security/tool/deployment setup. | Run staged clarification, reference scan, capability scan, document consent, and readiness gates before implementation. |
+| Contract-Changing Feature Path | Feature or fix changes product behavior, frontend/API/database contracts, permissions, dependencies, deployment, tools, or operations. | Update affected current-state source-of-truth documents before implementation. |
+| Bounded Feature Path | Approved baseline exists and the work stays inside documented contracts. | Read relevant docs, state that no source-of-truth update is needed, then hand off to implementation discipline. |
+| Local Fix Path | Small bug fix, copy/style tweak, test fix, code explanation, single command, or other local task. | Skip the project baseline flow and use debugging, TDD, verification, or direct command execution. |
+
+## Contract Impact Check
+
+Before treating work as a Bounded Feature Path, check whether it changes:
+
+- Frontend routes, pages, component responsibilities, UI states, interactions, data dependencies, source tree, ownership, or import boundaries.
+- API endpoints, request/response contracts, validation, errors, permissions, backend workflows, integrations, workers, or data flow.
+- Tables, fields, relations, indexes, enums, seeds, schemas, migrations, ownership, retention, or rollback.
+- Frameworks, packages, scripts, repository layout, quality gates, deployment, environment variables, tool permissions, or operations.
+- Security, privacy, production data, external writes, payments, secrets, privileged local access, or destructive operations.
+
+If any item changes, use the Contract-Changing Feature Path.
+
+## Optional Workflow Tool Fallback
+
+Superpowers, OpenSpec, GitHub Spec Kit, issue trackers, and similar workflow tools are optional accelerators, not hard dependencies.
+
+If available and applicable, use Superpowers-style planning, TDD, execution, review, and verification after this skill protects source-of-truth gates. Use OpenSpec, GitHub Spec Kit, issue specs, or chat plans as inputs unless the project explicitly declares one of them to be the primary source of truth.
+
+If unavailable, do not block. Use the built-in fallback: clarify scope, run the Contract Impact Check, update source-of-truth docs only when contracts change, make the smallest useful implementation plan, implement, verify, and report evidence.
+
+## Implementation Handoff
+
+When the readiness gate has passed and the task is a Bounded Feature Path or Local Fix Path, do not rerun the full project baseline. Hand off to Superpowers if installed and applicable, another explicitly selected workflow if the user chose one, or the built-in fallback.
 
 ## Goal And Completion Signal
 
@@ -103,6 +141,10 @@ English example:
 - [ ] `docs/architecture/FRONTEND_PLAN.md`
 - [ ] `docs/architecture/DATABASE_DESIGN.md`
 - [ ] `docs/architecture/BACKEND_SPEC.md`
+- [ ] `docs/features/<feature-name>.md` when stable feature behavior should be findable by feature name
+- [ ] `docs/changes/<date-or-id>-<change-name>.md` when one change needs proposal, design, tasks, or acceptance detail
+- [ ] `docs/decisions/ADR-<number>-<topic>.md` when a long-term product or architecture decision is made
+- [ ] `docs/agent-project-kit/PROCESS_ARTIFACTS.md` or subfolders when saving reference scans, capability scans, readiness audits, or handoffs
 - [ ] Backend architecture acceptance report
 - [ ] Backend security boundary table
 - [ ] Bottom-layer security checklist
@@ -143,6 +185,8 @@ Do not proceed to code.
 
 For frontend work, also verify that `docs/architecture/FRONTEND_PLAN.md` includes the Product MVP UI Quality Gate: Design Read, Design Dials, design system tokens, UI component strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification. If these are missing, update the frontend plan before code.
 
+For Bounded Feature Path or Local Fix Path work, do not rerun this full readiness audit if the project baseline has already passed and the Contract Impact Check finds no contract changes. Read the relevant docs, state the bounded classification, and proceed through the Implementation Handoff.
+
 ## Reference Project Scan Prompt
 
 ```text
@@ -175,6 +219,19 @@ Before implementing a change that alters design or contracts, update the origina
 
 OpenSpec, GitHub Spec Kit, issue specs, and chat plans can guide the change, but they do not replace the repository source-of-truth documents unless the user explicitly changes that rule. If implementation reveals a design change, stop and update the affected document before continuing code.
 
+## Source-of-Truth Distillation Gate
+
+Core source-of-truth documents describe the current system contract, not the full history of how the project got there.
+
+- Distill durable product, architecture, API, database, permission, deployment, and tool contracts into the relevant core document.
+- Put stable feature behavior in `docs/features/<feature-name>.md`.
+- Put one change's proposal, design notes, tasks, acceptance notes, and temporary context in `docs/changes/<date-or-id>-<change-name>.md`.
+- Put long-term product or architecture decisions in `docs/decisions/ADR-<number>-<topic>.md`.
+- Put Agent Project Kit process artifacts in `docs/agent-project-kit/`.
+- Archive or remove obsolete detail after it is no longer the current contract.
+
+After implementation, distill only durable results back into core current-state docs. Keep process-heavy detail in `docs/changes/`.
+
 ## Default Product MVP Stack
 
 Use as a default for ordinary individual or small-team web products unless project constraints justify another route. Product MVP means narrow feature scope, not a disposable foundation.
@@ -194,8 +251,8 @@ Use as a default for ordinary individual or small-team web products unless proje
 | Backend deploy | Railway, Render, Fly.io, or Docker | Node service hosting and operations control |
 | Quality | ESLint, Prettier, EditorConfig, TypeScript, CI | repeatable code quality |
 | Checks | pnpm check, pnpm test, pnpm build, Vitest, React Testing Library, Playwright | quality gate, unit, component, and browser evidence |
-| AI discipline | Superpowers | clarify, plan, implement, verify |
-| Spec management | OpenSpec or GitHub Spec Kit | durable requirements, design, tasks, acceptance |
+| AI discipline | Superpowers or built-in fallback | clarify, plan, implement, verify; Superpowers is optional, not a hard dependency |
+| Spec management | OpenSpec, GitHub Spec Kit, or repo docs | durable requirements, design, tasks, acceptance; external spec tools are optional inputs unless explicitly primary |
 | AI app SDK | Vercel AI SDK, OpenAI Agents SDK, LangGraph, Dify, n8n | chat, agents, workflows, automation by scenario |
 
 Rule: mature technology reduces AI error rate; workflow discipline constrains execution; tests, browser checks, API checks, builds, and deploy logs form the evidence chain. Defaults are candidates, not mandates: repository shape, UI library, and icon library must be justified by product shape, design-system evidence, implementation boundaries, and migration cost.
@@ -212,6 +269,7 @@ Based on the project charter, target users, scope, budget, launch time, and team
 
 ```text
 Generate docs/workflow/AI_WORKFLOW.md for this project. Combine Superpowers-style discipline with spec-first work. Define how AI should clarify requirements, write specs, design, split tasks, implement, test, accept, and archive. Mark which steps require human confirmation and which situations forbid direct coding.
+Include Optional Workflow Tool Fallback: if Superpowers, OpenSpec, GitHub Spec Kit, or similar tools are unavailable, use the project's built-in clarify, Contract Impact Check, source-of-truth update, plan, implement, verify, and evidence workflow instead of blocking.
 ```
 
 ## DEPLOYMENT.md Prompt
@@ -230,6 +288,7 @@ Audit implementation readiness before creating code. Check AGENTS.md, PROJECT_CH
 
 ```text
 Before implementing this change, identify whether it changes frontend design, frontend source tree, component boundaries, state/config/i18n/utils ownership, API/backend contracts, database shape, permissions, stack, deployment, tools, or operations. If it does, update the affected original source-of-truth document first, ask for confirmation when required, then implement code strictly against the updated document. Treat OpenSpec or other spec artifacts as auxiliary inputs unless the project explicitly declares them as source of truth.
+If the change is bounded by existing approved contracts, state that it is a Bounded Feature Path and use the Implementation Handoff. If process detail would bloat current-state docs, put it in `docs/changes/`, `docs/features/`, `docs/decisions/`, or `docs/agent-project-kit/` and distill only durable contract changes back into core docs.
 ```
 
 ## Goal Contract Prompt
@@ -248,4 +307,5 @@ Based on the current stack, generate a testing and quality-check plan for docs/a
 
 ```text
 Before implementing, read AGENTS.md, docs/project/PROJECT_CHARTER.md, docs/architecture/TECH_STACK.md, docs/architecture/ENGINEERING_BASELINE.md, docs/architecture/FRONTEND_PLAN.md, docs/architecture/DATABASE_DESIGN.md, docs/architecture/BACKEND_SPEC.md, docs/workflow/AI_WORKFLOW.md, docs/ops/TOOL_POLICY.md, and docs/ops/DEPLOYMENT.md. Unless you provide a clear reason and receive confirmation, do not introduce a new frontend framework, UI library, icon library, state library, backend framework, database, deployment platform, package manager, repository shape, or AI workflow tool. If the task changes frontend source tree, component boundaries, state/config/i18n/utils ownership, frontend UI quality gate, frontend/API/database/permission/operation design, update the affected source-of-truth document before code. For frontend work, return browser UI quality evidence for desktop and mobile along with test/build evidence. After finishing, provide changed-doc summary plus test, build, browser, API, or deployment evidence.
+If the task is bounded by existing approved contracts, say so and use the Implementation Handoff instead of rerunning the full baseline. Store feature/change/process detail in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/` when it would bloat current-state docs.
 ```

@@ -1,6 +1,6 @@
 ---
 name: agent-project-kit
-description: Use when planning, building, or reviewing AI-assisted software projects from vague idea to delivery, especially for Vibe Coding, project charters, tech stack decisions, Agent constitution, skill workflows, frontend/backend/database skeletons, security acceptance, tool permissions, or AI-friendly engineering rules.
+description: Use when starting or governing AI-assisted software projects, especially project baseline setup, source-of-truth documents, architecture or contract changes, implementation readiness, tool permissions, security or deployment boundaries, or routing bounded feature work.
 ---
 
 # Agent Project Kit
@@ -104,11 +104,48 @@ English example:
 
 ## Default Workflow Priority
 
-When this skill is loaded or the user request matches AI-assisted project initiation, planning, architecture, frontend, backend, database, security, tool permissions, acceptance, or delivery workflow, Agent Project Kit is the default primary workflow.
+When this skill is loaded or the user request matches AI-assisted project initiation, project baseline setup, source-of-truth documents, architecture or contract changes, implementation readiness, tool permissions, security boundaries, deployment boundaries, or bounded-feature routing, Agent Project Kit is the default primary workflow.
 
 Use overlapping skills, including `superpowers` planning, TDD, execution, or review skills, only as auxiliary method libraries. Do not let overlapping skills replace this skill's stage router, confirmation gates, or required artifacts.
 
 Skip this priority only when the user explicitly names another skill or process as the primary workflow, or when the task is a local code fix, code explanation, single command, or other non-project-level task.
+
+Use the lightest path that protects the project:
+
+| Path | Use when | Agent Project Kit responsibility |
+| --- | --- | --- |
+| Project Baseline Path | New project, project reorganization, missing core documents, technology stack choice, engineering baseline, security/tool/deployment boundary setup. | Run the staged clarification, reference scan, capability scan, document consent, and readiness gates before implementation. |
+| Contract-Changing Feature Path | A feature or fix changes product behavior, routes, UI states, component responsibilities, API contracts, data shape, permissions, dependencies, deployment, tool permissions, or operations. | Read affected source-of-truth documents, propose the documentation delta, get required consent, update current-state docs first, then hand off to implementation. |
+| Bounded Feature Path | The baseline exists and the work is inside approved source-of-truth contracts without changing architecture, data, permissions, dependencies, deployment, or tool boundaries. | Read the relevant docs, state that no source-of-truth update is needed, then use implementation discipline without rerunning the full baseline. |
+| Local Fix Path | Small bug fix, copy/style tweak, test fix, code explanation, single command, or other local task that does not change product or engineering contracts. | Do not run the project baseline flow. Use debugging, TDD, verification, or direct command execution as appropriate. |
+
+Before classifying a feature as bounded, run a Contract Impact Check. Treat the work as contract-changing if it changes any of:
+
+- Frontend route, page, component responsibility, UI state, interaction, data dependency, source tree, shared UI location, state/config/i18n/icon/asset/utility ownership, or import boundary.
+- API endpoint, request/response contract, validation, error shape, permission rule, backend workflow, integration, worker, or data flow.
+- Table, field, relation, index, enum, seed, schema, migration, data ownership, retention, or rollback plan.
+- Framework, package, script, repository layout, quality gate, deployment path, environment variable, tool permission, or operational behavior.
+- Security, privacy, production data, external write, payment, secrets, privileged local access, or destructive operation boundary.
+
+### Optional Workflow Tool Fallback
+
+Superpowers, OpenSpec, GitHub Spec Kit, issue trackers, and similar workflow tools are optional accelerators, not hard dependencies.
+
+If an overlapping workflow tool is available and applicable, use it as an auxiliary method library after this skill has classified the task and protected the source-of-truth gates. For example, use Superpowers-style planning, TDD, execution, review, and verification during implementation, or use OpenSpec/GitHub Spec Kit artifacts as change-spec inputs.
+
+If an optional workflow tool is unavailable, do not block the workflow and do not ask the user to install it unless the user explicitly requested that specific tool as the primary workflow. Use this built-in fallback:
+
+1. Clarify the requested scope.
+2. Run the Contract Impact Check.
+3. Read and update affected source-of-truth documents only when contracts change.
+4. Produce the smallest useful implementation plan.
+5. Implement the smallest useful change.
+6. Verify with tests, build, browser, API, CLI, worker, security, or run evidence as applicable.
+7. Report source-of-truth deltas and verification evidence.
+
+### Implementation Handoff
+
+When the Project Specification Readiness Gate has passed and the current task is a Bounded Feature Path or Local Fix Path, do not restart the full project baseline flow. Hand off to the project's approved implementation discipline: Superpowers if installed and applicable, another explicitly selected workflow if the user chose one, or the built-in fallback above.
 
 ## Guided Interaction
 
@@ -262,6 +299,21 @@ Use this sequence:
 5. Implement the smallest code change that follows the updated documents.
 6. If implementation reveals an unavoidable design change, pause implementation, update the source-of-truth document first, then continue.
 
+### Source-of-Truth Distillation Gate
+
+Core source-of-truth documents describe the current system contract, not the full history of how the project got there. Do not append every feature discussion, task list, rejected option, or verification log to `PROJECT_CHARTER.md`, `TECH_STACK.md`, `FRONTEND_PLAN.md`, `BACKEND_SPEC.md`, `DATABASE_DESIGN.md`, `AI_WORKFLOW.md`, `TOOL_POLICY.md`, or `DEPLOYMENT.md`.
+
+Route detail by lifespan:
+
+- Current product, architecture, API, data, permission, deployment, or tool contract: distill into the relevant core source-of-truth document.
+- Stable feature behavior that users or agents will reference repeatedly: place in `docs/features/<feature-name>.md` and link from the relevant core document when useful.
+- One change's proposal, design notes, task breakdown, acceptance notes, or temporary implementation context: place in `docs/changes/<date-or-id>-<change-name>.md`.
+- Long-term architecture or product tradeoff: place in `docs/decisions/ADR-<number>-<topic>.md`.
+- Agent Project Kit process artifacts such as reference scans, capability scans, readiness audits, or handoffs: place under `docs/agent-project-kit/`.
+- Obsolete detail: archive, replace with a short historical note, or remove after confirming it is no longer the current contract.
+
+After completing a change, distill only the durable result back into the core source-of-truth documents. Keep process-heavy detail in `docs/changes/`, not in the current-state docs.
+
 ## Product MVP UI Quality Gate
 
 MVP scope may be small, but UI/UX/design system quality is not optional. A Product MVP should cut features, not ship a careless interface. For web products, the first MVP page is the user's entry into the first product loop, so it must feel like a coherent product surface rather than a temporary demo.
@@ -301,24 +353,29 @@ Before declaring a first frontend MVP slice complete, verify that the page prove
 | Deciding which tools or MCPs AI may use | `references/tool-policy.md` | `docs/ops/TOOL_POLICY.md` or tool permission matrix |
 | Need whole-project flow, default stack, or reusable prompt pack | `references/workflow-checklists.md` | roadmap, docs checklist, default workflow docs |
 | User asks to create the project, scaffold the app, or start implementation | `references/workflow-checklists.md`, then the missing stage references | implementation readiness audit before any code |
+| Existing baseline and bounded feature or local fix | `references/workflow-checklists.md`, then affected source-of-truth docs | Contract Impact Check, implementation handoff, verification evidence |
+| Feature/change detail would bloat current-state docs | `references/document-layout.md`, affected stage references | `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/` placement |
 
 ## Execution Flow
 
 1. Classify the request into one stage from the router.
 2. State the Goal Contract for the current run: target outcome, completion signal, and next action.
-3. Read the matching reference file before giving instructions or editing project files.
-4. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
-5. Check whether required upstream artifacts exist. If only one artifact or fact is missing, request only that item. If multiple readiness documents are missing, run the stage-aware readiness audit and offer both steady and accelerated paths.
-6. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
-7. For project initiation, satisfy Reference Project Scan Gate, Requirements Depth Gate, and Project Purpose Confirmation before asking to write the project charter.
-8. For every document file, satisfy Document Consent Gate before creating or updating it.
-9. Before technology stack confirmation, satisfy the Capability Library Scan Gate and get user confirmation for the combined core stack and library set.
-10. Before scaffolding or implementation, satisfy the Project Specification Readiness Gate. If documents are missing, stop implementation and offer the steady path and accelerated path as plain-text options.
-11. Before any implementation that changes design or contracts, satisfy the Source-of-Truth Change Gate and update the original project documents first.
-12. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report. After creating or updating any readiness document, rerun the readiness audit summary in the final response; when multiple readiness documents remain, end with the two plain-text options rather than a single "next document" suggestion.
-13. For implementation work, preserve Git checkpoints and return evidence: updated source-of-truth documents when design changed, commands run, tests, build, browser/API checks, or security proof.
-14. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
-15. When a Goal Contract milestone is genuinely satisfied, say so explicitly. Provide the project engineering baseline congratulatory message at the baseline milestone, and provide the first MVP slice congratulatory message only after the approved slice is implemented and verified with fresh evidence.
+3. For feature or fix work, run the Contract Impact Check before choosing Project Baseline, Contract-Changing Feature, Bounded Feature, or Local Fix.
+4. Read the matching reference file before giving instructions or editing project files.
+5. When creating project documents, use `references/document-layout.md` unless the user explicitly requests a different layout.
+6. Check whether required upstream artifacts exist. If only one artifact or fact is missing, request only that item. If multiple readiness documents are missing, run the stage-aware readiness audit and offer both steady and accelerated paths.
+7. When information is missing, use Guided Interaction instead of dumping a long checklist of questions.
+8. For project initiation, satisfy Reference Project Scan Gate, Requirements Depth Gate, and Project Purpose Confirmation before asking to write the project charter.
+9. For every document file, satisfy Document Consent Gate before creating or updating it.
+10. Before technology stack confirmation, satisfy the Capability Library Scan Gate and get user confirmation for the combined core stack and library set.
+11. Before scaffolding or implementation, satisfy the Project Specification Readiness Gate. If documents are missing, stop implementation and offer the steady path and accelerated path as plain-text options.
+12. Before any implementation that changes design or contracts, satisfy the Source-of-Truth Change Gate and update the original project documents first.
+13. When change details would bloat a current-state document, satisfy the Source-of-Truth Distillation Gate and route process detail to `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`.
+14. For Bounded Feature Path or Local Fix Path after readiness has passed, use the Implementation Handoff instead of rerunning the full project baseline.
+15. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report. After creating or updating any readiness document, rerun the readiness audit summary in the final response; when multiple readiness documents remain, end with the two plain-text options rather than a single "next document" suggestion.
+16. For implementation work, preserve Git checkpoints and return evidence: updated source-of-truth documents when design changed, commands run, tests, build, browser/API checks, or security proof.
+17. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+18. When a Goal Contract milestone is genuinely satisfied, say so explicitly. Provide the project engineering baseline congratulatory message at the baseline milestone, and provide the first MVP slice congratulatory message only after the approved slice is implemented and verified with fresh evidence.
 
 ## Required Artifacts
 
@@ -334,6 +391,10 @@ When a `templates/` directory is available, copy and adapt its matching template
 - `docs/workflow/AI_WORKFLOW.md`: clarify, spec, plan, implement, verify, archive.
 - `docs/ops/TOOL_POLICY.md`: default tools, project tools, high-risk confirmations.
 - `docs/ops/DEPLOYMENT.md`: local, staging, production, environment variables, health checks, rollback.
+- `docs/features/<feature-name>.md`: stable feature behavior that should be easy to find without bloating current-state architecture docs.
+- `docs/changes/<date-or-id>-<change-name>.md`: one change's proposal, design notes, tasks, acceptance notes, and temporary implementation context.
+- `docs/decisions/ADR-<number>-<topic>.md`: long-term product or architecture decisions and rejected alternatives.
+- `docs/agent-project-kit/`: Agent Project Kit process artifacts such as reference scans, capability scans, readiness audits, and handoffs.
 
 These artifacts are not all required for every tiny task, but they are required before implementation when the project contains the corresponding surface. Do not treat `PROJECT_CHARTER.md`, `TECH_STACK.md`, and `ENGINEERING_BASELINE.md` alone as enough to start a Product MVP scaffold with frontend, backend, database, tool execution, or deployment concerns.
 
@@ -357,6 +418,9 @@ These artifacts are not all required for every tiny task, but they are required 
 | Accepting "it is secure" as proof | Require file locations, code paths, tests, and role-based evidence. |
 | Opening every tool to AI | Separate default-open tools, project-specific tools, and high-risk confirmation gates. |
 | Letting code, migrations, or APIs become the first record of a design change | Update the original source-of-truth document first, then implement against it. |
+| Rerunning the whole baseline for a bounded feature | Run the Contract Impact Check, then use the Implementation Handoff when no contract changes are needed. |
+| Requiring Superpowers or OpenSpec when they are unavailable | Use Optional Workflow Tool Fallback unless the user explicitly made that tool the primary workflow. |
+| Turning source-of-truth docs into change journals | Distill current contracts into core docs and keep feature/change/process detail in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`. |
 
 ## Source Notes
 

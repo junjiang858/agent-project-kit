@@ -1,4 +1,4 @@
 interface:
   display_name: "Agent Project Kit"
-  short_description: "Guide AI-assisted projects from idea to secure delivery"
-  default_prompt: "Use $agent-project-kit to plan and execute an AI-assisted software project from idea to delivery."
+  short_description: "Govern AI project baselines, contracts, readiness, and bounded feature routing"
+  default_prompt: "Use $agent-project-kit to set up or audit this AI-assisted project's source-of-truth docs, readiness gates, and feature implementation path."

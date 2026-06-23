@@ -52,6 +52,7 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 - `docs/architecture/ENGINEERING_BASELINE.md` — scripts, quality gates, testing, migrations, environment rules, and commit discipline.
 - `docs/ops/TOOL_POLICY.md` — default tools, project-specific tools, and high-risk confirmation gates.
 - `docs/workflow/AI_WORKFLOW.md` — clarify, spec, plan, implement, verify, and archive workflow.
+- `docs/features/`, `docs/changes/`, `docs/decisions/`, and `docs/agent-project-kit/` — stable feature notes, one-change detail, long-term decisions, and Agent Project Kit process artifacts that should not bloat current-state docs.
 
 ## 🧩 What It Helps You Do
 
@@ -63,6 +64,9 @@ Agent Project Kit helps the agent create and maintain project source-of-truth fi
 - Treat default stack choices as candidates, not mandates: repository shape, UI library, and icon library must be justified by product shape, design-system evidence, and real package boundaries.
 - Create durable project source-of-truth documents under `docs/` instead of scattering planning notes across chat history.
 - Update source-of-truth documents before code when a later task changes frontend design, API contracts, database shape, permissions, deployment, tools, or operations.
+- Route feature work through Project Baseline Path, Contract-Changing Feature Path, Bounded Feature Path, or Local Fix Path so small changes do not rerun the full baseline.
+- Use Superpowers, OpenSpec, GitHub Spec Kit, and similar tools as optional accelerators; when they are unavailable, fall back to the built-in clarify, plan, implement, verify, and evidence workflow.
+- Keep current-state source-of-truth docs compact by distilling durable contracts into core docs and placing feature, change, decision, and process detail in dedicated directories.
 - Keep MVP frontend scope small without accepting generic UI: the Product MVP UI Quality Gate requires a Design Read, design system tokens, complete interaction states, anti-slop guardrails, and browser verification.
 - Establish AI working rules through `AGENTS.md`, engineering baselines, tool permission policies, and workflow documents.
 - Plan frontend, backend, database, security, deployment, and acceptance work with verification evidence instead of "trust me" completion claims.
@@ -125,15 +129,16 @@ It combines:
 
 ## 🧭 Similar Project Comparison
 
-Mature skill packs such as [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) and Superpowers focus on the full engineering lifecycle: spec, plan, build, test, review, security, performance, and shipping. Agent Project Kit focuses one layer earlier: turning a vague project idea into confirmed product and engineering source-of-truth before implementation starts.
+Mature skill packs such as [`addyosmani/agent-skills`](https://github.com/addyosmani/agent-skills) and Superpowers focus on the full engineering lifecycle: spec, plan, build, test, review, security, performance, and shipping. Spec tools such as OpenSpec and GitHub Spec Kit organize change proposals, specs, plans, tasks, and archival. Agent Project Kit focuses on the governing layer around those tools: project baselines, current-state source-of-truth documents, implementation readiness, contract-change routing, and user confirmation.
 
 | Compared with | Agent Project Kit emphasizes |
 | --- | --- |
-| Full-lifecycle skill packs | Reference scans, project initiation, source-of-truth documents, and implementation readiness before code. |
+| Full-lifecycle skill packs | Reference scans, project initiation, source-of-truth documents, implementation readiness before code, and bounded handoff to implementation discipline. |
+| Spec-driven tools | Repo-level source-of-truth priority, current-state doc distillation, and fallback when external spec tools are unavailable. |
 | Autonomous execution frameworks | User-confirmed decisions, one-question-at-a-time clarification, and explicit write or high-risk consent. |
 | Generic prompt collections | Reusable templates, stage routing, source-of-truth change gates, and local validation. |
 
-Use it as the primary router while the product shape is still forming. Pair it with mature lifecycle skills later for TDD, code review, security, performance, and launch.
+Use it as the primary router while the product shape or contracts are still forming. Pair it with mature lifecycle skills later for TDD, code review, security, performance, and launch. For bounded feature work inside approved docs, it should classify and hand off instead of restarting the whole project baseline.
 
 ## 🚫 What It Is Not
 
@@ -210,6 +215,15 @@ For vague ideas, it now uses four startup guardrails before writing files:
 
 During technology selection, it also uses a capability library scan gate: derive technical capabilities from the confirmed charter, research project-needed third-party libraries with direct links and maintenance evidence, then present the core stack plus included/deferred/rejected libraries for user confirmation.
 
+For existing projects, it uses four implementation paths:
+
+- Project Baseline Path: new project, missing core docs, stack decisions, or security/tool/deployment baseline.
+- Contract-Changing Feature Path: changes product behavior, frontend/API/database contracts, permissions, dependencies, deployment, tools, or operations.
+- Bounded Feature Path: stays inside approved source-of-truth contracts and can hand off to implementation discipline.
+- Local Fix Path: small bug fixes, copy/style tweaks, test fixes, code explanations, or single commands.
+
+Optional accelerators: Superpowers, OpenSpec, GitHub Spec Kit, issue trackers, and similar tools can strengthen the workflow. If they are unavailable, Agent Project Kit should not block; it falls back to the built-in clarify, Contract Impact Check, plan, implement, verify, and evidence workflow.
+
 Usage examples:
 
 ```text
@@ -228,6 +242,8 @@ Use $agent-project-kit to create root AGENTS.md and docs/ops/TOOL_POLICY.md for 
 Use $agent-project-kit to plan the backend skeleton and acceptance checklist.
 
 Use $agent-project-kit to review whether this backend is safe enough to deploy.
+
+Use $agent-project-kit to decide whether this feature is contract-changing or bounded before implementation.
 ```
 
 ## 🧯 Implementation Readiness Gate
@@ -258,6 +274,8 @@ For frontend work, `docs/architecture/FRONTEND_PLAN.md` must define the frontend
 
 It must also define the Product MVP UI Quality Gate: Design Read, design dials, design system tokens, UI component and icon strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification. MVP scope can be narrow, but the first page should still feel like a coherent product surface.
 
+When the project baseline has already passed, the agent first runs a Contract Impact Check. If the work is a Bounded Feature Path or Local Fix Path, it should use the Implementation Handoff rather than rerunning the full readiness process.
+
 ## 🧭 Source-of-Truth Change Gate
 
 When a later task changes design or contracts, the agent should update the original project document before implementation:
@@ -268,6 +286,16 @@ When a later task changes design or contracts, the agent should update the origi
 - Tables, fields, relations, indexes, enums, schemas, migrations, ownership, retention, or rollback: `docs/architecture/DATABASE_DESIGN.md`.
 
 OpenSpec, GitHub Spec Kit, issue specs, and chat plans can guide a change, but they do not replace the repo's source-of-truth docs unless the project explicitly says so.
+
+## 🧪 Source-of-Truth Distillation
+
+Core source-of-truth documents describe the current system contract, not the full history of how the project got there.
+
+- Stable feature behavior belongs in `docs/features/`.
+- One-change proposal, design notes, tasks, acceptance notes, and temporary context belong in `docs/changes/`.
+- Long-term product or architecture decisions belong in `docs/decisions/`.
+- Agent Project Kit process artifacts such as reference scans, capability scans, readiness audits, and handoffs belong in `docs/agent-project-kit/`.
+- Durable current contracts should be distilled back into the relevant core docs.
 
 ## 🎉 Goal And Completion Signal
 
@@ -315,8 +343,10 @@ The skill routes work through these stages:
 10. Tool permission matrix
 11. Deployment and AI workflow documents
 12. Implementation readiness audit before scaffolding or code
-13. First MVP slice implementation and verification
-14. Goal milestone signals and language-adaptive completion messages
+13. Contract Impact Check and Implementation Handoff for bounded work
+14. First MVP slice implementation and verification
+15. Source-of-truth distillation into current-state docs, feature notes, change notes, decisions, or Agent Project Kit process artifacts
+16. Goal milestone signals and language-adaptive completion messages
 
 ## 📁 Repository Layout
 
@@ -345,6 +375,10 @@ By default, generated project documents should not be dumped into the repository
     ├── architecture/FRONTEND_PLAN.md
     ├── architecture/DATABASE_DESIGN.md
     ├── architecture/BACKEND_SPEC.md
+    ├── features/<feature-name>.md
+    ├── changes/<date-or-id>-<change-name>.md
+    ├── decisions/ADR-<number>-<topic>.md
+    ├── agent-project-kit/PROCESS_ARTIFACTS.md
     ├── workflow/AI_WORKFLOW.md
     ├── ops/TOOL_POLICY.md
     └── ops/DEPLOYMENT.md
@@ -361,6 +395,10 @@ Copy templates into your project when the skill asks for stage artifacts:
 - `templates/docs/architecture/FRONTEND_PLAN.md`
 - `templates/docs/architecture/DATABASE_DESIGN.md`
 - `templates/docs/architecture/BACKEND_SPEC.md`
+- `templates/docs/features/FEATURE.md`
+- `templates/docs/changes/CHANGE.md`
+- `templates/docs/decisions/ADR.md`
+- `templates/docs/agent-project-kit/PROCESS_ARTIFACTS.md`
 - `templates/docs/workflow/AI_WORKFLOW.md`
 - `templates/docs/ops/TOOL_POLICY.md`
 - `templates/docs/ops/DEPLOYMENT.md`
@@ -375,6 +413,7 @@ python3 scripts/validate.py
 
 This checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, Product MVP baseline coverage, and Product MVP UI Quality Gate coverage.
 It also checks that initiation guardrails remain present: reference project scan, requirements depth, document consent, tech stack confirmation, and a generic domain-object clarification flow instead of a one-domain hardcoded branch.
+The validation also covers bounded-feature routing, optional workflow tool fallback, implementation handoff, source-of-truth distillation, and the feature/change/decision/process artifact template paths.
 
 ## 💡 Why This Exists
 

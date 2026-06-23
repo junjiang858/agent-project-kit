@@ -13,6 +13,8 @@ Use this reference for cognition calibration, project charter work, technology s
 - Technology choice should follow product shape, team capability, launch pressure, ecosystem maturity, documentation quality, security posture, and licensing.
 - Git is the rollback and comparison mechanism for fast AI edits; initialize it before meaningful implementation.
 - `PROJECT_CHARTER.md`, `TECH_STACK.md`, and `ENGINEERING_BASELINE.md` alone are not enough to begin a Product MVP scaffold when the project also has frontend, backend, database, tool execution, deployment, or AI workflow concerns.
+- External workflow tools such as Superpowers, OpenSpec, and GitHub Spec Kit are optional accelerators. Do not block project initiation if they are unavailable; document the fallback workflow in `docs/workflow/AI_WORKFLOW.md`.
+- Core source-of-truth documents should stay current-state. Put stable feature behavior in `docs/features/`, one-change detail in `docs/changes/`, long-term decisions in `docs/decisions/`, and Agent Project Kit process artifacts in `docs/agent-project-kit/`.
 
 ## Interaction Defaults
 
@@ -39,8 +41,9 @@ Use the user's current language for questions, confirmations, progress updates, 
 11. Define `docs/architecture/ENGINEERING_BASELINE.md` before implementation, again only after consent to write it.
 12. Define the remaining implementation-readiness documents before scaffolding: `AGENTS.md`, `docs/architecture/FRONTEND_PLAN.md`, `docs/architecture/DATABASE_DESIGN.md`, `docs/architecture/BACKEND_SPEC.md`, `docs/workflow/AI_WORKFLOW.md`, `docs/ops/TOOL_POLICY.md`, and `docs/ops/DEPLOYMENT.md` as applicable.
 13. Initialize Git, create the first documentation checkpoint, and define commit rules.
-14. Only after the readiness set is complete should the agent ask whether to scaffold or implement the first approved MVP slice.
-15. After implementation starts, keep the first deliverable narrow: one approved MVP slice with verification evidence. For web products this usually includes the first MVP page; for non-web projects it may be the first API, worker flow, CLI flow, automation run, or integration workflow.
+14. Establish document-lifespan rules for `docs/features/`, `docs/changes/`, `docs/decisions/`, and `docs/agent-project-kit/` so future work does not bloat current-state docs.
+15. Only after the readiness set is complete should the agent ask whether to scaffold or implement the first approved MVP slice.
+16. After implementation starts, keep the first deliverable narrow: one approved MVP slice with verification evidence. For web products this usually includes the first MVP page; for non-web projects it may be the first API, worker flow, CLI flow, automation run, or integration workflow.
 
 ## Guided Intake
 
@@ -141,8 +144,9 @@ Move in this order:
 9. Recommend exactly one technical route plus included/deferred/rejected third-party libraries, then get user confirmation before writing `docs/architecture/TECH_STACK.md`.
 10. After stack confirmation and document-write consent, move to root `AGENTS.md`, `docs/architecture/ENGINEERING_BASELINE.md`, and `docs/ops/TOOL_POLICY.md`.
 11. Before implementation, complete the project-specific readiness set: frontend plan for UI work, database design for persisted data, backend spec for API/service/tool execution, AI workflow for agent process, deployment plan for local or hosted runtime, and explicit security acceptance content for high-risk execution or secrets.
-12. When multiple readiness documents are missing, identify the current stage and explain which missing documents directly unblock the next stage. Offer plain-text options: a steady path for the single most important next document and an accelerated path for the named missing batch. Do not depend on UI buttons.
-13. Only then discuss first implementation planning for the first MVP slice.
+12. Document Optional Workflow Tool Fallback in `docs/workflow/AI_WORKFLOW.md` so unavailable Superpowers, OpenSpec, GitHub Spec Kit, or similar tools do not block progress.
+13. When multiple readiness documents are missing, identify the current stage and explain which missing documents directly unblock the next stage. Offer plain-text options: a steady path for the single most important next document and an accelerated path for the named missing batch. Do not depend on UI buttons.
+14. Only then discuss first implementation planning for the first MVP slice.
 
 If the user says "not sure", offer 2-3 concrete options and ask them to choose one.
 

@@ -21,6 +21,14 @@ Keep the repository root scannable. `AGENTS.md` stays at the root because agents
     │   ├── FRONTEND_PLAN.md
     │   ├── DATABASE_DESIGN.md
     │   └── BACKEND_SPEC.md
+    ├── features/
+    │   └── <feature-name>.md
+    ├── changes/
+    │   └── <date-or-id>-<change-name>.md
+    ├── decisions/
+    │   └── ADR-<number>-<topic>.md
+    ├── agent-project-kit/
+    │   └── PROCESS_ARTIFACTS.md
     ├── workflow/
     │   └── AI_WORKFLOW.md
     └── ops/
@@ -43,6 +51,18 @@ Use root `AGENTS.md` as a short index and operating contract:
 - Keep stable rules only.
 - Do not duplicate the full contents of `docs/architecture/TECH_STACK.md`, `docs/ops/TOOL_POLICY.md`, or specs.
 
+## Document Lifespan
+
+Keep current-state source-of-truth documents compact. They should describe the contract the project follows now, not the full history of every change.
+
+- Core source-of-truth documents under `docs/project/`, `docs/architecture/`, `docs/workflow/`, and `docs/ops/` hold current product, architecture, workflow, deployment, and tool contracts.
+- `docs/features/` holds stable feature behavior that is useful to find by feature name without bloating architecture documents.
+- `docs/changes/` holds one change's proposal, design notes, tasks, acceptance notes, and temporary implementation context.
+- `docs/decisions/` holds ADR-style long-term product or architecture decisions and rejected alternatives.
+- `docs/agent-project-kit/` holds Agent Project Kit process artifacts such as reference scans, capability scans, readiness audits, and handoffs.
+
+When a change finishes, distill only durable contract changes back into the core documents. Keep process-heavy detail in `docs/changes/` or archive it.
+
 ## Path Mapping
 
 | Artifact | Default path |
@@ -54,6 +74,10 @@ Use root `AGENTS.md` as a short index and operating contract:
 | Frontend plan | `docs/architecture/FRONTEND_PLAN.md` |
 | Database design | `docs/architecture/DATABASE_DESIGN.md` |
 | Backend spec | `docs/architecture/BACKEND_SPEC.md` |
+| Feature note | `docs/features/<feature-name>.md` |
+| Change note | `docs/changes/<date-or-id>-<change-name>.md` |
+| Architecture decision | `docs/decisions/ADR-<number>-<topic>.md` |
+| Agent Project Kit process artifacts | `docs/agent-project-kit/PROCESS_ARTIFACTS.md` or subfolders under `docs/agent-project-kit/` |
 | AI workflow | `docs/workflow/AI_WORKFLOW.md` |
 | Tool policy | `docs/ops/TOOL_POLICY.md` |
 | Deployment plan | `docs/ops/DEPLOYMENT.md` |
