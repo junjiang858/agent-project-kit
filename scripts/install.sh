@@ -24,6 +24,7 @@ copy_file "$ROOT_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
 copy_dir "$ROOT_DIR/agents" "$TARGET_DIR/agents"
 copy_dir "$ROOT_DIR/references" "$TARGET_DIR/references"
 copy_dir "$ROOT_DIR/templates" "$TARGET_DIR/templates"
+copy_dir "$ROOT_DIR/scripts" "$TARGET_DIR/scripts"
 
 printf 'Installed Agent Project Kit to %s\n' "$TARGET_DIR"
 printf 'Invoke it with: Use $agent-project-kit ...\n'

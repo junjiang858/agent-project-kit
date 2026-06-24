@@ -92,6 +92,7 @@ Agent Project Kit helps an agent:
 - Treat default stack choices as candidates, not mandates: repository shape, UI library, and icon library must be justified by product shape, design-system evidence, and real package boundaries.
 - Keep durable project facts under `docs/` instead of scattering them across chat history.
 - Route later work as Project Baseline, Contract-Changing Feature, Bounded Feature, or Local Fix so small changes do not rerun the full baseline.
+- Distinguish Engineering Baseline Ready, First MVP Slice Complete, MVP Scope Incomplete, Full MVP Scope Complete, and Release Ready so milestone messages do not blur together.
 - Require verification evidence instead of "trust me" completion claims.
 
 ## 🎯 When To Use It
@@ -162,6 +163,8 @@ Each project-level run starts by naming the target outcome, completion signal, a
 
 Baseline completion means the project purpose is confirmed, required source-of-truth documents are present or marked not applicable, readiness has passed, and the user has approved the result or next implementation step. First MVP slice completion means one approved product loop has been implemented and verified with fresh build, test, browser, API, CLI, worker, or run evidence.
 
+After the first slice, the skill uses MVP closure states: `MVP Scope Incomplete`, `Full MVP Scope Complete`, and `Release Ready`. The MVP Closure Sentinel runs only when triggered by completion, release, remaining-risk, or next-step questions, or before the agent claims full MVP or release readiness. Ordinary local fixes and code explanations do not run a fresh full-project closure audit.
+
 Completion messages are language-adaptive completion messages; they should match the user's current language.
 
 ```text
@@ -176,6 +179,20 @@ Completion messages are language-adaptive completion messages; they should match
 
 ✅ The first approved product loop has been implemented with run, build, browser, API, or task verification evidence.
 🚀 Next, you can expand the remaining pages, data flows, APIs, jobs, or deployment path.
+```
+
+```text
+🎉 MVP scope is complete!
+
+✅ The documented MVP scope has been implemented and verified with current evidence.
+🚀 Next, move into formal product development: release validation, architecture hardening, user feedback, and the next planned version.
+```
+
+```text
+🎉 Release validation passed!
+
+✅ The MVP scope, deployment environment, regression checks, security boundaries, and operational readiness are verified with current evidence.
+🚀 Next, release, monitor real usage, and plan post-release fixes and the next version.
 ```
 
 ## 💬 Mini Demo
@@ -224,12 +241,13 @@ Use Agent Project Kit as the primary router while the product shape or contracts
 
 ## 🛡️ Safety And Trust
 
-The install script copies only runtime skill files into the target directory:
+The install script copies runtime skill files and helper scripts into the target directory:
 
 - `SKILL.md`
 - `agents/`
 - `references/`
 - `templates/`
+- `scripts/`
 
 It does not install dependencies, scaffold an application, modify package manager files, run remote code, or change your project documents. Project documents and implementation files are created only when the user asks for them or approves the specific document/action through the skill workflow.
 
@@ -239,7 +257,7 @@ Run validation with:
 python3 scripts/validate.py
 ```
 
-The validator checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, Product MVP baseline coverage, Product MVP UI Quality Gate coverage, implementation handoff, source-of-truth distillation, and template paths.
+The validator checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, Product MVP baseline coverage, Product MVP UI Quality Gate coverage, MVP closure semantics, implementation handoff, source-of-truth distillation, and template paths.
 
 As with any skill or plugin, review the files before installing and test the workflow in your own environment before relying on it for critical work.
 
@@ -252,6 +270,7 @@ As with any skill or plugin, review the files before installing and test the wor
 ├── references/               # Stage-specific guidance loaded on demand
 ├── templates/                # Copyable project documents
 ├── examples/tiny-webapp/     # Small end-to-end example
+├── scripts/mvp_closure_snapshot.py # Cacheable MVP closure evidence snapshot
 ├── scripts/install.sh        # Local installer
 └── scripts/validate.py       # Repository validation
 ```
@@ -300,7 +319,7 @@ Copy templates into your project when the skill asks for stage artifacts:
 
 ## 🚫 What It Is Not
 
-- Not a CLI that analyzes your codebase.
+- Not a full autonomous codebase analyzer; the optional snapshot script only caches evidence for agent review.
 - Not a project management app.
 - Not a generic prompt dump.
 - Not a replacement for tests, review, Git discipline, or human product judgment.

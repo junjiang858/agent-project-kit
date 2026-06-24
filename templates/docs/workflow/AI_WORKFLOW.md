@@ -11,7 +11,8 @@
 7. If the task is a Bounded Feature Path or Local Fix Path, use the Implementation Handoff instead of rerunning the full project baseline.
 8. Implement the smallest useful change against the updated documents.
 9. Run checks.
-10. Report changed-doc summary and evidence.
+10. When the user asks whether the MVP is complete, what remains, whether release is safe, or what to do next after implementation, run an MVP closure audit before claiming completion.
+11. Report changed-doc summary and evidence.
 
 ## Contract Impact Check
 
@@ -62,6 +63,12 @@ If available and applicable, use them after protecting source-of-truth gates. If
 
 When implementation changes design or contracts, docs evidence must come before code evidence.
 When frontend implementation changes source tree, file responsibilities, component boundaries, state/config/i18n/utils ownership, or import boundaries, `docs/architecture/FRONTEND_PLAN.md` evidence must come before code evidence.
+
+## MVP Closure States
+
+- `MVP Scope Incomplete`: documented must-have scope, acceptance evidence, or blocking risks remain. Do not use a celebration message; report remaining risks and the next recommended action.
+- `Full MVP Scope Complete`: the documented MVP scope is implemented and verified with current evidence. Switch to Formal Product Development Mode: release validation, architecture hardening, user feedback, and next-version planning.
+- `Release Ready`: Full MVP Scope Complete plus deployment, environment, regression, security, rollback, and operational checks pass for the target release.
 
 ## Source-of-Truth Distillation
 

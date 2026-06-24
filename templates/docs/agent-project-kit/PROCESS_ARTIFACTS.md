@@ -7,6 +7,7 @@ Use this area for Agent Project Kit process artifacts that should not bloat curr
 - Reference project scans.
 - Capability library scans.
 - Implementation readiness audits.
+- MVP closure audits.
 - Contract Impact Check notes.
 - Implementation handoffs.
 - Session handoffs.

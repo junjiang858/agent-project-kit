@@ -16,6 +16,7 @@ REQUIRED_FILES = [
     "README.zh-CN.md",
     "LICENSE",
     "scripts/install.sh",
+    "scripts/mvp_closure_snapshot.py",
     "examples/tiny-webapp/README.md",
     "templates/AGENTS.md",
     "templates/docs/project/PROJECT_CHARTER.md",
@@ -45,6 +46,7 @@ REQUIRED_RUNTIME_REFERENCES = [
     "references/security.md",
     "references/tool-policy.md",
     "references/workflow-checklists.md",
+    "references/mvp-closure.md",
 ]
 
 
@@ -213,6 +215,57 @@ def check_default_stack_flexibility() -> None:
     for path, phrase in required_pairs:
         if phrase not in read(path):
             fail(f"{path} must include flexible stack rule: {phrase}")
+
+
+def check_mvp_closure_semantics() -> None:
+    required_pairs = [
+        ("SKILL.md", "MVP Scope Incomplete"),
+        ("SKILL.md", "Full MVP Scope Complete"),
+        ("SKILL.md", "Release Ready"),
+        ("SKILL.md", "Formal Product Development Mode"),
+        ("SKILL.md", "MVP Closure Sentinel"),
+        ("SKILL.md", "references/mvp-closure.md"),
+        ("SKILL.md", "🎉 MVP scope is complete"),
+        ("SKILL.md", "🎉 Release validation passed"),
+        ("SKILL.md", "🎉 文档定义的 MVP 范围已完成"),
+        ("SKILL.md", "🎉 发布验证已通过"),
+        ("SKILL.md", "Skip the closure audit for Local Fix Path"),
+        ("SKILL.md", "Store MVP closure audits"),
+        ("references/mvp-closure.md", "Trigger Policy"),
+        ("references/mvp-closure.md", "Required Inputs"),
+        ("references/mvp-closure.md", "Audit Steps"),
+        ("references/mvp-closure.md", "Common Risk Signals"),
+        ("references/mvp-closure.md", "Output Format"),
+        ("references/mvp-closure.md", "Cache And Process Artifacts"),
+        ("references/mvp-closure.md", "mock-only"),
+        ("references/mvp-closure.md", "production-unverified"),
+        ("references/mvp-closure.md", "deployment-gap"),
+        ("references/mvp-closure.md", "security-gap"),
+        ("references/mvp-closure.md", "doc-code-drift"),
+        ("references/mvp-closure.md", "missing-e2e"),
+        ("references/mvp-closure.md", "ux-unverified"),
+        ("references/workflow-checklists.md", "MVP Closure Prompt"),
+        ("references/workflow-checklists.md", "Formal Product Development Mode"),
+        ("templates/docs/workflow/AI_WORKFLOW.md", "MVP Closure States"),
+        ("templates/docs/workflow/AI_WORKFLOW.md", "Full MVP Scope Complete"),
+        ("templates/docs/agent-project-kit/PROCESS_ARTIFACTS.md", "MVP closure audits"),
+        ("scripts/mvp_closure_snapshot.py", "mvp-closure-status.md"),
+        ("scripts/mvp_closure_snapshot.py", "references/mvp-closure.md"),
+        ("scripts/install.sh", 'copy_dir "$ROOT_DIR/scripts" "$TARGET_DIR/scripts"'),
+        ("README.md", "MVP Closure Sentinel"),
+        ("README.md", "Full MVP Scope Complete"),
+        ("README.md", "Release Ready"),
+        ("README.md", "🎉 MVP scope is complete"),
+        ("README.md", "🎉 Release validation passed"),
+        ("README.zh-CN.md", "MVP Closure Sentinel"),
+        ("README.zh-CN.md", "Full MVP Scope Complete"),
+        ("README.zh-CN.md", "Release Ready"),
+        ("README.zh-CN.md", "🎉 文档定义的 MVP 范围已完成"),
+        ("README.zh-CN.md", "🎉 发布验证已通过"),
+    ]
+    for path, phrase in required_pairs:
+        if phrase not in read(path):
+            fail(f"{path} must include MVP closure semantic: {phrase}")
 
 
 def check_workflow_priority_and_confirmation() -> None:
@@ -473,6 +526,7 @@ def main() -> None:
     check_product_mvp_baseline()
     check_product_mvp_ui_quality_gate()
     check_default_stack_flexibility()
+    check_mvp_closure_semantics()
     check_workflow_priority_and_confirmation()
     print("Repository validation passed.")
 

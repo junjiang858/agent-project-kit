@@ -46,6 +46,16 @@ For the common "create/start this project" flow, the default target outcome is: 
 1. Project engineering baseline ready.
 2. First MVP slice accepted with evidence.
 
+Beyond the first slice, use explicit lifecycle states instead of treating every positive audit as the same kind of "done":
+
+| State | Meaning | Output behavior |
+| --- | --- | --- |
+| Engineering Baseline Ready | The project purpose, technical route, core source-of-truth documents, readiness gate, and required security/tool/deployment boundaries are ready for implementation. | Use the project engineering baseline readiness message. |
+| First MVP Slice Complete | One approved, user-verifiable product loop has been implemented and checked with fresh evidence. | Use the first MVP slice completion message. |
+| MVP Scope Incomplete | A closure audit found missing must-have scope, acceptance evidence, or blocking risk against the source-of-truth documents. | Do not celebrate; append remaining risks and a next step recommendation. |
+| Full MVP Scope Complete | The documented MVP scope is implemented, current evidence covers the required acceptance criteria, and no blocking risk remains unless the user explicitly accepts it. | Use the MVP scope completion message and switch to Formal Product Development Mode. |
+| Release Ready | Full MVP Scope Complete plus deployment, environment, security, regression, rollback, and operational checks are validated for the requested release target. | Use the release validation message and recommend release, monitoring, and post-release follow-up. |
+
 The project engineering baseline milestone is achieved when:
 
 - Project purpose is confirmed.
@@ -101,6 +111,67 @@ English example:
 ✅ The first approved product loop has been implemented with run, build, browser, API, or task verification evidence.
 🚀 Next, you can expand the remaining pages, data flows, APIs, jobs, or deployment path.
 ```
+
+The Full MVP Scope Complete milestone is achieved only after the agent checks the current implementation against the MVP scope, must-have features, non-goals, acceptance criteria, and risks in the source-of-truth documents. It is broader than the first MVP slice and narrower than Release Ready.
+
+A Full MVP Scope Complete result must include:
+
+- Coverage of the documented MVP must-have scope and objective acceptance criteria.
+- Fresh implementation evidence such as build, test, browser, API, CLI, worker, deployment preview, or run logs.
+- Explicit separation of blocking risks from accepted non-blocking risks.
+- No unresolved mock-only, production-unverified, deployment, security, or document-code drift blocker unless the user accepts it as outside the MVP release decision.
+
+Chinese example:
+
+```text
+🎉 文档定义的 MVP 范围已完成！
+
+✅ 当前实现已经覆盖真源文档定义的 MVP 范围，并提供了新的验证证据。
+🚀 下一步进入正式项目发展：发布验证、架构加固、用户反馈和下一版本规划。
+```
+
+English example:
+
+```text
+🎉 MVP scope is complete!
+
+✅ The documented MVP scope has been implemented and verified with current evidence.
+🚀 Next, move into formal product development: release validation, architecture hardening, user feedback, and the next planned version.
+```
+
+Release Ready is achieved only after Full MVP Scope Complete and a release validation pass for the target environment.
+
+Chinese example:
+
+```text
+🎉 发布验证已通过！
+
+✅ MVP 范围、部署环境、回归检查、安全边界和运营准备已经通过当前证据验证。
+🚀 下一步可以发布、监控真实使用情况，并规划发布后的修复和下一版本。
+```
+
+English example:
+
+```text
+🎉 Release validation passed!
+
+✅ The MVP scope, deployment environment, regression checks, security boundaries, and operational readiness are verified with current evidence.
+🚀 Next, release, monitor real usage, and plan post-release fixes and the next version.
+```
+
+When Full MVP Scope Complete is reached, do not close this skill. Stop treating the project as an MVP construction task and switch to Formal Product Development Mode: preserve and evolve the approved architecture, route new work through Contract Impact Check, update source-of-truth documents only when product, architecture, API, data, permissions, deployment, or operations change, run release validation for production requests, and plan post-MVP work through roadmap, features, ADRs, quality hardening, operations, and user feedback.
+
+### MVP Closure Sentinel
+
+Use `references/mvp-closure.md` for detailed MVP closure audit rules when the user asks whether the MVP is complete, asks what remains, asks whether the project can be released, asks for current risks or next steps after implementation, or when the agent is about to claim Full MVP Scope Complete or Release Ready.
+
+To avoid slowing ordinary replies:
+
+- Skip the closure audit for Local Fix Path, code explanation, single-command requests, and non-project-level questions.
+- Use only the cached or recent closure result for ordinary project-level final suggestions unless the user asks for a fresh audit or the current task may close a documented must-have item.
+- Run a synchronous closure audit before saying Full MVP Scope Complete or Release Ready.
+- After implementation work, append a short next step recommendation when the closure result is incomplete, stale, or newly complete; do not interrupt the main answer with a long audit unless the user asked for it.
+- Store MVP closure audits and cache snapshots under `docs/agent-project-kit/` or `.agent-project-kit/cache/` when the project allows process artifacts.
 
 ## Default Workflow Priority
 
@@ -354,6 +425,7 @@ Before declaring a first frontend MVP slice complete, verify that the page prove
 | Need whole-project flow, default stack, or reusable prompt pack | `references/workflow-checklists.md` | roadmap, docs checklist, default workflow docs |
 | User asks to create the project, scaffold the app, or start implementation | `references/workflow-checklists.md`, then the missing stage references | implementation readiness audit before any code |
 | Existing baseline and bounded feature or local fix | `references/workflow-checklists.md`, then affected source-of-truth docs | Contract Impact Check, implementation handoff, verification evidence |
+| User asks whether MVP is complete, what remains, whether release is safe, or asks for post-implementation next steps | `references/mvp-closure.md`, then relevant source-of-truth docs | MVP closure audit, lifecycle state, remaining risks, and next step recommendation |
 | Feature/change detail would bloat current-state docs | `references/document-layout.md`, affected stage references | `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/` placement |
 
 ## Execution Flow
@@ -374,8 +446,9 @@ Before declaring a first frontend MVP slice complete, verify that the page prove
 14. For Bounded Feature Path or Local Fix Path after readiness has passed, use the Implementation Handoff instead of rerunning the full project baseline.
 15. Produce the smallest useful approved stage artifact: plan, document, checklist, matrix, skeleton, or acceptance report. After creating or updating any readiness document, rerun the readiness audit summary in the final response; when multiple readiness documents remain, end with the two plain-text options rather than a single "next document" suggestion.
 16. For implementation work, preserve Git checkpoints and return evidence: updated source-of-truth documents when design changed, commands run, tests, build, browser/API checks, or security proof.
-17. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
-18. When a Goal Contract milestone is genuinely satisfied, say so explicitly. Provide the project engineering baseline congratulatory message at the baseline milestone, and provide the first MVP slice congratulatory message only after the approved slice is implemented and verified with fresh evidence.
+17. Use the MVP Closure Sentinel only when triggered. Do not make ordinary questions slower by rereading the whole project when a cached closure result or no closure result is sufficient.
+18. For high-risk operations involving production data, secrets, deployment, payments, cloud resources, database writes, or destructive file changes, stop and request explicit confirmation.
+19. When a Goal Contract milestone is genuinely satisfied, say so explicitly. Provide the project engineering baseline congratulatory message at the baseline milestone, the first MVP slice congratulatory message after the approved slice is implemented and verified, the MVP scope completion message only after the closure audit passes, and the release validation message only after release checks pass.
 
 ## Required Artifacts
 
@@ -394,7 +467,7 @@ When a `templates/` directory is available, copy and adapt its matching template
 - `docs/features/<feature-name>.md`: stable feature behavior that should be easy to find without bloating current-state architecture docs.
 - `docs/changes/<date-or-id>-<change-name>.md`: one change's proposal, design notes, tasks, acceptance notes, and temporary implementation context.
 - `docs/decisions/ADR-<number>-<topic>.md`: long-term product or architecture decisions and rejected alternatives.
-- `docs/agent-project-kit/`: Agent Project Kit process artifacts such as reference scans, capability scans, readiness audits, and handoffs.
+- `docs/agent-project-kit/`: Agent Project Kit process artifacts such as reference scans, capability scans, readiness audits, MVP closure audits, and handoffs.
 
 These artifacts are not all required for every tiny task, but they are required before implementation when the project contains the corresponding surface. Do not treat `PROJECT_CHARTER.md`, `TECH_STACK.md`, and `ENGINEERING_BASELINE.md` alone as enough to start a Product MVP scaffold with frontend, backend, database, tool execution, or deployment concerns.
 
@@ -421,6 +494,7 @@ These artifacts are not all required for every tiny task, but they are required 
 | Rerunning the whole baseline for a bounded feature | Run the Contract Impact Check, then use the Implementation Handoff when no contract changes are needed. |
 | Requiring Superpowers or OpenSpec when they are unavailable | Use Optional Workflow Tool Fallback unless the user explicitly made that tool the primary workflow. |
 | Turning source-of-truth docs into change journals | Distill current contracts into core docs and keep feature/change/process detail in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`. |
+| Treating first MVP slice, full MVP scope, and release readiness as the same status | Use the lifecycle states and the MVP Closure Sentinel before claiming Full MVP Scope Complete or Release Ready. |
 
 ## Source Notes
 

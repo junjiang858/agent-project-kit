@@ -27,6 +27,8 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 21. Product MVP UI quality checked when the slice includes frontend UI.
 22. Source-of-truth distillation into current-state docs, `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`.
 23. First MVP slice completion signal with evidence.
+24. MVP closure audit when the user asks whether the full documented MVP scope is complete, what remains, whether release is safe, or what to do next.
+25. Formal Product Development Mode after Full MVP Scope Complete.
 
 ## Interaction Defaults
 
@@ -85,6 +87,8 @@ For a new Product MVP, the default goal is: first MVP slice accepted after the p
 
 1. Project engineering baseline ready: the agent has clarified the project, created or confirmed the required source-of-truth documents, passed the implementation readiness audit, and received user confirmation to proceed.
 2. First MVP slice complete: the agent has implemented one approved, user-verifiable product slice and returned fresh verification evidence.
+
+After the first slice, use explicit lifecycle states: `MVP Scope Incomplete`, `Full MVP Scope Complete`, and `Release Ready`. Do not treat first MVP slice completion, full documented MVP completion, and release readiness as the same status.
 
 Do not say the goal is complete just because a single document exists. Say the goal is complete only when the readiness gate has passed or the narrower user-specified goal has its completion evidence.
 
@@ -295,6 +299,12 @@ If the change is bounded by existing approved contracts, state that it is a Boun
 
 ```text
 Before continuing, state the current goal, the completion signal, and the next action. For a new Product MVP, use two milestones by default: project engineering baseline ready, then first MVP slice complete with evidence. When a milestone is satisfied, explicitly say so. If the project engineering baseline is ready, finish with the language-adaptive baseline message. If the first MVP slice is implemented and verified, finish with the language-adaptive first MVP slice message.
+```
+
+## MVP Closure Prompt
+
+```text
+Audit whether the current implementation satisfies the full documented MVP scope. Read the relevant source-of-truth documents, especially PROJECT_CHARTER.md and any frontend, backend, database, deployment, workflow, tool, or security docs that define MVP obligations. Classify each must-have and acceptance criterion as Met, Partially met, Missing, Deferred/non-goal, or Accepted risk. Classify remaining risks as blocking, non-blocking, or needing a user decision. Return one lifecycle state: MVP Scope Incomplete, Full MVP Scope Complete, or Release Ready. If incomplete, do not use a celebration message; end with remaining risks and one next step recommendation. If Full MVP Scope Complete, say the documented MVP scope is complete and recommend Formal Product Development Mode: release validation, architecture hardening, user feedback, and the next planned version. If Release Ready, include deployment, environment, regression, security, rollback, and operations evidence.
 ```
 
 ## Testing Scripts Prompt
