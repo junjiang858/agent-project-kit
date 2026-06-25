@@ -18,11 +18,11 @@
 
 ## Design Dials
 
-| Dial | Value | Rationale |
-| --- | --- | --- |
-| Design variance |  |  |
-| Motion intensity |  |  |
-| Visual density |  |  |
+| Dial             | Value | Rationale |
+| ---------------- | ----- | --------- |
+| Design variance  |       |           |
+| Motion intensity |       |           |
+| Visual density   |       |           |
 
 Rules:
 
@@ -45,8 +45,8 @@ Rules:
 ## Page Map
 
 | Route or screen | Goal | Primary action | Data needed | States |
-| --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+| --------------- | ---- | -------------- | ----------- | ------ |
+|                 |      |                |             |        |
 
 ## First MVP Page
 
@@ -62,8 +62,8 @@ Rules:
 ## Component Map
 
 | Component | Purpose | Owner layer or folder | Reuse scope | State owned |
-| --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+| --------- | ------- | --------------------- | ----------- | ----------- |
+|           |         |                       |             |             |
 
 ## Frontend Architecture
 
@@ -86,22 +86,22 @@ Document the approved frontend file structure before implementation. Mark which 
 
 ## File Boundary Contract
 
-| Concern | Approved location | Notes |
-| --- | --- | --- |
-| App boot entry |  |  |
-| Route/page files |  |  |
-| App shell and providers |  |  |
-| Shared UI primitives |  |  |
-| Business/domain components |  |  |
-| Feature or workflow components |  |  |
-| Data/API clients or mocks |  |  |
-| Local or global stores |  |  |
-| Config, constants, tokens |  |  |
-| i18n messages |  |  |
-| Icons |  |  |
-| Assets/media |  |  |
-| Utilities and browser adapters |  |  |
-| Global styles |  |  |
+| Concern                        | Approved location | Notes |
+| ------------------------------ | ----------------- | ----- |
+| App boot entry                 |                   |       |
+| Route/page files               |                   |       |
+| App shell and providers        |                   |       |
+| Shared UI primitives           |                   |       |
+| Business/domain components     |                   |       |
+| Feature or workflow components |                   |       |
+| Data/API clients or mocks      |                   |       |
+| Local or global stores         |                   |       |
+| Config, constants, tokens      |                   |       |
+| i18n messages                  |                   |       |
+| Icons                          |                   |       |
+| Assets/media                   |                   |       |
+| Utilities and browser adapters |                   |       |
+| Global styles                  |                   |       |
 
 Rules:
 
@@ -150,17 +150,17 @@ Rules:
 ## State And Interaction Contract
 
 | State or interaction | Pattern | Components affected | Notes |
-| --- | --- | --- | --- |
-| Loading |  |  |  |
-| Empty |  |  |  |
-| Error |  |  |  |
-| Success |  |  |  |
-| Disabled |  |  |  |
-| Validating or saving |  |  |  |
-| Selected or editing |  |  |  |
-| Destructive action |  |  |  |
-| Focus and keyboard |  |  |  |
-| Hover, active, touch |  |  |  |
+| -------------------- | ------- | ------------------- | ----- |
+| Loading              |         |                     |       |
+| Empty                |         |                     |       |
+| Error                |         |                     |       |
+| Success              |         |                     |       |
+| Disabled             |         |                     |       |
+| Validating or saving |         |                     |       |
+| Selected or editing  |         |                     |       |
+| Destructive action   |         |                     |       |
+| Focus and keyboard   |         |                     |       |
+| Hover, active, touch |         |                     |       |
 
 Rules:
 

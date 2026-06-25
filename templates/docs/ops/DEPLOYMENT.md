@@ -3,16 +3,16 @@
 ## Environments
 
 | Environment | Purpose | URL or command | Notes |
-| --- | --- | --- | --- |
-| Local |  |  |  |
-| Staging |  |  |  |
-| Production |  |  |  |
+| ----------- | ------- | -------------- | ----- |
+| Local       |         |                |       |
+| Staging     |         |                |       |
+| Production  |         |                |       |
 
 ## Environment Variables
 
 | Name | Required | Scope | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| ---- | -------- | ----- | ----- |
+|      |          |       |       |
 
 ## Deployment Flow
 

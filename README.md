@@ -97,31 +97,31 @@ Agent Project Kit helps an agent:
 
 ## 🎯 When To Use It
 
-| Situation | Use Agent Project Kit to |
-| --- | --- |
-| Vague product idea | Ask one question at a time, scan references, choose an MVP direction, and confirm the project purpose. |
-| New repo or missing baseline | Create source-of-truth docs, tool rules, stack decisions, and readiness checks before implementation. |
-| Stack or library choice | Compare one main route, rejected alternatives, capability libraries, maintenance evidence, and migration risks. |
-| Contract-Changing Feature Path | Update affected source-of-truth docs before code changes. |
-| Bounded Feature Path | Confirm the work stays inside approved contracts, then hand off to normal implementation discipline. |
-| Local Fix Path | Avoid the full baseline flow and use the lightest direct path. |
+| Situation                      | Use Agent Project Kit to                                                                                        |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Vague product idea             | Ask one question at a time, scan references, choose an MVP direction, and confirm the project purpose.          |
+| New repo or missing baseline   | Create source-of-truth docs, tool rules, stack decisions, and readiness checks before implementation.           |
+| Stack or library choice        | Compare one main route, rejected alternatives, capability libraries, maintenance evidence, and migration risks. |
+| Contract-Changing Feature Path | Update affected source-of-truth docs before code changes.                                                       |
+| Bounded Feature Path           | Confirm the work stays inside approved contracts, then hand off to normal implementation discipline.            |
+| Local Fix Path                 | Avoid the full baseline flow and use the lightest direct path.                                                  |
 
 ## 📦 What You Get
 
 The skill helps the agent create and maintain project source-of-truth files such as:
 
-| Artifact | Purpose |
-| --- | --- |
-| `AGENTS.md` | Project-level agent constitution and index into source-of-truth docs. |
-| `docs/project/PROJECT_CHARTER.md` | Users, problem, MVP scope, workflows, domain objects, risks, and acceptance criteria. |
-| `docs/architecture/TECH_STACK.md` | One chosen stack, rejected alternatives, migration cost, production compatibility, and re-evaluation rules. |
-| `docs/architecture/ENGINEERING_BASELINE.md` | Scripts, quality gates, tests, migrations, environment rules, and commit discipline. |
-| `docs/architecture/FRONTEND_PLAN.md` | Page map, Design Read, Product MVP UI Quality Gate, design system, component boundaries, and browser UI verification. |
-| `docs/architecture/DATABASE_DESIGN.md` | Domain objects, tables, fields, relations, indexes, migrations, ownership, and rollback notes. |
-| `docs/architecture/BACKEND_SPEC.md` | API contracts, permissions, backend workflows, integrations, data flow, and error handling. |
-| `docs/workflow/AI_WORKFLOW.md` | Clarify, spec, plan, implement, verify, and archive workflow. |
-| `docs/ops/TOOL_POLICY.md` | Default tools, project-specific tools, and high-risk confirmation gates. |
-| `docs/ops/DEPLOYMENT.md` | Local, staging, production, environment variables, health checks, and rollback. |
+| Artifact                                                                        | Purpose                                                                                                                       |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `AGENTS.md`                                                                     | Project-level agent constitution and index into source-of-truth docs.                                                         |
+| `docs/project/PROJECT_CHARTER.md`                                               | Users, problem, MVP scope, workflows, domain objects, risks, and acceptance criteria.                                         |
+| `docs/architecture/TECH_STACK.md`                                               | One chosen stack, rejected alternatives, migration cost, production compatibility, and re-evaluation rules.                   |
+| `docs/architecture/ENGINEERING_BASELINE.md`                                     | Scripts, quality gates, tests, migrations, environment rules, and commit discipline.                                          |
+| `docs/architecture/FRONTEND_PLAN.md`                                            | Page map, Design Read, Product MVP UI Quality Gate, design system, component boundaries, and browser UI verification.         |
+| `docs/architecture/DATABASE_DESIGN.md`                                          | Domain objects, tables, fields, relations, indexes, migrations, ownership, and rollback notes.                                |
+| `docs/architecture/BACKEND_SPEC.md`                                             | API contracts, permissions, backend workflows, integrations, data flow, and error handling.                                   |
+| `docs/workflow/AI_WORKFLOW.md`                                                  | Clarify, spec, plan, implement, verify, and archive workflow.                                                                 |
+| `docs/ops/TOOL_POLICY.md`                                                       | Default tools, project-specific tools, and high-risk confirmation gates.                                                      |
+| `docs/ops/DEPLOYMENT.md`                                                        | Local, staging, production, environment variables, health checks, and rollback.                                               |
 | `docs/features/`, `docs/changes/`, `docs/decisions/`, `docs/agent-project-kit/` | Stable feature notes, one-change detail, long-term decisions, and process artifacts that should not bloat current-state docs. |
 
 ## ⚙️ How It Works
@@ -215,27 +215,27 @@ Agent: Got it. I will use that direction, then clarify who uses it and which fir
 
 Agent Project Kit is not a generic prompt collection. It focuses on the governing layer around AI implementation:
 
-| Capability | What this skill adds |
-| --- | --- |
-| Stage routing | The agent loads only the reference needed for the current phase. |
-| Reference grounding | Vague ideas are compared against concrete projects with direct links before requirements are narrowed. |
-| Stack discipline | Technology choices include one main route, rejected alternatives, capability libraries, maintenance evidence, and re-evaluation rules. |
-| User control | Source-of-truth docs, stack decisions, and high-risk operations require explicit confirmation. |
-| Frontend quality | Product MVP work requires a Design Read, design system tokens, state contracts, anti-slop guardrails, and browser verification. |
-| Source-of-truth maintenance | Durable current contracts stay in core docs; feature, change, decision, and process detail is routed to dedicated directories. |
-| Language adaptation | Questions, confirmations, progress updates, and completion messages match the user's current language. |
-| Local validation | `scripts/validate.py` checks required files, reference routing, context budget, reference contents, migrated rule coverage, guardrails, templates, README links, and markdown fences. |
+| Capability                  | What this skill adds                                                                                                                                                                  |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Stage routing               | The agent loads only the reference needed for the current phase.                                                                                                                      |
+| Reference grounding         | Vague ideas are compared against concrete projects with direct links before requirements are narrowed.                                                                                |
+| Stack discipline            | Technology choices include one main route, rejected alternatives, capability libraries, maintenance evidence, and re-evaluation rules.                                                |
+| User control                | Source-of-truth docs, stack decisions, and high-risk operations require explicit confirmation.                                                                                        |
+| Frontend quality            | Product MVP work requires a Design Read, design system tokens, state contracts, anti-slop guardrails, and browser verification.                                                       |
+| Source-of-truth maintenance | Durable current contracts stay in core docs; feature, change, decision, and process detail is routed to dedicated directories.                                                        |
+| Language adaptation         | Questions, confirmations, progress updates, and completion messages match the user's current language.                                                                                |
+| Local validation            | `scripts/validate.py` checks required files, reference routing, context budget, reference contents, migrated rule coverage, guardrails, templates, README links, and markdown fences. |
 
 ## 🧭 Compared With Similar Projects
 
-| Compared with | Common emphasis | Agent Project Kit emphasis |
-| --- | --- | --- |
-| OpenAI/Codex skills model | Reusable workflows packaged as `SKILL.md` plus optional scripts, references, assets, and progressive disclosure. | A specific project-governance workflow built on that model. |
-| `anthropics/skills` | Reference implementations that demonstrate many skill patterns and file-processing workflows. | A focused operating system for AI-assisted software project baselines. |
-| `addyosmani/agent-skills` and other lifecycle packs | Spec, plan, build, test, review, security, performance, and ship discipline. | Upstream project clarity, source-of-truth docs, implementation readiness, contract-change routing, and bounded handoff. |
-| OpenSpec, GitHub Spec Kit, issue specs | Change proposals, specs, tasks, archival, and implementation tracking. | Repo-level current-state source-of-truth priority and fallback when external spec tools are unavailable. |
-| Autonomous execution frameworks | More continuous agent execution after approval. | User-confirmed decisions, one-question-at-a-time clarification, and explicit write or high-risk consent. |
-| Generic prompt collections | Reusable prompts and role instructions. | Templates, references, stage routing, document gates, and repository validation. |
+| Compared with                                       | Common emphasis                                                                                                  | Agent Project Kit emphasis                                                                                              |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| OpenAI/Codex skills model                           | Reusable workflows packaged as `SKILL.md` plus optional scripts, references, assets, and progressive disclosure. | A specific project-governance workflow built on that model.                                                             |
+| `anthropics/skills`                                 | Reference implementations that demonstrate many skill patterns and file-processing workflows.                    | A focused operating system for AI-assisted software project baselines.                                                  |
+| `addyosmani/agent-skills` and other lifecycle packs | Spec, plan, build, test, review, security, performance, and ship discipline.                                     | Upstream project clarity, source-of-truth docs, implementation readiness, contract-change routing, and bounded handoff. |
+| OpenSpec, GitHub Spec Kit, issue specs              | Change proposals, specs, tasks, archival, and implementation tracking.                                           | Repo-level current-state source-of-truth priority and fallback when external spec tools are unavailable.                |
+| Autonomous execution frameworks                     | More continuous agent execution after approval.                                                                  | User-confirmed decisions, one-question-at-a-time clarification, and explicit write or high-risk consent.                |
+| Generic prompt collections                          | Reusable prompts and role instructions.                                                                          | Templates, references, stage routing, document gates, and repository validation.                                        |
 
 Use Agent Project Kit as the primary router while the product shape or contracts are still forming. Pair it with mature lifecycle skills later for TDD, code review, security, performance, and launch.
 

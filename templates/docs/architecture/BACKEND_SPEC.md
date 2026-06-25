@@ -7,20 +7,20 @@
 ## Business Rules
 
 | Rule | Enforced where | Failure behavior |
-| --- | --- | --- |
-|  |  |  |
+| ---- | -------------- | ---------------- |
+|      |                |                  |
 
 ## API Contracts
 
 | Method | Path | Input | Output | Errors |
-| --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+| ------ | ---- | ----- | ------ | ------ |
+|        |      |       |        |        |
 
 ## Data Flow
 
 | API | Reads | Writes | Notes |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| --- | ----- | ------ | ----- |
+|     |       |        |       |
 
 ## Auth And Permissions
 

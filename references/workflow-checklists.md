@@ -62,12 +62,12 @@ Use the user's current language for questions, confirmations, progress updates, 
 
 Use the lightest path that protects the project:
 
-| Path | Use when | Required behavior |
-| --- | --- | --- |
-| Project Baseline Path | New project, missing core documents, technology stack choice, engineering baseline, security/tool/deployment setup. | Run staged clarification, reference scan, capability scan, document consent, and readiness gates before implementation. |
-| Contract-Changing Feature Path | Feature or fix changes product behavior, frontend/API/database contracts, permissions, dependencies, deployment, tools, or operations. | Update affected current-state source-of-truth documents before implementation. |
-| Bounded Feature Path | Approved baseline exists and the work stays inside documented contracts. | Read relevant docs, state that no source-of-truth update is needed, then hand off to implementation discipline. |
-| Local Fix Path | Small bug fix, copy/style tweak, test fix, code explanation, single command, or other local task. | Skip the project baseline flow and use debugging, TDD, verification, or direct command execution. |
+| Path                           | Use when                                                                                                                               | Required behavior                                                                                                       |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Project Baseline Path          | New project, missing core documents, technology stack choice, engineering baseline, security/tool/deployment setup.                    | Run staged clarification, reference scan, capability scan, document consent, and readiness gates before implementation. |
+| Contract-Changing Feature Path | Feature or fix changes product behavior, frontend/API/database contracts, permissions, dependencies, deployment, tools, or operations. | Update affected current-state source-of-truth documents before implementation.                                          |
+| Bounded Feature Path           | Approved baseline exists and the work stays inside documented contracts.                                                               | Read relevant docs, state that no source-of-truth update is needed, then hand off to implementation discipline.         |
+| Local Fix Path                 | Small bug fix, copy/style tweak, test fix, code explanation, single command, or other local task.                                      | Skip the project baseline flow and use debugging, TDD, verification, or direct command execution.                       |
 
 ## Contract Impact Check
 
@@ -275,43 +275,43 @@ After implementation, distill only durable results back into core current-state 
 
 ## Common Mistakes
 
-| Mistake | Correction |
-| --- | --- |
-| Asking AI to code before scope is clear | Create or update the project charter first. |
-| Listing vague competitor categories during initiation | Run a Reference Project Scan Gate with project name, direct link, lessons, cautions, and direction choices. |
-| Planning implementation before confirming project purpose | Summarize the target user, problem, product role, and MVP; wait for user confirmation. |
-| Confirming a stack without library research | Run a Capability Library Scan Gate and review project-needed third-party libraries with links, maintenance evidence, and include/defer/reject decisions. |
-| Starting a scaffold after only a charter, stack, and engineering baseline | Run the Project Specification Readiness Gate and create frontend, database, backend, workflow, tool policy, deployment, and Agent rule documents as applicable before implementation. |
-| Treating frontend directory structure as cleanup after code generation | Define the frontend engineering contract in `docs/architecture/FRONTEND_PLAN.md` before writing UI code, then implement against it. |
-| Putting UI, config, messages, state, icons, mock data, and utilities into one route or app file | Split code by route composition, shared UI, business components, config, i18n, state, assets, and capability-scoped utilities. |
-| Treating default stack suggestions as mandatory | Use defaults as candidates; document why the project needs a single package, workspace, UI library, icon library, backend, or database before locking it. |
-| Letting code, migrations, or APIs become the first record of a design change | Update the original source-of-truth document first, then implement against it. |
-| Rerunning the whole baseline for a bounded feature | Run the Contract Impact Check, then use the Implementation Handoff when no contract changes are needed. |
-| Turning source-of-truth docs into change journals | Distill current contracts into core docs and keep feature/change/process detail in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`. |
-| Treating first MVP slice, full MVP scope, and release readiness as the same status | Use lifecycle states and the MVP Closure Sentinel before claiming Full MVP Scope Complete or Release Ready. |
+| Mistake                                                                                         | Correction                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Asking AI to code before scope is clear                                                         | Create or update the project charter first.                                                                                                                                           |
+| Listing vague competitor categories during initiation                                           | Run a Reference Project Scan Gate with project name, direct link, lessons, cautions, and direction choices.                                                                           |
+| Planning implementation before confirming project purpose                                       | Summarize the target user, problem, product role, and MVP; wait for user confirmation.                                                                                                |
+| Confirming a stack without library research                                                     | Run a Capability Library Scan Gate and review project-needed third-party libraries with links, maintenance evidence, and include/defer/reject decisions.                              |
+| Starting a scaffold after only a charter, stack, and engineering baseline                       | Run the Project Specification Readiness Gate and create frontend, database, backend, workflow, tool policy, deployment, and Agent rule documents as applicable before implementation. |
+| Treating frontend directory structure as cleanup after code generation                          | Define the frontend engineering contract in `docs/architecture/FRONTEND_PLAN.md` before writing UI code, then implement against it.                                                   |
+| Putting UI, config, messages, state, icons, mock data, and utilities into one route or app file | Split code by route composition, shared UI, business components, config, i18n, state, assets, and capability-scoped utilities.                                                        |
+| Treating default stack suggestions as mandatory                                                 | Use defaults as candidates; document why the project needs a single package, workspace, UI library, icon library, backend, or database before locking it.                             |
+| Letting code, migrations, or APIs become the first record of a design change                    | Update the original source-of-truth document first, then implement against it.                                                                                                        |
+| Rerunning the whole baseline for a bounded feature                                              | Run the Contract Impact Check, then use the Implementation Handoff when no contract changes are needed.                                                                               |
+| Turning source-of-truth docs into change journals                                               | Distill current contracts into core docs and keep feature/change/process detail in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`.                |
+| Treating first MVP slice, full MVP scope, and release readiness as the same status              | Use lifecycle states and the MVP Closure Sentinel before claiming Full MVP Scope Complete or Release Ready.                                                                           |
 
 ## Default Product MVP Stack
 
 Use as a default for ordinary individual or small-team web products unless project constraints justify another route. Product MVP means narrow feature scope, not a disposable foundation.
 
-| Layer | Default | Role |
-| --- | --- | --- |
-| Repository | Single package or workspace, chosen from real boundaries | one deployable frontend app can stay single-package; use `apps/*` and `packages/*` only for real app/shared-package ownership |
-| Frontend | Next.js + TypeScript | pages, routing, SSR/full-stack entry |
-| Styling | Tailwind CSS | consistent styling constraints |
-| UI | shadcn/ui or project-approved design-system strategy | readable, editable defaults; replace when design source or platform conventions justify it |
-| Icons | lucide-react or project-approved icon family | consistent icon language; replace when Figma/Stitch/brand/system icons are the real baseline |
-| Charts | Recharts or Apache ECharts | business charts and advanced visualization |
-| Backend | NestJS for independent APIs; Next.js route handlers/server actions for same-app light backend | modules, APIs, services, permission and validation boundaries |
-| Database | PostgreSQL or Supabase/Postgres | relational data, auth/storage acceleration when needed |
-| Migrations | Prisma or Drizzle migrations | schema evolution, rollback planning, team visibility |
-| Frontend deploy | Vercel | Next.js-friendly deployment |
-| Backend deploy | Railway, Render, Fly.io, or Docker | Node service hosting and operations control |
-| Quality | ESLint, Prettier, EditorConfig, TypeScript, CI | repeatable code quality |
-| Checks | pnpm check, pnpm test, pnpm build, Vitest, React Testing Library, Playwright | quality gate, unit, component, and browser evidence |
-| AI discipline | Superpowers or built-in fallback | clarify, plan, implement, verify; Superpowers is optional, not a hard dependency |
-| Spec management | OpenSpec, GitHub Spec Kit, or repo docs | durable requirements, design, tasks, acceptance; external spec tools are optional inputs unless explicitly primary |
-| AI app SDK | Vercel AI SDK, OpenAI Agents SDK, LangGraph, Dify, n8n | chat, agents, workflows, automation by scenario |
+| Layer           | Default                                                                                       | Role                                                                                                                          |
+| --------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Repository      | Single package or workspace, chosen from real boundaries                                      | one deployable frontend app can stay single-package; use `apps/*` and `packages/*` only for real app/shared-package ownership |
+| Frontend        | Next.js + TypeScript                                                                          | pages, routing, SSR/full-stack entry                                                                                          |
+| Styling         | Tailwind CSS                                                                                  | consistent styling constraints                                                                                                |
+| UI              | shadcn/ui or project-approved design-system strategy                                          | readable, editable defaults; replace when design source or platform conventions justify it                                    |
+| Icons           | lucide-react or project-approved icon family                                                  | consistent icon language; replace when Figma/Stitch/brand/system icons are the real baseline                                  |
+| Charts          | Recharts or Apache ECharts                                                                    | business charts and advanced visualization                                                                                    |
+| Backend         | NestJS for independent APIs; Next.js route handlers/server actions for same-app light backend | modules, APIs, services, permission and validation boundaries                                                                 |
+| Database        | PostgreSQL or Supabase/Postgres                                                               | relational data, auth/storage acceleration when needed                                                                        |
+| Migrations      | Prisma or Drizzle migrations                                                                  | schema evolution, rollback planning, team visibility                                                                          |
+| Frontend deploy | Vercel                                                                                        | Next.js-friendly deployment                                                                                                   |
+| Backend deploy  | Railway, Render, Fly.io, or Docker                                                            | Node service hosting and operations control                                                                                   |
+| Quality         | ESLint, Prettier, EditorConfig, TypeScript, CI                                                | repeatable code quality                                                                                                       |
+| Checks          | pnpm check, pnpm test, pnpm build, Vitest, React Testing Library, Playwright                  | quality gate, unit, component, and browser evidence                                                                           |
+| AI discipline   | Superpowers or built-in fallback                                                              | clarify, plan, implement, verify; Superpowers is optional, not a hard dependency                                              |
+| Spec management | OpenSpec, GitHub Spec Kit, or repo docs                                                       | durable requirements, design, tasks, acceptance; external spec tools are optional inputs unless explicitly primary            |
+| AI app SDK      | Vercel AI SDK, OpenAI Agents SDK, LangGraph, Dify, n8n                                        | chat, agents, workflows, automation by scenario                                                                               |
 
 Rule: mature technology reduces AI error rate; workflow discipline constrains execution; tests, browser checks, API checks, builds, and deploy logs form the evidence chain. Defaults are candidates, not mandates: repository shape, UI library, and icon library must be justified by product shape, design-system evidence, implementation boundaries, and migration cost.
 

@@ -18,25 +18,25 @@
 
 ## 时间线总览
 
-| 时间 | 会话或证据 | 问题关键 | 解决结果 | 证据 |
-| --- | --- | --- | --- | --- |
-| 2026-06-16 | Git 初始提交 | 需要把 AI 编程项目启动经验做成 skill | 建立初版 playbook、references 和 agent 配置 | `8b3c0ec`, `8ad7a63` |
-| 2026-06-16 | Git 提交 | skill 需要可发布、可安装、可校验 | 增加 README、LICENSE、安装脚本、validate、CI 和模板 | `781af8b`, `ecfc936`, `b07a177` |
-| 2026-06-17 | Git 提交 | 文档布局和 Product MVP 基线不足 | 建立 `templates/docs/...`、document layout、工程基线、架构基线 | `08095b0` |
-| 2026-06-21 | 了解工具作用 `019ee8ca-d2e9-7733-b196-4cf5d5cd26a3` | workflow 优先级和项目作用确认缺失 | 增加默认主流程优先级、Project Purpose Confirmation 和校验 | `61f1029` |
-| 2026-06-21 | 优化 skill 流程 `019ee8e2-b1c6-7801-9f93-e5cde12c2f4f` | PRD 深度不足、未获同意就写文档、README 公共化不足 | 强化立项门禁、安装示例、README 和完成提示 | `2ed6e44`, `843b18d`, `034fb34` |
-| 2026-06-21 | 确认规范文档同步 `019ee92f-0143-7711-add4-8d169f7d5a50` | 实现变更可能不回写真源文档，提示语不随用户语言变化 | 增加 Source-of-Truth Change Gate 和语言自适应完成提示 | `910582d` |
-| 2026-06-21 | 优化项目阶段引导 `019ee95c-31d9-7383-abbe-d76fe2a48942` | 目标只停在工程基线，不区分首个 MVP 切片 | 增加工程基线 ready 和 First MVP Slice 两阶段目标 | `490477d` |
-| 2026-06-21 | 添加同类项目调研 `019eeabd-e6bf-71c2-8eaf-d7a27f78ad00` | 只细化用户 idea，缺少具体参考项目和能力库扫描 | 增加 Reference Project Scan Gate 和 Capability Library Scan Gate | `490477d` |
-| 2026-06-22 | 分析快速推进缺失原因 `019eeb07-0209-7e93-b29b-721902e99d62` | 快速推进选项丢失，确认依赖 UI，语言不自适应 | 增加 Steady/Accelerated path、文字确认兜底、用户语言规则 | `77d7268` |
-| 2026-06-22 | 规范 skill 代码结构 `019eee70-34f4-7072-b3c4-7733beb3ca56` | 首版代码容易把 UI/config/i18n/utils 塞进单文件 | 增加前端工程化契约和组件拆分规则 | `08184be` |
-| 2026-06-22 | 制定MVP页面设计规范 `019eee8d-4a71-73e0-8a84-1190cdc67ed0` | MVP 页面 UI/UX/design system 粗糙，快速推进可能跳过 UI 门禁 | 增加 Product MVP UI Quality Gate | `0eb0495` |
-| 2026-06-22 至 2026-06-23 | 审查 skill 实现规范 `019eef9d-61fa-7c21-9f05-db3d7174ed57` | 默认栈、UI 库、图标库、仓库结构写得太硬 | 把默认技术栈改为上下文候选，增加 repository shape 规则 | `9bb85ab` |
-| 2026-06-23 | 规划 skill 文档目录、分析 Skill 与插件重叠关系 `019ef385-6f09-7ee3-a787-e188e8e512d1`, `019ef38a-08ac-7b53-878b-807c76901439` | 和 Superpowers/OpenSpec 重叠，功能开发被拉回重流程，文档长期膨胀 | 增加四条任务路径、fallback、handoff 和文档蒸馏目录 | `ebcd95e` |
-| 2026-06-23 | 评估 skill README 质量 `019ef3c1-0574-7fc0-b9d6-291c39981302` | README 太像完整手册，Quick Start 靠后，首页展示不够成熟 | 重组 README，增加 hero、badge、导航和更轻的信息架构 | `cdcf032` |
-| 2026-06-24 | 设计异步MVP风险检测 `019ef8ad-c16a-7fb1-991e-31b07e0d1f61` | MVP 完成、完整范围完成、发布就绪混在一起，检测可能拖慢普通问答 | 增加 MVP closure 生命周期和快照脚本 | `b6705ca` |
-| 2026-06-24 至 2026-06-25 | 审阅 skill 膨胀与 token `019ef8dd-8a37-7711-b05f-77cf3e46b6f9` | `SKILL.md` 膨胀，读取 token 成本高，瘦身后规则可能丢失 | 把入口瘦身为 router，细节迁移到 references，并用 validate 保证覆盖 | `d04037e` |
-| 2026-06-25 | 分析两个文件夹作用 `019efd1a-21b8-7d71-846e-0b7dffbf2857` | 当前仓库迁移到 `github/` 后，旧 Codex 会话路径可能失效 | 直接迁移项目，保留 git 历史，但提醒旧会话工作目录可能断开 | C 级会话证据 |
+| 时间                      | 会话或证据                                                                                                         | 问题关键                                         | 解决结果                                                          | 证据                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------- | ------------------------------- |
+| 2026-06-16              | Git 初始提交                                                                                                      | 需要把 AI 编程项目启动经验做成 skill                      | 建立初版 playbook、references 和 agent 配置                           | `8b3c0ec`, `8ad7a63`            |
+| 2026-06-16              | Git 提交                                                                                                        | skill 需要可发布、可安装、可校验                          | 增加 README、LICENSE、安装脚本、validate、CI 和模板                        | `781af8b`, `ecfc936`, `b07a177` |
+| 2026-06-17              | Git 提交                                                                                                        | 文档布局和 Product MVP 基线不足                       | 建立 `templates/docs/...`、document layout、工程基线、架构基线             | `08095b0`                       |
+| 2026-06-21              | 了解工具作用 `019ee8ca-d2e9-7733-b196-4cf5d5cd26a3`                                                                 | workflow 优先级和项目作用确认缺失                        | 增加默认主流程优先级、Project Purpose Confirmation 和校验                   | `61f1029`                       |
+| 2026-06-21              | 优化 skill 流程 `019ee8e2-b1c6-7801-9f93-e5cde12c2f4f`                                                            | PRD 深度不足、未获同意就写文档、README 公共化不足               | 强化立项门禁、安装示例、README 和完成提示                                      | `2ed6e44`, `843b18d`, `034fb34` |
+| 2026-06-21              | 确认规范文档同步 `019ee92f-0143-7711-add4-8d169f7d5a50`                                                               | 实现变更可能不回写真源文档，提示语不随用户语言变化                    | 增加 Source-of-Truth Change Gate 和语言自适应完成提示                     | `910582d`                       |
+| 2026-06-21              | 优化项目阶段引导 `019ee95c-31d9-7383-abbe-d76fe2a48942`                                                               | 目标只停在工程基线，不区分首个 MVP 切片                       | 增加工程基线 ready 和 First MVP Slice 两阶段目标                          | `490477d`                       |
+| 2026-06-21              | 添加同类项目调研 `019eeabd-e6bf-71c2-8eaf-d7a27f78ad00`                                                               | 只细化用户 idea，缺少具体参考项目和能力库扫描                    | 增加 Reference Project Scan Gate 和 Capability Library Scan Gate | `490477d`                       |
+| 2026-06-22              | 分析快速推进缺失原因 `019eeb07-0209-7e93-b29b-721902e99d62`                                                             | 快速推进选项丢失，确认依赖 UI，语言不自适应                      | 增加 Steady/Accelerated path、文字确认兜底、用户语言规则                      | `77d7268`                       |
+| 2026-06-22              | 规范 skill 代码结构 `019eee70-34f4-7072-b3c4-7733beb3ca56`                                                          | 首版代码容易把 UI/config/i18n/utils 塞进单文件           | 增加前端工程化契约和组件拆分规则                                              | `08184be`                       |
+| 2026-06-22              | 制定MVP页面设计规范 `019eee8d-4a71-73e0-8a84-1190cdc67ed0`                                                            | MVP 页面 UI/UX/design system 粗糙，快速推进可能跳过 UI 门禁 | 增加 Product MVP UI Quality Gate                                | `0eb0495`                       |
+| 2026-06-22 至 2026-06-23 | 审查 skill 实现规范 `019eef9d-61fa-7c21-9f05-db3d7174ed57`                                                          | 默认栈、UI 库、图标库、仓库结构写得太硬                        | 把默认技术栈改为上下文候选，增加 repository shape 规则                          | `9bb85ab`                       |
+| 2026-06-23              | 规划 skill 文档目录、分析 Skill 与插件重叠关系 `019ef385-6f09-7ee3-a787-e188e8e512d1`, `019ef38a-08ac-7b53-878b-807c76901439` | 和 Superpowers/OpenSpec 重叠，功能开发被拉回重流程，文档长期膨胀  | 增加四条任务路径、fallback、handoff 和文档蒸馏目录                             | `ebcd95e`                       |
+| 2026-06-23              | 评估 skill README 质量 `019ef3c1-0574-7fc0-b9d6-291c39981302`                                                     | README 太像完整手册，Quick Start 靠后，首页展示不够成熟        | 重组 README，增加 hero、badge、导航和更轻的信息架构                            | `cdcf032`                       |
+| 2026-06-24              | 设计异步MVP风险检测 `019ef8ad-c16a-7fb1-991e-31b07e0d1f61`                                                            | MVP 完成、完整范围完成、发布就绪混在一起，检测可能拖慢普通问答            | 增加 MVP closure 生命周期和快照脚本                                      | `b6705ca`                       |
+| 2026-06-24 至 2026-06-25 | 审阅 skill 膨胀与 token `019ef8dd-8a37-7711-b05f-77cf3e46b6f9`                                                     | `SKILL.md` 膨胀，读取 token 成本高，瘦身后规则可能丢失         | 把入口瘦身为 router，细节迁移到 references，并用 validate 保证覆盖               | `d04037e`                       |
+| 2026-06-25              | 分析两个文件夹作用 `019efd1a-21b8-7d71-846e-0b7dffbf2857`                                                              | 当前仓库迁移到 `github/` 后，旧 Codex 会话路径可能失效         | 直接迁移项目，保留 git 历史，但提醒旧会话工作目录可能断开                               | C 级会话证据                         |
 
 ## 阶段复盘
 

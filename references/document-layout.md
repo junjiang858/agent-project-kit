@@ -74,22 +74,22 @@ When a change finishes, distill only durable contract changes back into the core
 
 ## Path Mapping
 
-| Artifact | Default path |
-| --- | --- |
-| Agent constitution | `AGENTS.md` |
-| Project charter | `docs/project/PROJECT_CHARTER.md` |
-| Tech stack | `docs/architecture/TECH_STACK.md` |
-| Engineering baseline | `docs/architecture/ENGINEERING_BASELINE.md` |
-| Frontend plan | `docs/architecture/FRONTEND_PLAN.md` |
-| Database design | `docs/architecture/DATABASE_DESIGN.md` |
-| Backend spec | `docs/architecture/BACKEND_SPEC.md` |
-| Feature note | `docs/features/<feature-name>.md` |
-| Change note | `docs/changes/<date-or-id>-<change-name>.md` |
-| Architecture decision | `docs/decisions/ADR-<number>-<topic>.md` |
+| Artifact                            | Default path                                                                                |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| Agent constitution                  | `AGENTS.md`                                                                                 |
+| Project charter                     | `docs/project/PROJECT_CHARTER.md`                                                           |
+| Tech stack                          | `docs/architecture/TECH_STACK.md`                                                           |
+| Engineering baseline                | `docs/architecture/ENGINEERING_BASELINE.md`                                                 |
+| Frontend plan                       | `docs/architecture/FRONTEND_PLAN.md`                                                        |
+| Database design                     | `docs/architecture/DATABASE_DESIGN.md`                                                      |
+| Backend spec                        | `docs/architecture/BACKEND_SPEC.md`                                                         |
+| Feature note                        | `docs/features/<feature-name>.md`                                                           |
+| Change note                         | `docs/changes/<date-or-id>-<change-name>.md`                                                |
+| Architecture decision               | `docs/decisions/ADR-<number>-<topic>.md`                                                    |
 | Agent Project Kit process artifacts | `docs/agent-project-kit/PROCESS_ARTIFACTS.md` or subfolders under `docs/agent-project-kit/` |
-| AI workflow | `docs/workflow/AI_WORKFLOW.md` |
-| Tool policy | `docs/ops/TOOL_POLICY.md` |
-| Deployment plan | `docs/ops/DEPLOYMENT.md` |
+| AI workflow                         | `docs/workflow/AI_WORKFLOW.md`                                                              |
+| Tool policy                         | `docs/ops/TOOL_POLICY.md`                                                                   |
+| Deployment plan                     | `docs/ops/DEPLOYMENT.md`                                                                    |
 
 ## Migration Rule
 

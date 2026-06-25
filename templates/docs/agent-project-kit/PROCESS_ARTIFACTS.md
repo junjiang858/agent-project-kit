@@ -15,8 +15,8 @@ Use this area for Agent Project Kit process artifacts that should not bloat curr
 ## Current Artifacts
 
 | Date | Artifact | Related docs | Status |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| ---- | -------- | ------------ | ------ |
+|      |          |              |        |
 
 ## Distillation Rule
 

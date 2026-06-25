@@ -96,8 +96,8 @@ The scan must include 3-7 specific projects, products, repositories, plugins, te
 Required output shape:
 
 | Project | Direct link | Source type | What to borrow | What not to copy blindly | Direction impact |
-| --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |
+| ------- | ----------- | ----------- | -------------- | ------------------------ | ---------------- |
+|         |             |             |                |                          |                  |
 
 Rules:
 

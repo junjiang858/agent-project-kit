@@ -53,12 +53,12 @@ Do not declare a milestone complete just because a document was written. Complet
 
 Use the lightest path that protects the project:
 
-| Path | Use when | Minimum behavior |
-| --- | --- | --- |
-| Project Baseline Path | New project, project reorganization, missing core documents, technology stack choice, engineering baseline, security, tool, or deployment boundary setup. | Run staged clarification, reference scan, capability scan, document consent, and readiness gates before implementation. |
-| Contract-Changing Feature Path | A feature or fix changes product behavior, routes, UI states, component responsibilities, API contracts, data shape, permissions, dependencies, deployment, tool permissions, or operations. | Run the Contract Impact Check, update affected source-of-truth documents first, then implement. |
-| Bounded Feature Path | Baseline exists and the work stays inside approved source-of-truth contracts. | Read relevant docs, state no source-of-truth update is needed, then use the Implementation Handoff. |
-| Local Fix Path | Small bug fix, copy/style tweak, test fix, code explanation, single command, or local task that does not change product or engineering contracts. | Skip the project baseline flow and use the lightest direct engineering method. |
+| Path                           | Use when                                                                                                                                                                                     | Minimum behavior                                                                                                        |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Project Baseline Path          | New project, project reorganization, missing core documents, technology stack choice, engineering baseline, security, tool, or deployment boundary setup.                                    | Run staged clarification, reference scan, capability scan, document consent, and readiness gates before implementation. |
+| Contract-Changing Feature Path | A feature or fix changes product behavior, routes, UI states, component responsibilities, API contracts, data shape, permissions, dependencies, deployment, tool permissions, or operations. | Run the Contract Impact Check, update affected source-of-truth documents first, then implement.                         |
+| Bounded Feature Path           | Baseline exists and the work stays inside approved source-of-truth contracts.                                                                                                                | Read relevant docs, state no source-of-truth update is needed, then use the Implementation Handoff.                     |
+| Local Fix Path                 | Small bug fix, copy/style tweak, test fix, code explanation, single command, or local task that does not change product or engineering contracts.                                            | Skip the project baseline flow and use the lightest direct engineering method.                                          |
 
 Before treating work as bounded, run the Contract Impact Check from `references/workflow-checklists.md`.
 
@@ -86,23 +86,23 @@ When multiple readiness documents are missing, offer exactly two plain-text opti
 
 Read the matching reference before giving stage instructions or editing project files:
 
-| User situation | Load | Primary output |
-| --- | --- | --- |
-| Creating or reorganizing project source-of-truth documents | `references/document-layout.md` | root `AGENTS.md` index plus docs under `docs/` |
-| Vague idea, unsure what AI can do, or first project | `references/project-initiation.md` | clarified problem, reference scan, MVP boundary, project charter |
-| Choosing stack, repository setup, version safety | `references/project-initiation.md`, `references/architecture-baseline.md` | tech stack decision, architecture track, Git checkpoint rule |
-| Defining quality gates, scripts, CI, migrations, env, or repo hygiene | `references/engineering-baseline.md` | engineering baseline and acceptance checklist |
-| Need project-level rules, AGENTS.md, or reusable process | `references/engineering-rules.md` | Agent constitution and candidate skill workflow |
-| Planning pages, UX states, components, frontend skeleton | `references/frontend.md` | page map, component map, frontend skeleton plan |
-| Designing tables, fields, relations, migrations | `references/database.md` | database design document |
-| Defining APIs, backend business boundaries, backend skeleton, architecture acceptance | `references/backend.md` | backend business spec, minimal backend skeleton, acceptance report |
-| Checking backend safety, secrets, logs, dependencies, database risk | `references/security.md` | security boundary table and bottom-layer security evidence |
-| Deciding which tools or MCPs AI may use | `references/tool-policy.md` | `docs/ops/TOOL_POLICY.md` or tool permission matrix |
-| Need whole-project flow, default stack, or reusable prompt pack | `references/workflow-checklists.md` | roadmap, docs checklist, default workflow docs |
-| User asks to create the project, scaffold the app, or start implementation | `references/workflow-checklists.md`, then missing stage references | implementation readiness audit before any code |
-| Existing baseline and bounded feature or local fix | `references/workflow-checklists.md`, then affected source-of-truth docs | Contract Impact Check, Implementation Handoff, verification evidence |
-| User asks whether MVP is complete, what remains, whether release is safe, or asks for post-implementation next steps | `references/mvp-closure.md`, then relevant source-of-truth docs | MVP closure audit, lifecycle state, remaining risks, next step recommendation |
-| Feature/change detail would bloat current-state docs | `references/document-layout.md`, affected stage references | placement in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/` |
+| User situation                                                                                                       | Load                                                                      | Primary output                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Creating or reorganizing project source-of-truth documents                                                           | `references/document-layout.md`                                           | root `AGENTS.md` index plus docs under `docs/`                                                  |
+| Vague idea, unsure what AI can do, or first project                                                                  | `references/project-initiation.md`                                        | clarified problem, reference scan, MVP boundary, project charter                                |
+| Choosing stack, repository setup, version safety                                                                     | `references/project-initiation.md`, `references/architecture-baseline.md` | tech stack decision, architecture track, Git checkpoint rule                                    |
+| Defining quality gates, scripts, CI, migrations, env, or repo hygiene                                                | `references/engineering-baseline.md`                                      | engineering baseline and acceptance checklist                                                   |
+| Need project-level rules, AGENTS.md, or reusable process                                                             | `references/engineering-rules.md`                                         | Agent constitution and candidate skill workflow                                                 |
+| Planning pages, UX states, components, frontend skeleton                                                             | `references/frontend.md`                                                  | page map, component map, frontend skeleton plan                                                 |
+| Designing tables, fields, relations, migrations                                                                      | `references/database.md`                                                  | database design document                                                                        |
+| Defining APIs, backend business boundaries, backend skeleton, architecture acceptance                                | `references/backend.md`                                                   | backend business spec, minimal backend skeleton, acceptance report                              |
+| Checking backend safety, secrets, logs, dependencies, database risk                                                  | `references/security.md`                                                  | security boundary table and bottom-layer security evidence                                      |
+| Deciding which tools or MCPs AI may use                                                                              | `references/tool-policy.md`                                               | `docs/ops/TOOL_POLICY.md` or tool permission matrix                                             |
+| Need whole-project flow, default stack, or reusable prompt pack                                                      | `references/workflow-checklists.md`                                       | roadmap, docs checklist, default workflow docs                                                  |
+| User asks to create the project, scaffold the app, or start implementation                                           | `references/workflow-checklists.md`, then missing stage references        | implementation readiness audit before any code                                                  |
+| Existing baseline and bounded feature or local fix                                                                   | `references/workflow-checklists.md`, then affected source-of-truth docs   | Contract Impact Check, Implementation Handoff, verification evidence                            |
+| User asks whether MVP is complete, what remains, whether release is safe, or asks for post-implementation next steps | `references/mvp-closure.md`, then relevant source-of-truth docs           | MVP closure audit, lifecycle state, remaining risks, next step recommendation                   |
+| Feature/change detail would bloat current-state docs                                                                 | `references/document-layout.md`, affected stage references                | placement in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/` |
 
 ## Execution Flow
 

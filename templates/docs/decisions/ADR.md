@@ -15,8 +15,8 @@ What did the project choose?
 ## Alternatives Considered
 
 | Option | Reason accepted or rejected |
-| --- | --- |
-|  |  |
+| ------ | --------------------------- |
+|        |                             |
 
 ## Consequences
 

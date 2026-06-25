@@ -12,8 +12,8 @@
 - Selected direction after reviewing references:
 
 | Project | Direct link | Source type | What to borrow | What not to copy blindly | Direction impact |
-| --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |
+| ------- | ----------- | ----------- | -------------- | ------------------------ | ---------------- |
+|         |             |             |                |                          |                  |
 
 ## Product Definition
 
@@ -71,20 +71,20 @@
 ### Core Objects
 
 | Object | Why it exists | Owner |
-| --- | --- | --- |
-|  |  |  |
+| ------ | ------------- | ----- |
+|        |               |       |
 
 ### Operations And States
 
 | Object or workflow | User operation | Important states | Evidence or history |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| ------------------ | -------------- | ---------------- | ------------------- |
+|                    |                |                  |                     |
 
 ### External Systems And Resources
 
 | System or resource | Purpose | Boundary or risk |
-| --- | --- | --- |
-|  |  |  |
+| ------------------ | ------- | ---------------- |
+|                    |         |                  |
 
 ## Rules And Permissions
 
@@ -96,8 +96,8 @@
 ## Risks
 
 | Risk | Impact | Mitigation |
-| --- | --- | --- |
-|  |  |  |
+| ---- | ------ | ---------- |
+|      |        |            |
 
 ## Acceptance Criteria
 

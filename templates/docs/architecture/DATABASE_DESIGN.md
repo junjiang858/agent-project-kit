@@ -3,28 +3,28 @@
 ## Core Objects
 
 | Object | Purpose | Owner |
-| --- | --- | --- |
-|  |  |  |
+| ------ | ------- | ----- |
+|        |         |       |
 
 ## Tables
 
 ### table_name
 
-| Field | Type | Required | Default | Notes |
-| --- | --- | --- | --- | --- |
-| id |  | yes |  | primary key |
+| Field | Type | Required | Default | Notes       |
+| ----- | ---- | -------- | ------- | ----------- |
+| id    |      | yes      |         | primary key |
 
 ## Relationships
 
-| From | To | Type | Reason |
-| --- | --- | --- | --- |
-|  |  |  |  |
+| From | To  | Type | Reason |
+| ---- | --- | ---- | ------ |
+|      |     |      |        |
 
 ## Indexes
 
 | Table | Fields | Query reason |
-| --- | --- | --- |
-|  |  |  |
+| ----- | ------ | ------------ |
+|       |        |              |
 
 ## Security Notes
 

@@ -259,7 +259,7 @@ def check_default_stack_flexibility() -> None:
         ("references/workflow-checklists.md", "Defaults are candidates, not mandates"),
         ("references/workflow-checklists.md", "UI library, and icon library must be justified"),
         ("templates/docs/architecture/TECH_STACK.md", "Repository shape rationale"),
-        ("templates/docs/architecture/TECH_STACK.md", "| Icons |"),
+        ("templates/docs/architecture/TECH_STACK.md", "Icons"),
         ("templates/docs/architecture/TECH_STACK.md", "UI/icon/repository choices that may be replaced with approval"),
         ("templates/docs/architecture/FRONTEND_PLAN.md", "UI library rationale"),
         ("templates/docs/architecture/FRONTEND_PLAN.md", "Icon library rationale"),

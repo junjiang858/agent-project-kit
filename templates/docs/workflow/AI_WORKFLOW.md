@@ -53,13 +53,13 @@ If available and applicable, use them after protecting source-of-truth gates. If
 
 ## Evidence by Work Type
 
-| Work type | Evidence |
-| --- | --- |
-| Docs | changed files and decision summary |
-| Frontend | build/check output and browser verification |
-| Backend | tests, health check, API sample |
-| Database | schema/migration diff and rollback note |
-| Security | risk table, code locations, verification |
+| Work type | Evidence                                    |
+| --------- | ------------------------------------------- |
+| Docs      | changed files and decision summary          |
+| Frontend  | build/check output and browser verification |
+| Backend   | tests, health check, API sample             |
+| Database  | schema/migration diff and rollback note     |
+| Security  | risk table, code locations, verification    |
 
 When implementation changes design or contracts, docs evidence must come before code evidence.
 When frontend implementation changes source tree, file responsibilities, component boundaries, state/config/i18n/utils ownership, or import boundaries, `docs/architecture/FRONTEND_PLAN.md` evidence must come before code evidence.

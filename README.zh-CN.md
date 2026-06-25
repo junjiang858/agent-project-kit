@@ -97,32 +97,32 @@ Agent Project Kit 会帮助 Agent：
 
 ## 🎯 什么时候用
 
-| 场景 | Agent Project Kit 会帮助你 |
-| --- | --- |
-| 模糊产品想法 | 一次问一个问题、扫描参考项目、选择 MVP 方向、确认项目目的。 |
-| 新仓库或基线缺失 | 在实现前创建真源文档、工具规则、技术栈决策和就绪检查。 |
-| 技术栈或第三方库选择 | 对比唯一主路线、拒绝的备选方案、能力库、维护证据和迁移风险。 |
-| Contract-Changing Feature Path | 先更新受影响的真源文档，再进入代码实现。 |
-| Bounded Feature Path | 确认任务处在已批准契约范围内，然后交接给正常实现纪律。 |
-| Local Fix Path | 不跑完整基线流程，使用最轻量的直接路径。 |
+| 场景                             | Agent Project Kit 会帮助你           |
+| ------------------------------ | -------------------------------- |
+| 模糊产品想法                         | 一次问一个问题、扫描参考项目、选择 MVP 方向、确认项目目的。 |
+| 新仓库或基线缺失                       | 在实现前创建真源文档、工具规则、技术栈决策和就绪检查。      |
+| 技术栈或第三方库选择                     | 对比唯一主路线、拒绝的备选方案、能力库、维护证据和迁移风险。   |
+| Contract-Changing Feature Path | 先更新受影响的真源文档，再进入代码实现。             |
+| Bounded Feature Path           | 确认任务处在已批准契约范围内，然后交接给正常实现纪律。      |
+| Local Fix Path                 | 不跑完整基线流程，使用最轻量的直接路径。             |
 
 ## 📦 你会得到什么
 
 这个 skill 会帮助 Agent 创建和维护这些项目真源文档：
 
-| 产物 | 用途 |
-| --- | --- |
-| `AGENTS.md` | 项目级 Agent 宪法和真源文档索引。 |
-| `docs/project/PROJECT_CHARTER.md` | 用户、问题、MVP 范围、核心流程、领域对象、风险和验收标准。 |
-| `docs/architecture/TECH_STACK.md` | 唯一技术栈、拒绝的备选方案、迁移成本、生产兼容性和重新评估规则。 |
-| `docs/architecture/ENGINEERING_BASELINE.md` | 脚本、质量门禁、测试、迁移、环境规则和提交纪律。 |
-| `docs/architecture/FRONTEND_PLAN.md` | 页面地图、设计判断、Product MVP UI 质量门禁、设计系统、组件边界和浏览器 UI 验证。 |
-| `docs/architecture/DATABASE_DESIGN.md` | 领域对象、数据表、字段、关系、索引、migration、归属和回滚说明。 |
-| `docs/architecture/BACKEND_SPEC.md` | API 契约、权限、后端流程、集成、数据流和错误处理。 |
-| `docs/workflow/AI_WORKFLOW.md` | 澄清、规格、计划、实现、验证和归档流程。 |
-| `docs/ops/TOOL_POLICY.md` | 默认工具、项目专用工具和高风险确认门禁。 |
-| `docs/ops/DEPLOYMENT.md` | 本地、预发、生产、环境变量、健康检查和回滚。 |
-| `docs/features/`、`docs/changes/`、`docs/decisions/`、`docs/agent-project-kit/` | 稳定功能说明、单次变更细节、长期决策，以及不应塞进当前状态文档的过程产物。 |
+| 产物                                                                           | 用途                                                 |
+| ---------------------------------------------------------------------------- | -------------------------------------------------- |
+| `AGENTS.md`                                                                  | 项目级 Agent 宪法和真源文档索引。                               |
+| `docs/project/PROJECT_CHARTER.md`                                            | 用户、问题、MVP 范围、核心流程、领域对象、风险和验收标准。                    |
+| `docs/architecture/TECH_STACK.md`                                            | 唯一技术栈、拒绝的备选方案、迁移成本、生产兼容性和重新评估规则。                   |
+| `docs/architecture/ENGINEERING_BASELINE.md`                                  | 脚本、质量门禁、测试、迁移、环境规则和提交纪律。                           |
+| `docs/architecture/FRONTEND_PLAN.md`                                         | 页面地图、设计判断、Product MVP UI 质量门禁、设计系统、组件边界和浏览器 UI 验证。 |
+| `docs/architecture/DATABASE_DESIGN.md`                                       | 领域对象、数据表、字段、关系、索引、migration、归属和回滚说明。               |
+| `docs/architecture/BACKEND_SPEC.md`                                          | API 契约、权限、后端流程、集成、数据流和错误处理。                        |
+| `docs/workflow/AI_WORKFLOW.md`                                               | 澄清、规格、计划、实现、验证和归档流程。                               |
+| `docs/ops/TOOL_POLICY.md`                                                    | 默认工具、项目专用工具和高风险确认门禁。                               |
+| `docs/ops/DEPLOYMENT.md`                                                     | 本地、预发、生产、环境变量、健康检查和回滚。                             |
+| `docs/features/`、`docs/changes/`、`docs/decisions/`、`docs/agent-project-kit/` | 稳定功能说明、单次变更细节、长期决策，以及不应塞进当前状态文档的过程产物。              |
 
 ## ⚙️ 工作机制
 
@@ -214,27 +214,27 @@ Agent：明白。我会按这个方向继续确认目标用户，以及第一版
 
 Agent Project Kit 不是普通提示词合集。它关注 AI 实现外层的项目治理层：
 
-| 能力 | 这个 skill 增加了什么 |
-| --- | --- |
-| 阶段路由 | Agent 只加载当前阶段需要的 reference。 |
-| 参考 grounding | 模糊想法会先对照带具体链接的真实项目，再收敛需求。 |
-| 技术栈纪律 | 技术决策包含唯一主路线、被拒绝的备选方案、能力库、维护证据和重新评估规则。 |
-| 用户控制 | 真源文档、技术栈决策和高风险操作都需要明确确认。 |
-| 前端质量 | Product MVP 要求设计判断、设计系统 token、状态契约、反模板约束和浏览器验证。 |
-| 真源维护 | 当前有效契约保留在核心文档；功能、变更、决策和过程细节放进专门目录。 |
-| 语言自适应 | 问题、确认、进度更新和完成提示匹配用户当前语言。 |
-| 本地校验 | `scripts/validate.py` 检查必需文件、reference 路由、上下文预算、reference 目录、迁移规则覆盖、门禁、模板、README 链接和 Markdown 代码块。 |
+| 能力           | 这个 skill 增加了什么                                                                                     |
+| ------------ | -------------------------------------------------------------------------------------------------- |
+| 阶段路由         | Agent 只加载当前阶段需要的 reference。                                                                        |
+| 参考 grounding | 模糊想法会先对照带具体链接的真实项目，再收敛需求。                                                                          |
+| 技术栈纪律        | 技术决策包含唯一主路线、被拒绝的备选方案、能力库、维护证据和重新评估规则。                                                              |
+| 用户控制         | 真源文档、技术栈决策和高风险操作都需要明确确认。                                                                           |
+| 前端质量         | Product MVP 要求设计判断、设计系统 token、状态契约、反模板约束和浏览器验证。                                                    |
+| 真源维护         | 当前有效契约保留在核心文档；功能、变更、决策和过程细节放进专门目录。                                                                 |
+| 语言自适应        | 问题、确认、进度更新和完成提示匹配用户当前语言。                                                                           |
+| 本地校验         | `scripts/validate.py` 检查必需文件、reference 路由、上下文预算、reference 目录、迁移规则覆盖、门禁、模板、README 链接和 Markdown 代码块。 |
 
 ## 🧭 与类似项目相比
 
-| 对比对象 | 常见重点 | Agent Project Kit 的重点 |
-| --- | --- | --- |
-| OpenAI/Codex skills 模型 | 用 `SKILL.md` 加可选 scripts、references、assets 和渐进加载机制封装可复用工作流。 | 基于这个模型实现一套具体的项目治理工作流。 |
-| `anthropics/skills` | 展示多种 skill 模式和文件处理工作流的参考实现。 | 聚焦 AI 辅助软件项目的基线操作系统。 |
-| `addyosmani/agent-skills` 等生命周期 skill 包 | spec、plan、build、test、review、安全、性能和发布纪律。 | 更上游的项目清晰度、真源文档、实现前就绪、契约变化路由和边界内交接。 |
-| OpenSpec、GitHub Spec Kit、issue spec | 变更 proposal、spec、任务、归档和实现跟踪。 | 仓库级当前状态真源优先级，以及外部规格工具不可用时的 fallback。 |
-| 自主执行型框架 | 批准后更连续的 Agent 执行。 | 用户确认的决策、一次一个问题的澄清、写文件和高风险操作前的显式同意。 |
-| 普通提示词合集 | 可复用提示词和角色指令。 | 模板、reference、阶段路由、文档门禁和仓库校验。 |
+| 对比对象                                    | 常见重点                                                        | Agent Project Kit 的重点                |
+| --------------------------------------- | ----------------------------------------------------------- | ------------------------------------ |
+| OpenAI/Codex skills 模型                  | 用 `SKILL.md` 加可选 scripts、references、assets 和渐进加载机制封装可复用工作流。 | 基于这个模型实现一套具体的项目治理工作流。                |
+| `anthropics/skills`                     | 展示多种 skill 模式和文件处理工作流的参考实现。                                 | 聚焦 AI 辅助软件项目的基线操作系统。                 |
+| `addyosmani/agent-skills` 等生命周期 skill 包 | spec、plan、build、test、review、安全、性能和发布纪律。                     | 更上游的项目清晰度、真源文档、实现前就绪、契约变化路由和边界内交接。   |
+| OpenSpec、GitHub Spec Kit、issue spec     | 变更 proposal、spec、任务、归档和实现跟踪。                                | 仓库级当前状态真源优先级，以及外部规格工具不可用时的 fallback。 |
+| 自主执行型框架                                 | 批准后更连续的 Agent 执行。                                           | 用户确认的决策、一次一个问题的澄清、写文件和高风险操作前的显式同意。   |
+| 普通提示词合集                                 | 可复用提示词和角色指令。                                                | 模板、reference、阶段路由、文档门禁和仓库校验。         |
 
 当产品形态或契约还在成型时，适合让 Agent Project Kit 做主流程；进入实现后，再搭配成熟生命周期 skill 做 TDD、代码审查、安全、性能和发布。
 

@@ -24,16 +24,16 @@ An engineering baseline is necessary but not sufficient for implementation. Befo
 
 For JavaScript/TypeScript projects, prefer these root scripts:
 
-| Script | Purpose |
-| --- | --- |
-| `dev` | start local development |
-| `build` | produce production build |
-| `typecheck` | verify TypeScript types |
-| `lint` | run ESLint |
-| `format` or `format:check` | run or check Prettier formatting |
-| `test` | run unit or integration tests |
-| `check` | minimal local quality gate, usually typecheck + lint + test + build |
-| `clean` | remove generated build artifacts when useful |
+| Script                     | Purpose                                                             |
+| -------------------------- | ------------------------------------------------------------------- |
+| `dev`                      | start local development                                             |
+| `build`                    | produce production build                                            |
+| `typecheck`                | verify TypeScript types                                             |
+| `lint`                     | run ESLint                                                          |
+| `format` or `format:check` | run or check Prettier formatting                                    |
+| `test`                     | run unit or integration tests                                       |
+| `check`                    | minimal local quality gate, usually typecheck + lint + test + build |
+| `clean`                    | remove generated build artifacts when useful                        |
 
 ## Code Quality
 

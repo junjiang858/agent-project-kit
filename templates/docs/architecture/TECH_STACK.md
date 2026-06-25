@@ -27,33 +27,33 @@
 
 ## Default Route
 
-| Layer | Choice | Reason |
-| --- | --- | --- |
-| Package manager |  |  |
-| Frontend |  |  |
-| Backend |  |  |
-| Database |  |  |
-| Migrations |  |  |
-| UI |  |  |
-| Icons |  |  |
-| Deployment |  |  |
-| Testing |  |  |
-| AI workflow discipline | Superpowers / built-in fallback / other | Superpowers and similar tools are optional accelerators, not hard dependencies |
-| Spec management | OpenSpec / GitHub Spec Kit / repo docs / other | External spec tools are optional unless explicitly primary |
+| Layer                  | Choice                                         | Reason                                                                         |
+| ---------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------ |
+| Package manager        |                                                |                                                                                |
+| Frontend               |                                                |                                                                                |
+| Backend                |                                                |                                                                                |
+| Database               |                                                |                                                                                |
+| Migrations             |                                                |                                                                                |
+| UI                     |                                                |                                                                                |
+| Icons                  |                                                |                                                                                |
+| Deployment             |                                                |                                                                                |
+| Testing                |                                                |                                                                                |
+| AI workflow discipline | Superpowers / built-in fallback / other        | Superpowers and similar tools are optional accelerators, not hard dependencies |
+| Spec management        | OpenSpec / GitHub Spec Kit / repo docs / other | External spec tools are optional unless explicitly primary                     |
 
 ## Capability Library Scan
 
 ### Required Technical Capabilities
 
-| Capability | Requirement source | Needed in MVP? |
-| --- | --- | --- |
-|  |  | Yes / Later / No |
+| Capability | Requirement source | Needed in MVP?   |
+| ---------- | ------------------ | ---------------- |
+|            |                    | Yes / Later / No |
 
 ### Third-Party Library Decisions
 
-| Capability | Library name | Direct link | Ecosystem | Open-source or inspectable | Maintenance evidence | Why include/defer/reject | Risk or lock-in note | Decision |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |  | Included / Deferred / Rejected |
+| Capability | Library name | Direct link | Ecosystem | Open-source or inspectable | Maintenance evidence | Why include/defer/reject | Risk or lock-in note | Decision                       |
+| ---------- | ------------ | ----------- | --------- | -------------------------- | -------------------- | ------------------------ | -------------------- | ------------------------------ |
+|            |              |             |           |                            |                      |                          |                      | Included / Deferred / Rejected |
 
 ## Production Compatibility
 
@@ -66,14 +66,14 @@
 ## Migration Cost
 
 | Choice | Replacement cost | Notes |
-| --- | --- | --- |
-|  |  |  |
+| ------ | ---------------- | ----- |
+|        |                  |       |
 
 ## Rejected Alternatives
 
 | Alternative | Why rejected |
-| --- | --- |
-|  |  |
+| ----------- | ------------ |
+|             |              |
 
 ## Forbidden Drift
 

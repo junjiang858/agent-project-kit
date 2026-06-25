@@ -74,11 +74,11 @@ State the design read in one sentence. If two directions would change layout, de
 
 Document three dials in `FRONTEND_PLAN.md`; use them to make layout decisions explicit:
 
-| Dial | Meaning | Product UI default |
-| --- | --- | --- |
-| Design variance | How conventional or expressive the layout is | 3-6 for tools and dashboards, 6-8 for brand or marketing surfaces |
+| Dial             | Meaning                                             | Product UI default                                                    |
+| ---------------- | --------------------------------------------------- | --------------------------------------------------------------------- |
+| Design variance  | How conventional or expressive the layout is        | 3-6 for tools and dashboards, 6-8 for brand or marketing surfaces     |
 | Motion intensity | How much movement supports feedback or storytelling | 1-3 for operational UI, 3-5 for SaaS pages, higher only with a reason |
-| Visual density | How much information appears per viewport | 6-9 for dashboards/admin, 4-7 for SaaS apps, 2-4 for marketing |
+| Visual density   | How much information appears per viewport           | 6-9 for dashboards/admin, 4-7 for SaaS apps, 2-4 for marketing        |
 
 For dashboards, admin panels, data tables, and multi-step product UI, do not apply landing-page taste rules blindly. Prefer scannable density, predictable navigation, efficient controls, clear tables/lists, and restrained motion. In short: do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI. For marketing or portfolio surfaces, apply stronger anti-slop and visual asset rules.
 

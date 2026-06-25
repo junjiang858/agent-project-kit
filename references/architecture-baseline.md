@@ -48,9 +48,9 @@ Then research project-needed third-party libraries only for those capabilities. 
 
 Required output shape:
 
-| Capability | Library name | Direct link | Ecosystem | Open-source or inspectable | Maintenance evidence | Why include/defer/reject | Risk or lock-in note | Decision |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |  | Included / Deferred / Rejected |
+| Capability | Library name | Direct link | Ecosystem | Open-source or inspectable | Maintenance evidence | Why include/defer/reject | Risk or lock-in note | Decision                       |
+| ---------- | ------------ | ----------- | --------- | -------------------------- | -------------------- | ------------------------ | -------------------- | ------------------------------ |
+|            |              |             |           |                            |                      |                          |                      | Included / Deferred / Rejected |
 
 Rules:
 
@@ -79,11 +79,11 @@ Do not confirm the stack, write `docs/architecture/TECH_STACK.md`, install packa
 
 Choose one track and record it in `docs/architecture/TECH_STACK.md`.
 
-| Track | Use when | Default shape |
-| --- | --- | --- |
-| Single Web App | One deployable web product, backend needs are light or handled by framework/server actions | Single package when no shared boundary exists; otherwise `apps/web` plus only real `packages/*` libraries |
-| Web + API | Web app plus independent backend API, real business rules, permissions, integrations, or mobile/API clients | `apps/web`, `apps/api`, `packages/shared`, `packages/config`, `packages/db` |
-| Multi-App Platform | Admin app, worker, multiple clients, or platform-style growth expected | `apps/web`, `apps/admin`, `apps/api`, `apps/worker`, `packages/shared`, `packages/config`, `packages/db`, optional `packages/auth` |
+| Track              | Use when                                                                                                    | Default shape                                                                                                                      |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Single Web App     | One deployable web product, backend needs are light or handled by framework/server actions                  | Single package when no shared boundary exists; otherwise `apps/web` plus only real `packages/*` libraries                          |
+| Web + API          | Web app plus independent backend API, real business rules, permissions, integrations, or mobile/API clients | `apps/web`, `apps/api`, `packages/shared`, `packages/config`, `packages/db`                                                        |
+| Multi-App Platform | Admin app, worker, multiple clients, or platform-style growth expected                                      | `apps/web`, `apps/admin`, `apps/api`, `apps/worker`, `packages/shared`, `packages/config`, `packages/db`, optional `packages/auth` |
 
 ## Default Product MVP Stack
 
@@ -102,11 +102,11 @@ For ordinary long-lived web products:
 
 Before recommending a workspace, classify the repository boundary:
 
-| Shape | Use when | Avoid when |
-| --- | --- | --- |
-| Single package frontend app | One deployable frontend app, all code has one ownership boundary, no shared schemas/core logic, no worker package, no near-term second app | The app already has reusable domain logic, worker contracts, or package-level tests that would be clearer outside UI |
-| pnpm workspace | There are two or more real packages, such as `apps/web` plus shared schemas, media/core logic, workers, SDKs, generated clients, or future deployable apps | The `packages/*` folders would be empty placeholders or only speculative "future-proofing" |
-| Turborepo/Nx workspace | Multiple packages need task caching, affected builds, generators, dependency graph visibility, or CI optimization | Plain pnpm scripts are still easy to understand and fast enough |
+| Shape                       | Use when                                                                                                                                                   | Avoid when                                                                                                           |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Single package frontend app | One deployable frontend app, all code has one ownership boundary, no shared schemas/core logic, no worker package, no near-term second app                 | The app already has reusable domain logic, worker contracts, or package-level tests that would be clearer outside UI |
+| pnpm workspace              | There are two or more real packages, such as `apps/web` plus shared schemas, media/core logic, workers, SDKs, generated clients, or future deployable apps | The `packages/*` folders would be empty placeholders or only speculative "future-proofing"                           |
+| Turborepo/Nx workspace      | Multiple packages need task caching, affected builds, generators, dependency graph visibility, or CI optimization                                          | Plain pnpm scripts are still easy to understand and fast enough                                                      |
 
 Do not create empty shared packages just because the default Product MVP stack mentions workspaces. If the project starts as a single package and later gains a real boundary, update `TECH_STACK.md`, `ENGINEERING_BASELINE.md`, `FRONTEND_PLAN.md`, and root agent rules before moving files.
 
