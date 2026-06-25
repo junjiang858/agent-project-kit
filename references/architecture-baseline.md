@@ -2,6 +2,17 @@
 
 Use this reference when choosing the project architecture track, repository shape, backend boundary, and production-compatible MVP stack.
 
+## Contents
+
+- Core Principle
+- Community Anchors
+- Capability Library Scan Gate
+- Architecture Tracks
+- Default Product MVP Stack
+- Repository Shape Decision
+- Stack Decision Rules
+- Anti-Patterns
+
 ## Core Principle
 
 Build a Product MVP by default: keep the feature scope small, but choose a repository shape and core stack that can grow without replacing the foundation. Use a throwaway stack only when the user explicitly says the work is a disposable prototype.
@@ -43,12 +54,15 @@ Required output shape:
 
 Rules:
 
+- Each recommended or rejected candidate must include capability, library name, direct link, ecosystem, open-source or inspectability status, license or commercial constraint when relevant, maintenance evidence, why it fits or does not fit this project, migration or lock-in risk, and whether it is included now, deferred, or rejected.
 - Include a capability, library name, direct link, and decision for every row.
 - Prefer mature, open-source, actively maintained, well-documented libraries when they fit the project.
 - Use official docs, GitHub repositories, package registries, release notes, or security advisories for maintenance evidence.
 - Mention license or commercial-use constraints when relevant.
 - Include rejected or deferred candidates when they explain why the chosen stack stays smaller.
 - Avoid adding dependencies for framework-native capabilities unless the project has a concrete need.
+
+Do not confirm a technology stack, write `docs/architecture/TECH_STACK.md`, install dependencies, or scaffold implementation until the user confirms the combined core stack and third-party library set.
 - If current maintenance status matters, use live research. If live research is unavailable, say maintenance evidence is incomplete.
 
 After the table, present one combined recommendation for user review:

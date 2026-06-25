@@ -224,7 +224,7 @@ Agent Project Kit is not a generic prompt collection. It focuses on the governin
 | Frontend quality | Product MVP work requires a Design Read, design system tokens, state contracts, anti-slop guardrails, and browser verification. |
 | Source-of-truth maintenance | Durable current contracts stay in core docs; feature, change, decision, and process detail is routed to dedicated directories. |
 | Language adaptation | Questions, confirmations, progress updates, and completion messages match the user's current language. |
-| Local validation | `scripts/validate.py` checks required files, reference routing, guardrails, templates, README links, and markdown fences. |
+| Local validation | `scripts/validate.py` checks required files, reference routing, context budget, reference contents, migrated rule coverage, guardrails, templates, README links, and markdown fences. |
 
 ## 🧭 Compared With Similar Projects
 
@@ -257,7 +257,7 @@ Run validation with:
 python3 scripts/validate.py
 ```
 
-The validator checks required files, README language links, markdown fences, skill frontmatter, stage reference routing, generated-project document layout, Product MVP baseline coverage, Product MVP UI Quality Gate coverage, MVP closure semantics, implementation handoff, source-of-truth distillation, and template paths.
+The validator checks required files, README language links, markdown fences, skill frontmatter, context budget, reference contents, migrated rule coverage, stage reference routing, generated-project document layout, Product MVP baseline coverage, Product MVP UI Quality Gate coverage, MVP closure semantics, implementation handoff, source-of-truth distillation, and template paths.
 
 As with any skill or plugin, review the files before installing and test the workflow in your own environment before relying on it for critical work.
 

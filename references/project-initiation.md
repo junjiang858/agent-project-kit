@@ -2,6 +2,21 @@
 
 Use this reference for cognition calibration, project charter work, technology selection, Git setup, and early project safety.
 
+## Contents
+
+- Principles
+- Interaction Defaults
+- Stage Flow
+- Guided Interaction
+- Reference Project Scan
+- Requirements Depth Gate
+- Project Purpose Confirmation
+- Project Charter Checklist
+- Technology Decision Checklist
+- Git Discipline
+- Implementation Readiness Audit
+- Prompts
+
 ## Principles
 
 - AI lowers the cost of writing code, not the need for product judgment, technical boundaries, and acceptance responsibility.
@@ -45,9 +60,11 @@ Use the user's current language for questions, confirmations, progress updates, 
 15. Only after the readiness set is complete should the agent ask whether to scaffold or implement the first approved MVP slice.
 16. After implementation starts, keep the first deliverable narrow: one approved MVP slice with verification evidence. For web products this usually includes the first MVP page; for non-web projects it may be the first API, worker flow, CLI flow, automation run, or integration workflow.
 
-## Guided Intake
+## Guided Interaction
 
 Ask one question at a time. Do not present a full intake questionnaire at project start.
+
+If two details are inseparable, ask at most two short questions. Prefer multiple-choice options when they reduce effort.
 
 Start with the smallest question that unlocks the next artifact:
 
@@ -59,7 +76,7 @@ Start with the smallest question that unlocks the next artifact:
 
 Do not ask all five at once. Ask the next question only after the previous answer is reflected back briefly.
 
-Do not stop after one sentence if the product domain is still ambiguous. Before the charter stage, unpack the core nouns in the user's idea:
+Do not stop after one sentence if the product domain is still ambiguous. When the user's wording contains ambiguous domain nouns or product-shape terms, clarify what they mean in this project before drafting a PRD-quality artifact. Before the charter stage, unpack the core nouns in the user's idea:
 
 - Managed objects: what entities, records, resources, jobs, content, tools, assets, users, or workflows does the product manage?
 - User operations: what can users create, configure, trigger, inspect, compare, approve, publish, retry, archive, or delete?
@@ -84,7 +101,7 @@ Required output shape:
 
 Rules:
 
-- Include a project name and direct link for every row.
+- Include project name, direct link, and source type for every row.
 - Include at least one open-source or inspectable implementation when the idea involves software users can reasonably build on.
 - Separate direct competitors from adjacent inspiration; both can be useful.
 - Explain concrete borrowable pieces such as onboarding, workflow shape, data model, plugin architecture, API surface, local-first design, community distribution, or pricing model.
@@ -98,7 +115,7 @@ After the table, present 2-4 direction choices grounded in the linked projects. 
 3. Shift to a plugin, extension, template, or integration around an existing ecosystem.
 4. Choose a differentiated niche that the scan reveals is underserved.
 
-Ask the user to choose, combine, or reject the directions. Do not proceed to Project Purpose Confirmation until the user chooses a direction or explicitly asks to continue with the original idea after reviewing the scan.
+Ask the user to choose, combine, or reject the directions. Do not proceed to Project Purpose Confirmation until the user chooses a direction or explicitly asks to continue with the original idea after reviewing the scan. Do not continue to project purpose confirmation before this choice.
 
 ## Requirements Depth Gate
 

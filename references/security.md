@@ -2,6 +2,14 @@
 
 Use this reference for backend security acceptance, configuration safety, logging safety, dependency safety, database safety, and evidence-based verification.
 
+## Contents
+
+- Backend Security Boundary
+- Bottom-Layer Security Matrix
+- Security Checklist
+- Risk Table Format
+- Prompts
+
 ## Backend Security Boundary
 
 Feature success only proves the normal path works. Security acceptance proves abnormal requests are rejected.

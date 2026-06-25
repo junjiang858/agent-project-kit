@@ -2,6 +2,18 @@
 
 Use this reference when defining repo hygiene, scripts, CI, code quality, migrations, environment configuration, and testing expectations.
 
+## Contents
+
+- Baseline Principle
+- Required Scripts
+- Code Quality
+- CI
+- Database Migrations
+- Environment Configuration
+- Backend Baseline
+- Testing Layers
+- Commit Discipline
+
 ## Baseline Principle
 
 MVP means fewer product features, not weaker engineering foundations. A Product MVP should have enough structure to extend safely without replacing the core stack.

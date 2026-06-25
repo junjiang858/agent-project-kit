@@ -2,6 +2,15 @@
 
 Use this reference when deciding which tools, MCPs, CLIs, browsers, databases, deployment platforms, cloud services, or external systems AI may use.
 
+## Contents
+
+- Principle
+- Default Open
+- Project Open
+- High-Risk Confirmation
+- TOOL_POLICY.md Template
+- Prompt
+
 ## Principle
 
 Give AI clear tool boundaries, not unlimited power. Split permissions into:

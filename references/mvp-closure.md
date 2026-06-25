@@ -2,6 +2,15 @@
 
 Use this reference when checking whether the implementation satisfies the documented MVP scope, when deciding whether release is safe, or when appending post-implementation next step recommendations.
 
+## Contents
+
+- Trigger Policy
+- Required Inputs
+- Audit Steps
+- Common Risk Signals
+- Output Format
+- Cache And Process Artifacts
+
 ## Trigger Policy
 
 Run a fresh synchronous audit when:
@@ -10,7 +19,7 @@ Run a fresh synchronous audit when:
 - The agent is about to say `Full MVP Scope Complete`, `Release Ready`, or equivalent language.
 - The current implementation task may close a documented must-have feature, acceptance criterion, deployment blocker, or security blocker.
 
-Do not run a fresh audit for Local Fix Path, code explanations, single-command tasks, or ordinary bounded work that cannot change MVP completion. Use a recent cached result for a short tail recommendation when useful.
+Do not run a fresh audit for Local Fix Path, code explanations, single-command tasks, or ordinary bounded work that cannot change MVP completion. Use only a cached or recent closure result for ordinary project-level final suggestions unless the user asks for a fresh audit or the current task may close a documented must-have item. After implementation work, append a short next step recommendation when the closure result is incomplete, stale, or newly complete; do not interrupt the main answer with a long audit unless the user asked for it.
 
 ## Required Inputs
 
@@ -89,5 +98,7 @@ Do not use a milestone celebration message when the state is `MVP Scope Incomple
 ## Cache And Process Artifacts
 
 When a project allows process artifacts, store durable audit outputs under `docs/agent-project-kit/`, such as `docs/agent-project-kit/mvp-closure-status.md`.
+
+Store MVP closure audits and cache snapshots under `docs/agent-project-kit/` or `.agent-project-kit/cache/` when the project allows process artifacts.
 
 When a script cache is available, use a cache key based on the current git commit, dirty diff, source-of-truth document hashes, package lock hashes, and relevant configuration hashes. If the cache is stale, say so instead of presenting stale results as current evidence.

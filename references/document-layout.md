@@ -2,6 +2,15 @@
 
 Use this reference whenever the skill creates, reorganizes, or indexes project source-of-truth documents.
 
+## Contents
+
+- Default Layout
+- Root Rules
+- AGENTS.md Role
+- Document Lifespan
+- Path Mapping
+- Migration Rule
+
 ## Default Layout
 
 Keep the repository root scannable. `AGENTS.md` stays at the root because agents naturally look there first. Detailed project documents live under `docs/`.

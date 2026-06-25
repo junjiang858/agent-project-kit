@@ -2,6 +2,14 @@
 
 Use this reference when turning business flow into tables, fields, relations, constraints, indexes, and database documentation.
 
+## Contents
+
+- Principles
+- Design Flow
+- Table Checklist
+- Risk Checks
+- Prompts
+
 ## Principles
 
 - Database design follows product flow and business objects; it should not be guessed from isolated screens.

@@ -8,6 +8,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+SKILL_MAX_LINES = 500
+SKILL_MAX_BYTES = 40_000
+
 
 REQUIRED_FILES = [
     "SKILL.md",
@@ -59,6 +62,10 @@ def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
+def line_count(text: str) -> int:
+    return text.count("\n") + (0 if text.endswith("\n") else 1)
+
+
 def require_files() -> None:
     for path in REQUIRED_FILES + REQUIRED_RUNTIME_REFERENCES:
         if not (ROOT / path).is_file():
@@ -75,6 +82,60 @@ def check_skill_frontmatter() -> None:
         fail("SKILL.md frontmatter must use name: agent-project-kit")
     if not re.search(r"^description: Use when ", frontmatter, re.M):
         fail('SKILL.md description must start with "Use when"')
+
+
+def check_context_budget() -> None:
+    skill = read("SKILL.md")
+    lines = line_count(skill)
+    byte_count = len(skill.encode("utf-8"))
+    if lines > SKILL_MAX_LINES:
+        fail(f"SKILL.md is over budget: {lines} lines > {SKILL_MAX_LINES}")
+    if byte_count > SKILL_MAX_BYTES:
+        fail(f"SKILL.md is over budget: {byte_count} bytes > {SKILL_MAX_BYTES}")
+
+
+def check_reference_contents() -> None:
+    for path in REQUIRED_RUNTIME_REFERENCES:
+        text = read(path)
+        if not re.search(r"^## Contents\n", text, re.M):
+            fail(f"{path} must include a ## Contents section near the top")
+
+
+def check_skill_stays_router_sized() -> None:
+    skill = read("SKILL.md")
+    detailed_phrases = [
+        "Chinese example:",
+        "English example:",
+        "The scan must include 3-7",
+        "Each recommended or rejected candidate must include",
+        "For a Product MVP with web, backend, database",
+        "Core source-of-truth documents describe the current system contract",
+    ]
+    for phrase in detailed_phrases:
+        if phrase in skill:
+            fail(f"SKILL.md contains detailed reference content that should be routed out: {phrase}")
+
+
+def check_migrated_rule_coverage() -> None:
+    required_pairs = [
+        ("references/workflow-checklists.md", "Do not depend on UI buttons"),
+        ("references/workflow-checklists.md", "Batch consent is limited to the named document list and current stage"),
+        ("references/workflow-checklists.md", "Writing one source-of-truth document does not authorize another"),
+        ("references/workflow-checklists.md", "Common Mistakes"),
+        ("references/mvp-closure.md", "Do not run a fresh audit for Local Fix Path"),
+        ("references/mvp-closure.md", "Use only a cached or recent closure result for ordinary project-level final suggestions"),
+        ("references/mvp-closure.md", "After implementation work, append a short next step recommendation"),
+        ("references/architecture-baseline.md", "Each recommended or rejected candidate must include"),
+        ("references/architecture-baseline.md", "Do not confirm a technology stack"),
+        ("references/frontend.md", "Design-system dependency rule"),
+        ("references/frontend.md", "selected UI and icon libraries are approved project decisions"),
+        ("references/project-initiation.md", "ambiguous domain nouns"),
+        ("references/project-initiation.md", "If two details are inseparable"),
+        ("references/mvp-closure.md", "Store MVP closure audits"),
+    ]
+    for path, phrase in required_pairs:
+        if phrase not in read(path):
+            fail(f"{path} must preserve migrated rule detail: {phrase}")
 
 
 def check_readme_language_switch() -> None:
@@ -154,11 +215,11 @@ def check_product_mvp_baseline() -> None:
 def check_product_mvp_ui_quality_gate() -> None:
     required_pairs = [
         ("SKILL.md", "Product MVP UI Quality Gate"),
-        ("SKILL.md", "MVP scope may be small, but UI/UX/design system quality is not optional"),
-        ("SKILL.md", "Design Read"),
-        ("SKILL.md", "do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI"),
+        ("SKILL.md", "references/frontend.md"),
         ("references/frontend.md", "Product MVP UI Quality Gate"),
+        ("references/frontend.md", "MVP scope may be small, but UI/UX/design system quality is not optional"),
         ("references/frontend.md", "Design Read"),
+        ("references/frontend.md", "do not apply landing-page taste rules blindly to dashboards, admin panels, data tables, or multi-step product UI"),
         ("references/frontend.md", "Design Dials"),
         ("references/frontend.md", "State And Interaction Contract"),
         ("references/frontend.md", "Anti-Slop Guardrails"),
@@ -189,8 +250,6 @@ def check_product_mvp_ui_quality_gate() -> None:
 def check_default_stack_flexibility() -> None:
     required_pairs = [
         ("SKILL.md", "default stack recommendations as context-aware candidates"),
-        ("SKILL.md", "A single deployable frontend app can stay a single package"),
-        ("SKILL.md", "Design-system dependency rule"),
         ("references/architecture-baseline.md", "Repository Shape Decision"),
         ("references/architecture-baseline.md", "Do not create empty shared packages"),
         ("references/architecture-baseline.md", "Single package frontend app"),
@@ -225,12 +284,6 @@ def check_mvp_closure_semantics() -> None:
         ("SKILL.md", "Formal Product Development Mode"),
         ("SKILL.md", "MVP Closure Sentinel"),
         ("SKILL.md", "references/mvp-closure.md"),
-        ("SKILL.md", "🎉 MVP scope is complete"),
-        ("SKILL.md", "🎉 Release validation passed"),
-        ("SKILL.md", "🎉 文档定义的 MVP 范围已完成"),
-        ("SKILL.md", "🎉 发布验证已通过"),
-        ("SKILL.md", "Skip the closure audit for Local Fix Path"),
-        ("SKILL.md", "Store MVP closure audits"),
         ("references/mvp-closure.md", "Trigger Policy"),
         ("references/mvp-closure.md", "Required Inputs"),
         ("references/mvp-closure.md", "Audit Steps"),
@@ -289,40 +342,26 @@ def check_workflow_priority_and_confirmation() -> None:
         ("SKILL.md", "Document Consent Gate"),
         ("SKILL.md", "Requirements Depth Gate"),
         ("SKILL.md", "Reference Project Scan Gate"),
-        ("SKILL.md", "project name, direct link"),
-        ("SKILL.md", "Do not continue to project purpose confirmation"),
         ("SKILL.md", "Capability Library Scan Gate"),
-        ("SKILL.md", "capability, library name, direct link"),
-        ("SKILL.md", "Do not confirm a technology stack"),
         ("SKILL.md", "Goal Contract"),
         ("SKILL.md", "Target outcome"),
         ("SKILL.md", "Completion signal"),
         ("SKILL.md", "Confirmation Prompt Rule"),
         ("SKILL.md", "User Language Rule"),
-        ("SKILL.md", "Any task that asks for user confirmation"),
-        ("SKILL.md", "match the user's current language"),
         ("SKILL.md", "Project Specification Readiness Gate"),
         ("SKILL.md", "Source-of-Truth Change Gate"),
         ("SKILL.md", "Never create application scaffolding"),
-        ("SKILL.md", "frontend engineering contract"),
-        ("SKILL.md", "component split rules"),
         ("SKILL.md", "in the user's current language"),
-        ("SKILL.md", "🎉 恭喜，项目工程基线已就绪"),
-        ("SKILL.md", "🎉 Project engineering baseline is ready"),
         ("SKILL.md", "First MVP slice accepted with evidence"),
-        ("SKILL.md", "🎉 恭喜，首个 MVP 切片已完成"),
-        ("SKILL.md", "🎉 First MVP slice is complete"),
         ("SKILL.md", "Steady path"),
         ("SKILL.md", "Accelerated path"),
         ("SKILL.md", "named missing batch"),
         ("SKILL.md", "plain-text options"),
-        ("SKILL.md", "Do not depend on UI buttons"),
-        ("SKILL.md", "After creating or updating any readiness document"),
-        ("SKILL.md", "ambiguous domain nouns"),
-        ("SKILL.md", "Do not move into technology stack, frontend, backend, database, or implementation planning until the user confirms"),
         ("references/project-initiation.md", "Project Purpose Confirmation"),
         ("references/project-initiation.md", "Requirements Depth Gate"),
         ("references/project-initiation.md", "Reference Project Scan"),
+        ("references/project-initiation.md", "project name, direct link"),
+        ("references/project-initiation.md", "Do not continue to project purpose confirmation"),
         ("references/project-initiation.md", "direct project links"),
         ("references/project-initiation.md", "user chooses a direction"),
         ("references/project-initiation.md", "Implementation Readiness Audit"),
@@ -373,6 +412,9 @@ def check_workflow_priority_and_confirmation() -> None:
         ("references/workflow-checklists.md", "Source-of-Truth Change Gate"),
         ("references/workflow-checklists.md", "Source-of-Truth Change Prompt"),
         ("references/workflow-checklists.md", "Project scaffold or implementation only after readiness passes"),
+        ("references/workflow-checklists.md", "Any task that asks for user confirmation"),
+        ("references/workflow-checklists.md", "match the user's current language"),
+        ("references/workflow-checklists.md", "After creating or updating any readiness document"),
         ("references/workflow-checklists.md", "in the user's current language"),
         ("references/workflow-checklists.md", "🎉 恭喜，项目工程基线已就绪"),
         ("references/workflow-checklists.md", "🎉 Project engineering baseline is ready"),
@@ -518,6 +560,10 @@ def check_workflow_priority_and_confirmation() -> None:
 def main() -> None:
     require_files()
     check_skill_frontmatter()
+    check_context_budget()
+    check_skill_stays_router_sized()
+    check_reference_contents()
+    check_migrated_rule_coverage()
     check_readme_language_switch()
     check_markdown_fences()
     check_reference_links()

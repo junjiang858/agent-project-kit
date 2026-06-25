@@ -2,6 +2,14 @@
 
 Use this reference for backend understanding, API boundaries, business rules, minimal backend skeletons, and backend architecture acceptance.
 
+## Contents
+
+- Backend Understanding
+- Backend Business Spec
+- Minimal Backend Skeleton
+- Architecture Acceptance
+- Prompts
+
 ## Backend Understanding
 
 Backend owns business rules, data processing, permission checks, system interfaces, and protection of data. Frontend expresses and interacts; backend decides, stores, computes, and guards.

@@ -2,6 +2,13 @@
 
 Use this reference for project-level Agent rules, AGENTS.md, reusable skill design, and long-running AI collaboration discipline.
 
+## Contents
+
+- Agent Constitution
+- Skill Workflow
+- Completion Definition
+- Prompts
+
 ## Agent Constitution
 
 The Agent constitution governs stable project-level behavior. Keep it short, actionable, and easy for AI to re-read before work.

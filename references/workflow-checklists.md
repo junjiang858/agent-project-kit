@@ -2,6 +2,24 @@
 
 Use this reference for the whole AI programming roadmap, deliverable tracking, default AI-friendly stack, and reusable workflow prompts.
 
+## Contents
+
+- Project Roadmap
+- Interaction Defaults
+- Task Routing
+- Contract Impact Check
+- Optional Workflow Tool Fallback
+- Implementation Handoff
+- Document Consent Gate
+- Goal And Completion Signal
+- Deliverable Checklist
+- Implementation Readiness Gate
+- Source-of-Truth Change Gate
+- Source-of-Truth Distillation Gate
+- Common Mistakes
+- Default Product MVP Stack
+- Prompts
+
 ## Project Roadmap
 
 1. Cognition calibration.
@@ -34,11 +52,11 @@ Use this reference for the whole AI programming roadmap, deliverable tracking, d
 
 ### Confirmation Prompt Rule
 
-Any confirmation, consent, approval, or path-choice prompt must include plain-text options in the assistant message. Do not depend on UI buttons, `request_user_input`, AskUserQuestion, or host-specific quick actions.
+Any confirmation, consent, approval, or path-choice prompt must include plain-text options in the assistant message. Any task that asks for user confirmation must be answerable in ordinary text. Do not depend on UI buttons, `request_user_input`, AskUserQuestion, or host-specific quick actions.
 
 ### User Language Rule
 
-Use the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user asks for another language.
+Use the user's current language for questions, confirmations, progress updates, final answers, and milestone messages unless the user asks for another language. Always match the user's current language in all project-stage prompts.
 
 ## Task Routing
 
@@ -74,6 +92,23 @@ If unavailable, do not block. Use the built-in fallback: clarify scope, run the 
 ## Implementation Handoff
 
 When the readiness gate has passed and the task is a Bounded Feature Path or Local Fix Path, do not rerun the full project baseline. Hand off to Superpowers if installed and applicable, another explicitly selected workflow if the user chose one, or the built-in fallback.
+
+## Document Consent Gate
+
+Do not create, copy, overwrite, move, or edit any project source-of-truth document until the user explicitly agrees to write that specific document or has directly asked for that exact document to be written. This includes `AGENTS.md`, every file under `docs/`, and any root-level planning document.
+
+Before writing a document file:
+
+1. Confirm the current stage artifact in conversation.
+2. State the target path and what the document will contain.
+3. Ask whether to write or update that file.
+4. Wait for an affirmative answer.
+
+Writing one source-of-truth document does not authorize another. Consent applies only to the named document and current stage. Writing `docs/project/PROJECT_CHARTER.md` does not imply permission to write `docs/architecture/TECH_STACK.md`, `AGENTS.md`, or engineering baseline files.
+
+Batch consent is limited to the named document list and current stage. It is not permanent permission, does not cover future documents discovered later, and does not authorize implementation code, scaffolding, package manager files, UI pages, APIs, database schemas, migrations, or runnable behavior.
+
+The agent may discuss, summarize, or propose a short outline in chat before consent, but must not create or modify document files before consent.
 
 ## Goal And Completion Signal
 
@@ -187,6 +222,8 @@ Use plain-text options, for example `A. Steady path` and `B. Accelerated path`. 
 
 Do not proceed to code.
 
+After creating or updating any readiness document, rerun the readiness audit summary before moving to implementation.
+
 For frontend work, also verify that `docs/architecture/FRONTEND_PLAN.md` includes the Product MVP UI Quality Gate: Design Read, Design Dials, design system tokens, UI component strategy, state and interaction contract, responsive and accessibility expectations, anti-slop guardrails, and browser UI quality verification. If these are missing, update the frontend plan before code.
 
 For Bounded Feature Path or Local Fix Path work, do not rerun this full readiness audit if the project baseline has already passed and the Contract Impact Check finds no contract changes. Read the relevant docs, state the bounded classification, and proceed through the Implementation Handoff.
@@ -235,6 +272,23 @@ Core source-of-truth documents describe the current system contract, not the ful
 - Archive or remove obsolete detail after it is no longer the current contract.
 
 After implementation, distill only durable results back into core current-state docs. Keep process-heavy detail in `docs/changes/`.
+
+## Common Mistakes
+
+| Mistake | Correction |
+| --- | --- |
+| Asking AI to code before scope is clear | Create or update the project charter first. |
+| Listing vague competitor categories during initiation | Run a Reference Project Scan Gate with project name, direct link, lessons, cautions, and direction choices. |
+| Planning implementation before confirming project purpose | Summarize the target user, problem, product role, and MVP; wait for user confirmation. |
+| Confirming a stack without library research | Run a Capability Library Scan Gate and review project-needed third-party libraries with links, maintenance evidence, and include/defer/reject decisions. |
+| Starting a scaffold after only a charter, stack, and engineering baseline | Run the Project Specification Readiness Gate and create frontend, database, backend, workflow, tool policy, deployment, and Agent rule documents as applicable before implementation. |
+| Treating frontend directory structure as cleanup after code generation | Define the frontend engineering contract in `docs/architecture/FRONTEND_PLAN.md` before writing UI code, then implement against it. |
+| Putting UI, config, messages, state, icons, mock data, and utilities into one route or app file | Split code by route composition, shared UI, business components, config, i18n, state, assets, and capability-scoped utilities. |
+| Treating default stack suggestions as mandatory | Use defaults as candidates; document why the project needs a single package, workspace, UI library, icon library, backend, or database before locking it. |
+| Letting code, migrations, or APIs become the first record of a design change | Update the original source-of-truth document first, then implement against it. |
+| Rerunning the whole baseline for a bounded feature | Run the Contract Impact Check, then use the Implementation Handoff when no contract changes are needed. |
+| Turning source-of-truth docs into change journals | Distill current contracts into core docs and keep feature/change/process detail in `docs/features/`, `docs/changes/`, `docs/decisions/`, or `docs/agent-project-kit/`. |
+| Treating first MVP slice, full MVP scope, and release readiness as the same status | Use lifecycle states and the MVP Closure Sentinel before claiming Full MVP Scope Complete or Release Ready. |
 
 ## Default Product MVP Stack
 
